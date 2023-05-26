@@ -2,7 +2,7 @@
 
 ## Chapitre 1 : Introduction et présentation du programme
 
-### 1.1 Présentation du programme de la formation
+### 1. Présentation du programme de la formation
 
 Bienvenue dans cette formation de deux jours sur SQL et MySQL ! Ce programme a été conçu pour vous aider à maîtriser les concepts fondamentaux et les compétences pratiques nécessaires pour travailler avec les bases de données relationnelles en utilisant SQL et MySQL.
 
@@ -424,15 +424,15 @@ FROM clients
 RIGHT JOIN commandes ON clients.id = commandes.client_id;
 ```
 
-### 1.4 FULL OUTER JOIN
+### 1.4 CROSS JOIN
 
-Le FULL OUTER JOIN renvoie les enregistrements lorsqu'il y a une correspondance dans l'une des tables. Les résultats de la table de gauche ou de droite sont NULL s'il n'y a pas de correspondance.
+Le CROSS JOIN renvoie les enregistrements lorsqu'il y a une correspondance dans l'une des tables. Les résultats de la table de gauche ou de droite sont NULL s'il n'y a pas de correspondance.
 
 ```sql
 -- Récupérer toutes les commandes et tous les clients, avec leurs correspondances éventuelles
 SELECT clients.nom, clients.prenom, commandes.date
 FROM clients
-FULL OUTER JOIN commandes ON clients.id = commandes.client_id;
+CROSS JOIN commandes ON clients.id = commandes.client_id;
 ```
 
 ## Chapitre 2 : Sous-requêtes
