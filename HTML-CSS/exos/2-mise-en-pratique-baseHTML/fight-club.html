@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Présentation d'un film de votre choix.</title>
+</head>
+<body>
+
+<!--
+Pour cet exo, vous devez présenter un film de votre choix.
+
+Vous devez créer :
+- un titre de niveau 1 comportant le nom du film
+
+Les rubriques suivantes :
+- un titre de niveau 2 "Synopsis"
+- un paragraphe contenant le synopsis du film
+
+- un titre de niveau 2 "Critique"
+- un paragraphe contenant votre critique du film
+
+- un titre de niveau 2 "Informations générales"
+
+- un titre de niveau 3 "Caractériques"
+- une liste contenant les caractéristiques du film (année de sortie, durée, réalisateur, acteurs principaux, etc.)
+
+- un titre de niveau 3 "Casting"
+- Un tableau contenant le casting avec Nom de l'acteur et Nom de personnage en colonnes.
+
+- un titre de niveau 2 "Ressources externes"
+- Des ancres amenant vers des articles de presse, des critiques, des bandes annonces, etc.
+- Bonus : Cela s'ouvre dans un nouvel onglet.
+
+- Un titre de niveau 2 nommé "Vous souhaitez des infos complémentaires ?"
+- Un lien permettant d'envoyer un mail a une adresse fictive.
+- Un formulaire pour faire une recherche google :
+- Un label "Rechercher sur Google"
+- Un champ de saisie
+- Un bouton "Rechercher"
+- (Tips : pour le formulaire, vous pouvez utiliser la méthode GET et l'action https://www.google.com/search)
+
+- Bonus : utilisez les balises br et hr pour rendre le tout plus lisible.
+- Bonus : Intégrer la bande annonce du film. (Balise iframe ...)
+
+
+Vous devez utiliser les balises suivantes :
+- h1
+- h2
+- p
+- img
+- ul
+- li
+- a
+- strong
+- em
+- hr
+- br
+- table
+- tr
+- td
+- th
+
+-->
+
+<h1>Fight Club</h1>
+
+<h2>Synopsis</h2>
+
+<p>Le narrateur, sans identité précise, vit seul, travaille seul, dort seul, mange seul ses plateaux-repas pour une personne comme beaucoup d'autres personnes seules qui connaissent la misère humaine, morale et sexuelle. C'est pourquoi il va devenir membre du Fight club, un lieu clandestin ou il va pouvoir retrouver sa virilité, l'échange et la communication. Ce club est dirigé par Tyler Durden, une sorte d'anarchiste entre gourou et philosophe qui prêche l'amour de son prochain.</p>
+
+<h2>Informations générales</h2>
+
+<h3>Caractéristiques</h3>
+
+<ul>
+    <li>Année : 1999</li>
+    <li>Genre : Thriller psychologique</li>
+    <li>Réalisateur : David Fincher</li>
+    <li>Durée : 2h19</li>
+</ul>
+
+<h3>Casting</h3>
+
+<table border="1">
+    <caption>Le casting de Fight Club</caption>
+    <thead>
+        <tr>
+            <th>Acteur</th>
+            <th>Personnage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Edward Norton</td>
+            <td>Le Narrateur</td>
+        </tr>
+        <tr>
+            <td>Brad Pitt</td>
+            <td>Tyler Durden</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Bande annonce</h3>
+
+<iframe width="420" height="315"
+        src="https://www.youtube.com/embed/qhCDxGqoFgg?autoplay=1&mute=0">
+</iframe>
+
+<h2>Ressources externes</h2>
+
+<a href="https://www.imdb.com/title/tt0137523/" target="_blank">Fight Club sur IMDB</a>
+
+<h2>Vous souhaitez recevoir des informations supplémentaires ?</h2>
+
+<p>Vous pouvez nous contacter à l'adresse suivante : <a href="mailto:test@gmail.com">test@gmail.com</a>
+</p>
+
+<p>Sinon, vous pouvez faire une recherche sur google</p>
+<form  action="https://www.google.com/search" method="get">
+    <label for="search">Rechercher sur Google</label>
+    <input type="text" name="q" id="search" value="Fight Club">
+    <input type="submit" value="Rechercher">
+</form>
+
+</body>
+</html>

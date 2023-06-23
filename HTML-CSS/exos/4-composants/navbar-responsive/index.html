@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar-logo {
+            width: 100px;
+            height: 100px;
+        }
+
+        .navbar-logo img {
+            width: 100%;
+        }
+
+        .navbar-menu ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .navbar-menu li {
+            list-style: none;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar-menu ul li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .navbar-menu-responsive {
+            display: none;
+        }
+
+        .navbar-hamburger {
+            width: 50px;
+        }
+
+        .navbar-hamburger img {
+            width: 100%;
+        }
+
+        .navbar-hamburger-menu{
+            display: none;
+            width: 100px;
+            position: absolute;
+            top: 50px;
+            right: 0;
+        }
+
+        .navbar-menu-responsive:hover  .navbar-hamburger-menu {
+            display: block;
+        }
+
+        .navbar-hamburger-menu li {
+            margin-bottom: 5px;
+            list-style: none;
+            color: white;
+            padding: 5px;
+            border-top: 1px solid white;
+            background-color: black;
+        }
+
+        .navbar-hamburger-menu a {
+
+            text-decoration: none;
+            color: white;
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+            }
+
+            .navbar-menu-responsive {
+                display: block;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="navbar">
+    <div class="navbar-logo">
+      <img src="https://www.w3schools.com/w3css/img_lights.jpg" alt="logo">
+    </div>
+    <div class="navbar-menu">
+      <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">A propos</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">A propos</a></li>
+          <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+      <div class="navbar-menu-responsive">
+          <div class="navbar-hamburger">
+              <img src="https://cdn4.iconfinder.com/data/icons/wirecons-free-vector-icons/32/menu-alt-512.png" alt="menu-hamburger">
+          </div>
+            <ul class="navbar-hamburger-menu">
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">A propos</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">A propos</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+      </div>
+  </div>
+</div>
+
+</body>
+</html>

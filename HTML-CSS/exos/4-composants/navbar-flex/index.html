@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .navbar {
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .side-left {
+            display: flex;
+            border: 1px solid red;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-wrapper {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            background-color: grey;
+        }
+
+        .side-left p {
+            margin-left: 10px;
+        }
+
+
+        .side-center {
+
+        }
+
+        .side-center ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .side-center li {
+            list-style: none;
+            margin: 10px;
+        }
+
+        .side-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .side-right>* {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="side-left">
+        <div class="logo-wrapper">
+            <!--<img src="" alt="Un logo">-->
+        </div>
+        <p>Nom de l'entreprise</p>
+    </div>
+
+    <div class="side-center">
+        <ul>
+            <li>Accueil</li>
+            <li>Articles</li>
+            <li>Contact</li>
+            <li>A propos</li>
+        </ul>
+    </div>
+
+    <div class="side-right">
+        <p>Mon compte</p>
+        <p>Se déconnecter</p>
+        <div class="cart">
+            <img src="" alt="Un panier">
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

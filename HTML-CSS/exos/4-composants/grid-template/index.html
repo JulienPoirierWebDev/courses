@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid Template</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .custom-header {
+            background-color: blue;
+            grid-area: header;
+        }
+
+        .custom-aside {
+            background-color: purple;
+            grid-area: aside;
+
+        }
+
+        .custom-main {
+            background-color: green;
+            grid-area: main;
+
+        }
+
+        .custom-nav {
+            background-color: yellow;
+            grid-area:nav;
+        }
+
+        .custom-footer {
+            background-color: darkred;
+            grid-area:footer;
+        }
+
+        .custom-bonus {
+            background-color: orangered;
+            grid-area:bonus;
+        }
+
+        .wrapper > * {
+            border-radius: 20px;
+        }
+
+        .paragraph {
+            background-color: black;
+            padding: 20px;
+            width: 200px;
+            height: 50px;
+            margin: 10px;
+        }
+
+        .wrapper {
+
+            display: grid;
+            width: 100vw;
+            height: 100vh;
+            grid-gap: 10px;
+
+
+            grid-template-areas:
+        "header header header header"
+        "bonus nav nav aside"
+        "main main main aside"
+        "main main main aside"
+        "main main main aside"
+        "footer footer footer footer"
+        ;
+        }
+
+        @media screen and (max-width:850px ) {
+
+
+
+            .custom-bonus {
+            display: none;
+            }
+
+            .wrapper {
+                grid-template-areas:
+        " header header header header "
+        "nav nav nav nav "
+        "main main main main"
+        "aside aside aside aside"
+        "footer footer footer footer"
+            ;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header class="custom-header">
+        <p class="paragraph">
+            Hello world
+        </p>
+    </header>
+
+    <aside class="custom-aside">
+        Aside
+    </aside>
+
+    <main class="custom-main">
+        Blabla
+    </main>
+
+    <nav class="custom-nav">
+        Nav
+    </nav>
+
+    <footer class="custom-footer">
+        Footer
+    </footer>
+
+    <div class="custom-bonus">
+        Bonus
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.article {
+    width: 300px;
+    border: 2px solid black;
+}
+
+.article .article-titre {
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+.article .article-paragraphe {
+    padding: 10px;
+}
+
+.article .article-item {
+    padding: 10px;
+}
+
+.article .article-liste {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.article .article-button {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: block;
+}
+
+
+

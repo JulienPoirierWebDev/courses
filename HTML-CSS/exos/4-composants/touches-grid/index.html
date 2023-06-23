@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Touches</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        .wrapper {
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+
+            grid-template-areas:
+                " red1 orange1 yellow1 green1 blue1 violet1"
+                " red2 orange2 yellow2 green2 blue2 violet2"
+                " red3 orange3 yellow3 green3 blue3 violet3"
+                " red4 orange4 yellow4 green4 blue4 violet4"
+                " red5 orange5 yellow5 green5 blue5 violet5"
+                " red6 orange6 yellow6 green6 blue6 violet6"
+        }
+
+        .item{
+            background-color: grey;
+            transition: background-color 0.5s;
+            margin: 10px;
+            border: 2px solid black;
+            border-radius: 20px;
+        }
+
+
+        div[class*="red"]:hover {
+            background-color: red;
+        }
+
+        div[class*="orange"]:hover {
+            background-color: orange;
+        }
+
+        div[class*="yellow"]:hover {
+            background-color: yellow;
+        }
+
+        div[class*="green"]:hover {
+            background-color: green;
+        }
+
+        div[class*="blue"]:hover {
+            background-color: blue;
+        }
+
+        div[class*="violet"]:hover {
+            background-color: violet;
+        }
+
+
+    </style>
+</head>
+<body>
+  <div class="wrapper">
+
+      <div class="item red1"></div>
+      <div class="item orange1"></div>
+      <div class="item yellow1"></div>
+      <div class="item green1"></div>
+      <div class="item blue1"></div>
+      <div class="item violet1"></div>
+
+      <div class="item red2"></div>
+      <div class="item orange2"></div>
+      <div class="item yellow2"></div>
+      <div class="item green2"></div>
+      <div class="item blue2"></div>
+      <div class="item violet2"></div>
+
+      <div class="item red3"></div>
+      <div class="item orange3"></div>
+      <div class="item yellow3"></div>
+      <div class="item green3"></div>
+      <div class="item blue3"></div>
+      <div class="item violet3"></div>
+
+      <div class="item red4"></div>
+      <div class="item orange4"></div>
+      <div class="item yellow4"></div>
+      <div class="item green4"></div>
+      <div class="item blue4"></div>
+      <div class="item violet4"></div>
+
+      <div class="item red5"></div>
+      <div class="item orange5"></div>
+      <div class="item yellow5"></div>
+      <div class="item green5"></div>
+      <div class="item blue5"></div>
+      <div class="item violet5"></div>
+
+      <div class="item red6"></div>
+      <div class="item orange6"></div>
+      <div class="item yellow6"></div>
+      <div class="item green6"></div>
+      <div class="item blue6"></div>
+      <div class="item violet6"></div>
+
+  </div>
+
+</body>
+</html>

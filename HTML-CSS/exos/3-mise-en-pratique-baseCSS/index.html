@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice CSS</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rubik+Bubbles&display=swap');
+
+        p, h2, h3{
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1  {
+            font-family: 'Rubik Bubbles', sans-serif;
+            font-size: 3em;
+            color: #000000;
+            text-align: center;
+        }
+
+        /* NAVBAR */
+
+        nav{
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li{
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a{
+            text-decoration: none;
+            color: #000;
+        }
+
+        nav ul li a:hover{
+            color: #f00;
+        }
+        /* END NAVBAR */
+
+        /* SECTION HERO */
+
+        .hero {
+            background-image: url("https://images.pexels.com/photos/265216/pexels-photo-265216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .hero>div{
+            background-color: rgba(0,0,0,0.5);
+            padding: 20px;
+            color: #fff;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        .hero h2
+        {
+            color: #fff;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        /* END SECTION HERO */
+
+        /* SECTION PRESENTATION */
+
+        .presentation{
+            padding: 20px;
+            text-align: center;
+        }
+
+        .presentation-group{
+            width: 50%;
+            margin: auto;
+        }
+
+        .presentation-item{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: auto;
+            background-color: lightgoldenrodyellow;
+
+        }
+
+        .presentation-item img{
+            width: 50%;
+        }
+
+        .presentation h2{
+            font-size: 2rem;
+        }
+
+        .presentation p{
+            font-size: 1.5rem;
+        }
+
+        /* END SECTION PRESENTATION */
+
+        /* SECTION PRODUCTS */
+
+        .products h2 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2rem;
+        }
+
+        .products h3 {
+            text-align: center;
+            margin: 20px 0;
+            color: red;
+            font-family: sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .group-products{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .product-item{
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            align-items: center;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        .product-item img{
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .product-item p{
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 5px 0;
+        }
+
+        /* END SECTION PRODUCTS */
+
+        /* SECTION WHERE */
+
+        .where h2{
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2rem;
+        }
+
+        .where-wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .where-item{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            padding: 10px;
+
+        }
+
+       .hourly, .location{
+           display: flex;
+           align-content: center;
+           justify-content: center;
+       }
+
+       .hourly ul, .location ul {
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+       }
+
+
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Particuliers</a></li>
+        <li><a href="#">Professionnels</a></li>
+        <li><a href="#">Panier</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">A propos</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section class="hero">
+        <div>
+          <h1>Maraicher & primeur</h1>
+          <h2>Fruits et legumes</h2>
+        </div>
+    </section>
+
+    <section class="presentation">
+        <h2>Ce que nous faisons</h2>
+
+        <hr>
+
+            <div class="presentation-group">
+                <div class="presentation-item">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error expedita nisi odit quam qui!</p>
+                    <img src="https://via.placeholder.com/400x200" alt="an random image">
+                </div>
+
+                <div class="presentation-item">
+                    <img src="https://via.placeholder.com/400x200" alt="an random image">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error expedita nisi odit quam qui!</p>
+                </div>
+
+                <div class="presentation-item">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error expedita nisi odit quam qui!</p>
+                    <img src="https://via.placeholder.com/400x200" alt="an random image">
+                </div>
+
+            </div>
+
+    </section>
+
+    <section class="products">
+        <h2>Produits du moment</h2>
+
+        <div class="fruits-wrapper">
+            <h3>Fruits</h3>
+            <div class="group-products">
+
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/200x300" alt="an random image">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>2€</p>
+                </div>
+
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/200x300" alt="an random image">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>2€</p>
+                </div>
+
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/200x300" alt="an random image">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>2€</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="vegetables-wrapper">
+            <h3>Legumes</h3>
+            <div class="group-products">
+
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/200x300" alt="an random image">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>2€</p>
+                </div>
+
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/200x300" alt="an random image">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>2€</p>
+                </div>
+
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/200x300" alt="an random image">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>2€</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="where">
+        <h2>Où nous trouver ?</h2>
+        <div class="where-wrapper">
+            <img src="https://via.placeholder.com/200x600" alt="an random image">
+            <div class="where-item">
+                <h3>Nos marchés</h3>
+                <div class="location">
+                    <img src="https://via.placeholder.com/200x200" alt="an random image">
+                    <ul>
+                        <li>Paris</li>
+                        <li>Montpellier</li>
+                        <li>Strasbourg</li>
+                        <li>Lyon</li>
+                        <li>Bordeaux</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="where-item">
+                <h3>Horaires</h3>
+                <div class="hourly">
+                    <img src="https://via.placeholder.com/200x200" alt="an random image">
+                    <ul >
+                        <li>Lundi: 8h-12h</li>
+                        <li>Mardi: 8h-12h</li>
+                        <li>Mercredi: 8h-12h</li>
+                        <li>Jeudi: 8h-12h</li>
+                        <li>Vendredi: 8h-12h</li>
+                        <li>Samedi: 8h-12h</li>
+                        <li>Dimanche: Fermé</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
