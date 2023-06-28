@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de citations</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 1rem;
+            cursor: pointer;
+        }
+
+        div {
+            margin: 1rem;
+        }
+
+        form {
+            display: none;
+        }
+
+        .hidden {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Générateur de citations</h1>
+
+    <div>
+        <p id="quote"></p>
+        <p id="movie"></p>
+        <p id="character"></p>
+        <p id="year"></p>
+    </div>
+
+    <div>
+        <button id="newCitation">Changer la citation</button>
+    </div>
+
+
+    <script>
+
+        let quotes = [  
+            {    
+                "movie": "The Godfather",
+                "quote": "I'm gonna make him an offer he can't refuse.",
+                "character": "Don Vito Corleone",
+                "year": 1972  
+            },  
+            {    
+                "movie": "The Terminator",
+                "quote": "I'll be back.",    
+                "character": "The Terminator",    
+                "year": 1984  
+            },  
+                
+            {    
+                "movie": "Star Wars: Episode V - The Empire Strikes Back", 
+                "quote": "Do. Or do not. There is no try.",  
+                "character": "Yoda",
+                "year": 1980  
+            },  
+            {    "movie": "The Princess Bride",
+                "quote": "Hello. My name is Inigo Montoya. You killed my father. Prepare to die.",   
+                "character": "Inigo Montoya", 
+                "year": 1987
+            }
+        ]
+ 
+
+    </script>
+</body>
+</html>

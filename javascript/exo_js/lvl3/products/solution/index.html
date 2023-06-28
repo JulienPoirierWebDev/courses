@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos articles</title>
+    <script src="products.js" defer></script>
+    <style type="text/css">
+        #products {
+            width: 50%;
+            float: left;
+        }
+        #cart {
+            width: 50%;
+            float: left;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .product {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="products">
+        <h1>Nos articles</h1>
+        <div id="products-list"></div>
+    </div>
+
+    <div id="cart">
+        <h1>Votre panier</h1>
+        <div><p>Nombre d'articles dans le panier : <span id="cart-length"></span></p></div>
+        <div id="cart-list"></div>
+    </div>
+    
+</body>
+</html>

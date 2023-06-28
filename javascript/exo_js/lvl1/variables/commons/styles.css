@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+section > div:nth-child(odd) {
+  background-color: lightblue;
+}
+
+section > div:nth-child(even) {
+  background-color: lightcoral;
+}
+
+section > * {
+  border: 1px solid black;
+  padding: 30px;
+  min-width: 250px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+#heroWeapons > ul,
+#enemyWeapons > ul {
+  background-color: lightgrey;
+  padding: 10px;
+  list-style: none;
+  border: 1px solid black;
+}

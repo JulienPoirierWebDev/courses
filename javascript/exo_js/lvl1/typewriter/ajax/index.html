@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajax</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        left: 0;
+        background-color: red;
+        position: relative;
+        margin: 100px;
+        transition: all 5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="error"></div>
+
+    <button id="pokemon-button">Ajouter un pokemon</button>
+    <div id="pokemon-container"></div>
+
+    <button onclick="handleAnimation()" id="animation-button">
+      Lancer l'animation
+    </button>
+    <div class="box"></div>
+
+    <script>
+      let errorDiv = document.querySelector("#error");
+
+      let pokemons = [];
+
+      // Avec then, on ne peut pas utiliser try catch et attendre la réponse de la requête avant de continuer le code
+      // Il faut donc utiliser un callback pour traiter la donnée reçue mais cela peut poser des problèmes de lisibilité
+      // et de maintenabilité du code
+      async function getDataWithFetchAndThen(id) {
+        await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            // Traitement de la donnée reçue
+            createPokemonCard(data);
+            pokemons.push(data);
+            // Fin du traitement
+          })
+          .catch((error) => {
+            console.log("bad request" + error);
+          });
+      }
+
+      // Avec await, on peut utiliser try catch et attendre la réponse de la requête avant de continuer le code
+      // On peut stocker la donnée reçue dans une variable pour l'utiliser immédiatement,
+      // mais il faut utiliser une fonction asynchrone pour pouvoir utiliser await
+      // et donc utiliser try catch pour gérer les erreurs
+      async function getDataWithFetchAndAwait(id) {
+        try {
+          let response = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${id}/`
+          );
+          let data = await response.json();
+
+          // Traitement de la donnée reçue
+          createPokemonCard(data);
+          pokemons.push(data);
+
+          // Fin du traitement
+        } catch (error) {
+          errorDiv.innerHTML = `Il y a une erreur : ${error}`;
+          console.log(error);
+        }
+      }
+
+      let button = document.querySelector("#pokemon-button");
+      let container = document.querySelector("#pokemon-container");
+      button.addEventListener("click", async function () {
+        errorDiv.innerHTML = "";
+        let random = Math.floor(Math.random() * 150); // entre 1 et 150
+
+        // avec await, on peut éxécuter le code suivant seulement après la réponse de la requête,
+        // et donc attendre la réponse de la requête avant de continuer le code
+        // il faut donc utiliser await sur la fonction qui fait la requête.
+        await getDataWithFetchAndAwait(random);
+
+        console.log(pokemons);
+        console.log("Même si ca plante avant, je me lance !");
+      });
+
+      function createPokemonCard(pokemon) {
+        let div = document.createElement("div");
+        let src = pokemon.sprites.front_default;
+
+        console.log(pokemon.sprites.front_default);
+        div.innerHTML = `
+                <p>${pokemon.name}</p>
+                <img src='${src}'/>
+            `;
+        container.appendChild(div);
+      }
+
+      // Animation
+      let box = document.querySelector(".box");
+      let animationButton = document.querySelector("#animation-button");
+      let isAnimated = false;
+
+      async function handleAnimation() {
+        let isFinished = await animate(box, [
+          { transform: "translateX(0px)" },
+          { transform: "translateX(1000px)" },
+          { transform: "translateX(0px)" },
+        ]);
+
+        console.log(isFinished);
+        if (isFinished) {
+          console.log("do something");
+        }
+      }
+
+      function animate(element, properties) {
+        return new Promise((resolve, reject) => {
+          element.animate(properties, { duration: 1000 }).onfinish = resolve;
+
+          reject("error");
+        });
+      }
+    </script>
+  </body>
+</html>

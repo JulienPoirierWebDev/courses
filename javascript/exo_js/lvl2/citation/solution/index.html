@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de citations</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 1rem;
+            cursor: pointer;
+        }
+
+        div {
+            margin: 1rem;
+        }
+
+        form {
+            display: block;
+            animation: showForm 1s;
+
+        }
+
+        .hidden {
+            display: none;
+        }
+
+
+
+        @keyframes showForm {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Générateur de citations</h1>
+
+    <div>
+        <p id="quote"></p>
+        <p id="movie"></p>
+        <p id="character"></p>
+        <p id="year"></p>
+    </div>
+
+    <div>
+        <button id="newCitation">Changer la citation</button>
+    </div>
+
+
+    <div>
+        <h2 onclick="hideForm()">Ajouter une citation</h2>
+
+        <form class="hidden" action="">
+            <label for="quote">Citation</label>
+            <input type="text" name="quote" id="quote" required>
+
+            <label for="movie">Film</label>
+            <input type="text" name="movie" id="movie" required>
+
+            <label for="character">Personnage</label>
+            <input type="text" name="character" id="character" required>
+
+            <label for="year">Année</label>
+            <input type="number" name="year" id="year" min="1900" max="3000" required>
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </div>
+
+    <div>
+        <h2>Faire un reset des citations</h2>
+
+        <button onclick="handleReset()">Reset</button>
+    </div>
+
+
+    <script>
+        let oldQuoteIndex;
+        let quotes = getQuotes();
+
+
+        function getQuotes() {
+        // get the localQuotes in local storage
+
+
+       // On simplifie avec le OU logique, si la partie gauche est null / undefined, c'est la partie droite qui prévaut. 
+            let localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
+        
+            /*
+         if( !localQuotes) {
+                localQuotes = []
+            }
+        */
+   
+
+            // if local storage is empty, get the quotes from the array
+            if(localQuotes.length === 0) {
+                localQuotes = [  
+                {    
+                    "movie": "The Godfather",
+                    "quote": "I'm gonna make him an offer he can't refuse.",
+                    "character": "Don Vito Corleone",
+                    "year": 1972  
+                },  
+                {    
+                    "movie": "The Terminator",
+                    "quote": "I'll be back.",    
+                    "character": "The Terminator",    
+                    "year": 1984  },  
+                    
+                {    
+                    "movie": "Star Wars: Episode V - The Empire Strikes Back", 
+                    "quote": "Do. Or do not. There is no try.",  
+                    "character": "Yoda",
+                    "year": 1980  
+                },  
+                {    "movie": "The Princess Bride",
+                    "quote": "Hello. My name is Inigo Montoya. You killed my father. Prepare to die.",   
+                    "character": "Inigo Montoya", 
+                    "year": 1987
+                }
+            ]
+    
+
+            }
+
+            return localQuotes;
+
+        }
+
+        function handleQuotesChange(event) {
+            let randomNumber = Math.floor(Math.random() * quotes.length)
+
+            if(oldQuoteIndex === randomNumber) {
+                // randomNumber = randomNumber +1 === quote.length -1 ? 0 : randomNumber +1;
+
+                if(randomNumber + 1 === localQuotes.length - 1) {
+                    randomNumber = 0
+                } else {
+                    randomNumber++  
+                }
+            }
+
+            console.log(randomNumber , oldQuoteIndex);
+
+            const randomQuote = quotes[randomNumber];
+            oldQuoteIndex = randomNumber;
+
+            const quote = document.getElementById('quote');
+            const movie = document.getElementById('movie');
+            const character = document.getElementById('character');
+            const year = document.getElementById('year');
+            quote.innerHTML = randomQuote.quote;
+            movie.innerHTML = randomQuote.movie;
+            character.innerHTML = randomQuote.character;
+            year.innerHTML = randomQuote.year;
+        }
+
+        function addCitation(event) {
+
+            console.log(event)
+            console.log(event.target)
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const quote = formData.get('quote');
+            const movie = formData.get('movie');
+            const character = formData.get('character');
+            const year = formData.get('year');
+
+            console.log(quote, movie, character, year)
+
+            if(!quote || !movie || !character || !year) {
+                return;
+            }
+
+            /*
+            const newCitation = {
+                quote : quote,
+                movie: movie,
+                character: character,
+                year: year
+            }
+
+            */
+            // Version contractée.
+
+            const newCitation = { quote, movie, character, year};
+            quotes.push(newCitation);
+            localStorage.setItem('quotes', JSON.stringify(quotes));
+
+            // form -> methode reset()
+            event.target.reset();
+        }
+
+        function hideForm() {
+            const form = document.querySelector('form');
+            form.classList.toggle('hidden');
+        }
+
+        function handleReset() {
+            localStorage.clear();
+            //localStorage.removeItem('quotes')
+            quotes = getQuotes();
+        }
+
+        handleQuotesChange();
+
+        const newCitation = document.getElementById('newCitation');
+        newCitation.addEventListener('click', handleQuotesChange);
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', addCitation);
+    </script>
+</body>
+</html>
