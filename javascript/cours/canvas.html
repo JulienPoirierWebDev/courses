@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas</title>
+    <style>
+      body {
+        background-color: black;
+      }
+
+      canvas {
+        background-color: lightblue;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <button onclick="stopInterval()" id="stop" >Stop</button>
+    <button onclick="createInterval()" id="play" class="hidden">Play</button>
+    <input type="color" name="color" id="color" onchange="setColor(event)">
+    <input type="range" min="5" max="50" onchange="setRadius(event)">
+
+    <script>
+      let canvas = document.querySelector("#canvas");
+      const buttonStop = document.querySelector("#stop");
+      const buttonPlay = document.querySelector("#play");
+      const width = canvas.width;
+      const height = canvas.height;
+      let radius = 10;
+      let color = "#000000"
+
+      let numberOfElements = 10;
+      let elements = [];
+
+      for(let i = 0; i<numberOfElements; i++) {
+        const element = {
+          color: color,
+          radius:radius,
+          x: radius + (Math.random() * (width - 2*radius)),
+          y:radius + (Math.random() * (height - 2*radius)),
+          speedX : 5,
+          speedY:5
+        }
+        elements.push(element)
+      }
+
+      let context = canvas.getContext("2d");
+
+
+    
+
+      let drawInterval = setInterval(() => {
+        context.clearRect(0,0,width, height)
+        elements.forEach(element => {
+          updateCircle(element)
+          drawCircle(element)
+      });
+      console.log("draw");
+      }, 1000/30)
+
+
+      function createInterval() {
+        buttonPlay.classList.toggle("hidden");
+        buttonStop.classList.toggle("hidden")
+        drawInterval = setInterval(() => {
+        context.clearRect(0,0,width, height)
+        elements.forEach(element => {
+          updateCircle(element)
+          drawCircle(element)
+      });
+      console.log("draw");
+      }, 1000/30)
+      }
+
+      function stopInterval() {
+        console.log("stop");
+        clearInterval(drawInterval);
+        drawInterval = null;
+        buttonPlay.classList.toggle("hidden");
+        buttonStop.classList.toggle("hidden");
+      }
+
+      function setColor(event) {
+        event.preventDefault();
+        color = event.target.value;
+        console.log(color);
+        elements.forEach(element => element.color = color)
+      }
+
+      function setRadius(event) {
+        event.preventDefault();
+        radius = event.target.value;
+        console.log(radius);
+        elements.forEach(element => element.radius = radius)
+      }
+
+      function updateCircle(element) {
+        element.x = element.x + element.speedX;
+        element.y = element.y + element.speedY;
+
+        if(element.x > width - radius || element.x < 0 + radius) {
+          element.speedX = -element.speedX;
+        }
+
+        if(element.y > height - radius || element.y < 0 + radius) {
+          element.speedY = -element.speedY;
+        }
+      }
+
+      function drawCircle (element) {
+        context.beginPath()
+        context.arc(element.x,element.y,element.radius,0,2*Math.PI, false)
+        context.fillStyle = element.color;
+        context.fill();
+        context.lineWidth = '#003300';
+        context.strokeStyle = '#003300';
+        context.stroke();
+      }
+      
+    </script>
+  </body>
+</html>      
+
+    </script>
+  </body>
+</html>
