@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Convertire la température</title>
+  </head>
+  <body>
+    <script>
+      function celsiusToFahrenheit(celsius) {
+        return (celsius * 9) / 5 + 32;
+      }
+
+      function fahrenheitToCelsius(fahrenheit) {
+        return ((fahrenheit - 32) * 5) / 9;
+      }
+
+      let tempC = parseFloat(
+        prompt("Entrez une température en degrés Celsius :")
+      );
+      let tempF = celsiusToFahrenheit(tempC);
+      alert(`${tempC} °C équivaut à ${tempF} °F.`);
+
+      let tempF2 = parseFloat(
+        prompt("Entrez une température en degrés Fahrenheit :")
+      );
+      let tempC2 = fahrenheitToCelsius(tempF2);
+      alert(`${tempF2} °F équivaut à ${tempC2} °C.`);
+    </script>
+  </body>
+</html>
