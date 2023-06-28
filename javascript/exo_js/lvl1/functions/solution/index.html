@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exo sur les fonctions</title>
+
+    <script src="../exo/script.js" defer></script>
+    <script src="../solution/script.js" defer></script>
+    <link rel="stylesheet" href="../commons/styles.css" />
+  </head>
+  <body>
+    <h1>Calculatrice</h1>
+    <form id="calculatrice">
+      <div id="numbers">
+        <div>
+          <label for="num1">Nombre 1:</label>
+          <input type="text" id="num1" name="num1" />
+        </div>
+        <div>
+          <label for="num2">Nombre 2:</label>
+          <input type="text" id="num2" name="num2" />
+        </div>
+        <div>
+          <label class="hidden" for="num3">Nombre 3:</label>
+          <input class="hidden" type="text" id="num3" name="num3" />
+        </div>
+      </div>
+
+      <div id="op">
+        <input type="submit" id="additionner" value="Additionner" />
+        <input type="submit" id="soustraire" value="Soustraire" />
+        <input type="submit" id="multiplier" value="Multiplier" />
+        <input type="submit" id="diviser" value="Diviser" />
+      </div>
+    </form>
+
+    <div id="result__container">
+      <p>
+        Type d'opération : <span class="result__span" id="operation"></span>
+      </p>
+      <p>Résultat : <span class="result__span" id="resultat"></span></p>
+    </div>
+  </body>
+</html>
