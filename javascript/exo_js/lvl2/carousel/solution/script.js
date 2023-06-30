@@ -22,21 +22,18 @@ window.onload = function () {
 };
 
 function carousel() {
-  let all_img = document.querySelectorAll(".carousel-img");
+  const all_img = document.querySelectorAll(".carousel-img");
 
-  let carousel = document.querySelector(".carousel");
+  const carousel = document.querySelector(".carousel");
 
-  console.log(all_img);
-  console.log(carousel);
-
-  let prev = document.querySelector(".previous");
-  let next = document.querySelector(".next");
+  const prev = document.querySelector(".previous");
+  const next = document.querySelector(".next");
 
   prev.addEventListener("click", handleClickPrev);
   next.addEventListener("click", handleClickNext);
 
-  console.log(prev);
   let count = 0;
+
   function handleClickPrev(event) {
     count--;
     if (count < 0) {
