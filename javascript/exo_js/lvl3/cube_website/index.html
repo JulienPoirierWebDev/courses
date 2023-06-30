@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site cubique</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" type="module" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="controls">
+        <div class="controls__move">
+          <button class="button-up">Up</button>
+          <div>
+            <button class="button-left">Left</button>
+            <button class="button-right">Right</button>
+          </div>
+          <button class="button-down">Down</button>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="cube">
+          <div class="front">
+            <div class="hero">
+              <h1>Je suis développeur web</h1>
+              <p>
+                Pour moi, le développement web est un jeu de construction, c'est
+                pourquoi j'ai décidé de faire de ce site un cube
+              </p>
+              <p>N'hésitez pas a naviguer avec les touches.</p>
+
+              <p>Merci de votre visite</p>
+            </div>
+          </div>
+          <div class="back">
+            <div class="github">Hello world</div>
+          </div>
+          <div class="right">
+            <div class="game">Un jeu ici</div>
+          </div>
+          <div class="left"><div class="contact"></div></div>
+          <div class="top">
+            <div class="music">
+              <div class="music_canvas">
+                <canvas class="music_visualizer"></canvas>
+              </div>
+              <div class="music_player">
+                <div class="music_infos">
+                  <div class="music_name"></div>
+                  <div class="music_timezone">
+                    <div class="music_time"></div>
+                    <input class="music_range" type="range" min="0" max="100" />
+                  </div>
+                </div>
+                <div class="music_controls">
+                  <div class="music_prev">Prev</div>
+                  <div class="music_play">Play</div>
+                  <div class="music_stop hidden">Stop</div>
+                  <div class="music_next">Next</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom"><div class="about"></div></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
