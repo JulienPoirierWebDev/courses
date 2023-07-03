@@ -1,6 +1,11 @@
 Exercice 1:
 Écrivez une requête pour récupérer les noms et les dates de naissance des clients.
 
+```sql
+
+
+```
+
 Exercice 2:
 Écrivez une requête pour récupérer les produits commandés par un client donné.
 

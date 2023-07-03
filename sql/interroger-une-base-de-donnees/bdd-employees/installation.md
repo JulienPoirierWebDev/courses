@@ -50,6 +50,7 @@ Cliquez sur "Choisir un fichier" et sélectionnez le fichier "load_departments.d
 Répétez l'opération pour les autres fichiers ".dump", dans cet ordre :
 
 - load_employees.dump
+- load_departments.dump
 - load_dept_emp.dump
 - load_dept_manager.dump
 - load_titles.dump
