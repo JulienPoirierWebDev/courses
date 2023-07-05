@@ -24,6 +24,10 @@ app.post("/hello", (req, res) => {
   res.send(name);
 });
 
+app.use((req, res) => {
+  res.status(404).send("Not found");
+});
+
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });

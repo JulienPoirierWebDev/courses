@@ -628,3 +628,425 @@ app.get("/hello", (req, res) => {
 ```
 
 Ici, les middlewares sont appliqués dans l'ordre : `middleware1` est appliqué, puis `middleware2`, puis `middleware3`, puis la fonction de callback, qui est définie dans `app.get()`.
+
+## Le routing
+
+Le routing est le fait de découper une application web en routes. Nous avons déja vu que Express rendait plus facile la création de routes.
+
+Mais il est possible de découper les routes dans plusieurs fichiers, pour rendre le code plus modulaire et plus lisible.
+
+### Créer un fichier `routes.js`
+
+Imaginions que nous définissions les routes pour faire un CRUD sur nos articles de blog. On pourrait avoir des routes comme `/articles`, `/articles/:id`, etc.
+
+On voudrait rassebler toutes ces routes dans un seul fichier, pour que le code soit plus lisible.
+
+On peut créer un fichier `articlesRouter.js` qui contient toutes les routes de notre application :
+
+```js
+const express = require("express");
+
+const router = express.Router();
+
+router.get("/articles", (req, res) => {
+  // ...
+});
+
+router.get("/articles/:id", (req, res) => {
+  // ...
+});
+
+router.post("/articles", (req, res) => {
+  // ...
+});
+
+router.put("/articles/:id", (req, res) => {
+  // ...
+});
+
+router.patch("/articles/:id", (req, res) => {
+  // ...
+});
+
+router.delete("/articles/:id", (req, res) => {
+  // ...
+});
+
+module.exports = router;
+```
+
+On exporte le router avec `module.exports = router`.
+
+### Importer le router dans `app.js`
+
+On peut ensuite importer le router dans `app.js` :
+
+```js
+const express = require("express");
+
+const articlesRouter = require("./articlesRouter");
+
+const app = express();
+
+app.use(articleRouter);
+app.use(userRouter);
+app.use(commentRouter);
+
+app.listen(3000, () => {
+  console.log("Server started");
+});
+```
+
+On a donc utilise un middleware pour utiliser le router `articlesRouter` sur toutes les routes qui commencent par `/articles`. Dans notre exemple, le router réecriera les routes `/articles`, `/articles/:id`, etc.
+
+Le problème c'est que si on veut changer la structure des routes, on devra modifier le router et `app.js`. C'est pourquoi on peut utiliser un middleware pour utiliser le router `articlesRouter` sur une route spécifique :
+
+```js
+app.use("/articles", articleRouter);
+```
+
+En utilisant `app.use("/articles", articleRouter)`, on utilise le router `articleRouter` sur toutes les routes qui commencent par `/articles`. Dans notre exemple, le router réecriera les routes `/articles`, `/articles/:id`, etc.
+
+Le router sera alors le suivant :
+
+```js
+const express = require("express");
+
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  // ...
+});
+
+router.get("/:id", (req, res) => {
+  // ...
+});
+
+router.post("/", (req, res) => {
+  // ...
+});
+
+router.put("/:id", (req, res) => {
+  // ...
+});
+
+router.patch("/:id", (req, res) => {
+  // ...
+});
+
+router.delete("/:id", (req, res) => {
+  // ...
+});
+
+module.exports = router;
+```
+
+Avec les routers, vous pouvez appliquer un middleware à toutes les routes d'un router, ou à une route spécifique.
+
+## Les moteurs de template
+
+Nous avons déja vu que l'on pouvait envoyer des fichiers avec `res.sendFile()`.
+
+Mais on peut aussi utiliser des moteurs de template pour générer des pages web dynamiques. Express est prévu pour fonctionner avec des moteurs de template et peut en utiliser plusieurs.
+
+Express permet d'utiliser des moteurs de template pour générer des pages web dynamiques.
+
+Une liste des moteurs de template supportés par Express est disponible [ici](https://expressjs.com/en/resources/template-engines.html).
+
+Nous allons utiliser le moteur de template [EJS](https://ejs.co/) car il est très simple à utiliser et très populaire. C'est un moteur de template qui permet de générer des pages web dynamiques avec du HTML et du JavaScript.
+
+### Installer un moteur de template
+
+Pour utiliser un moteur de template, il faut l'installer avec npm :
+
+```bash
+npm install ejs
+```
+
+### Configurer Express pour utiliser un moteur de template
+
+Pour utiliser un moteur de template, il faut le configurer avec `app.set()` :
+
+```js
+const express = require("express");
+
+const app = express();
+
+app.set("view engine", "ejs");
+
+app.listen(3000, () => {
+  console.log("Server started");
+});
+```
+
+La méthode `app.set()` permet de configurer Express. Elle prend deux paramètres :
+
+- le nom de la configuration
+- la valeur de la configuration
+
+D'autres exemples de configuration sont :
+
+- `app.set("views", "./views")` : pour indiquer à Express où se trouvent les fichiers de vues
+- `app.set("port", 3000)` : pour indiquer à Express sur quel port démarrer le serveur HTTP
+- `app.set("env", "production")` : pour indiquer à Express dans quel environnement on se trouve (production, développement, etc.)
+
+### Créer un fichier de vue et l'utiliser
+
+Nous avons indiqué à Express que nous allions utiliser le moteur de template EJS. Il faut donc créer un fichier de vue avec l'extension `.ejs`, pour que Express puisse l'utiliser.
+
+La convention avec EJS est de créer un dossier `views` à la racine du projet, et d'y mettre tous les fichiers de vues, soit en vracs, soit dans des sous-dossiers.
+
+Par exemple, on peut créer un fichier `views/hello.ejs` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'accueil</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <div>
+      <p>Je suis une page web statique</p>
+    </div>
+  </body>
+</html>
+```
+
+Ensuite, on peut utiliser la méthode `res.render()` pour utiliser le fichier de vue :
+
+```js
+app.get("/hello", (req, res) => {
+  res.render("hello");
+});
+```
+
+Pour l'instant, nos pages web sont statiques, mais on peut utiliser EJS pour générer des pages web dynamiques.
+
+### Utiliser des variables dans les fichiers de vues
+
+On peut utiliser des variables dans les fichiers de vues.
+
+Le deuxième paramètre de `res.render()` est un objet qui contient les variables que l'on veut utiliser dans le fichier de vue :
+
+```js
+app.get("/hello", (req, res) => {
+  res.render("hello", {
+    name: "John",
+  });
+});
+```
+
+Dans le fichier de vue, on peut utiliser la variable `name` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'accueil</title>
+  </head>
+  <body>
+    <h1>Hello <%= name %></h1>
+    <div>
+      <p>Je suis une page web dynamique</p>
+    </div>
+  </body>
+</html>
+```
+
+On utilise `<%= name %>` pour afficher la variable `name`. Il y a plusieurs élements de syntaxe avec EJS, que nous allons voir juste après.
+
+Toutefois, la logique est celle-ci : on utilise `<%= %>` pour afficher une variable, et `<% %>` pour éxécuter du code JavaScript.
+
+On peut passer autant de variables que l'on veut à `res.render()` :
+
+```js
+app.get("/hello", (req, res) => {
+  res.render("hello", {
+    name: "John",
+    age: 42,
+    address: "1 rue de la Paix",
+    city: "Paris",
+    tasks: ["Faire les courses", "Aller à la banque", "Aller à la poste"],
+  });
+});
+```
+
+Et on peut les utiliser dans le fichier de vue :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'accueil</title>
+  </head>
+  <body>
+    <h1>Hello <%= name %></h1>
+    <div>
+      <p>Je suis <%= name %>, j'ai <%= age %> ans.</p>
+      <p>J'habite au <%= address %> à <%= city %>.</p>
+      <p>Mes tâches du jour sont :</p>
+      <ul>
+        <% for (let task of tasks) { %>
+        <li><%= task %></li>
+        <% } %>
+      </ul>
+    </div>
+  </body>
+</html>
+```
+
+En combinant EJS avec des requêtes, des middlewares et des bases de données, on peut créer des pages web dynamiques et complexes.
+
+### Les éléments de syntaxe avec EJS
+
+EJS est un moteur de template simple d'accès mais qui permet de faire beaucoup. Nous n'allons pas voir toutes ses fonctionnalités, mais nous allons voir les éléments de syntaxe de base.
+
+#### Indiquer que nous allons utiliser EJS
+
+Pour indiquer que nous allons utiliser EJS, il faut utiliser la syntaxe suivante :
+
+```html
+<% %>
+```
+
+Tout ce qui se trouve entre `<%` et `%>` est du code JavaScript.
+
+#### Afficher une variable
+
+Pour afficher une variable, il faut utiliser la syntaxe suivante :
+
+```html
+<%= maVariable %>
+```
+
+Tout ce qui se trouve entre `<%=` et `%>` est une variable. On demande a EJS d'afficher la valeur de la variable.
+
+#### Afficher du code JavaScript
+
+Pour afficher du code JavaScript, il faut utiliser la syntaxe suivante :
+
+```html
+<% for (let i = 0; i < 10; i++) { %>
+<p>Je suis une ligne de texte</p>
+<% } %>
+```
+
+Tout ce qui se trouve entre `<%` et `%>` est du code JavaScript. On demande à EJS d'éxécuter le code JavaScript. Ici, on affiche 10 lignes de texte.
+
+La subtilité, c'est que l'on peut ouvrir une boucle a un endroit et ne pas la fermer avant la fin de la balise EJS (`%>`). C'est ce que l'on fait dans l'exemple ci-dessus.
+Il faut alors faire attention à bien fermer la boucle avant la fin du fichier de vue.
+
+De cette manière, on peut utiliser des variables dans le code JavaScript :
+
+```html
+<% for (let task of tasks) { %>
+<li><%= task %></li>
+<% } %>
+```
+
+Ici, on affiche une liste de tâches. On utilise une boucle `for...of` pour parcourir le tableau `tasks` et on affiche chaque tâche avec `<%= task %>`.
+
+#### Inclure un fichier de vue dans un autre fichier de vue
+
+On peut inclure un fichier de vue dans un autre fichier de vue avec la syntaxe suivante :
+
+```html
+<%- include("header") %>
+```
+
+Ici, on inclut le fichier `header.ejs` dans le fichier de vue.
+
+> Cela permet de créer des fichiers de vue réutilisables, par exemple pour créer un header ou un footer.
+
+On peut passer des variables à un fichier de vue inclus :
+
+```html
+<%- include("header", { title: "Page d'accueil" }) %>
+```
+
+Attention, on peut injecter une variable dans une vue incluse sans avoir besoin de passer de deuxième argument a `<%- include("header")%>` si le nom de la variable utilisé dans le fichier de vue inclus est le même que celui de la variable passée à `res.render()`.
+
+Par exemple, si on a un fichier `header.ejs` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <header>
+      <h1><%= title %></h1>
+    </header>
+  </body>
+</html>
+```
+
+Et que l'on utilise `res.render("hello", { title: "Page d'accueil" })`, on peut utiliser `<%- include("header")%>` sans passer de deuxième argument.
+
+### Comment ajouter du CSS et du JavaScript dans un fichier de vue ?
+
+Pour ajouter du CSS et du JavaScript dans un fichier de vue, il faut utiliser la syntaxe suivante :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'accueil</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/script.js" defer></script>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <div>
+      <p>Je suis une page web statique</p>
+    </div>
+  </body>
+</html>
+```
+
+En fait, on utilise les mêmes balises que dans un fichier HTML classique. Mais si l'on fait cela avec Express, il faut que les fichiers CSS et JavaScript soient dans un dossier que nous aurons crée et que nous aurons indiqué à Express avec `app.use(express.static("public"))`.
+
+Par exemple, si l'on a un dossier `public` avec un fichier `css/style.css` et un fichier `js/script.js`, on peut utiliser les fichiers CSS et JavaScript dans un fichier de vue avec la syntaxe suivante :
+
+```html
+<link rel="stylesheet" href="/css/style.css" />
+<script src="/js/script.js" defer></script>
+```
+
+Dans Express, on utilise `app.use(express.static("public"))` pour indiquer à Express que le dossier `public` contient des fichiers statiques (CSS, JavaScript, images, etc.).
+
+```js
+const express = require("express");
+
+const app = express();
+
+app.use(express.static("public"));
+
+app.listen(3000, () => {
+  console.log("Server started");
+});
+```
+
+> En faisant cela, on rend accessible toutes les ressources du dossier `public` sur le serveur HTTP. C'est pourquoi il est important de ne pas mettre de fichiers sensibles dans le dossier `public`.
+>
+> - Si l'on veut rendre accessible une image, on peut la mettre dans le dossier `public`.
+> - Si l'on utilise un fichier de configuration avec les mots de passe de la base de données, par exemple, il ne faut pas le mettre dans le dossier `public`.
+>   Exemple d'url pour accéder à une image : `http://localhost:3000/images/image.jpg`.
+
+On peut aussi spécifier une route pour les fichiers statiques :
+
+```js
+const express = require("express");
+
+const app = express();
+
+app.use("/static", express.static("public"));
+
+app.listen(3000, () => {
+  console.log("Server started");
+});
+```
+
+Ici, on rend accessible toutes les ressources du dossier `public` sur le serveur HTTP à partir de la route `/static`. Cela veut dire que si l'on a un fichier `public/css/style.css`, on pourra y accéder avec l'url `http://localhost:3000/static/css/style.css`.
