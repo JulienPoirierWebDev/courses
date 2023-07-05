@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= article.title %></title>
+  </head>
+  <body>
+    <h1><%= article.title %></h1>
+    <p><%= article.content %></p>
+    <a href="/article/<%= article.id %>/update">Modifier</a>
+    <form action="/article/<%= article.id %>/delete" method="post">
+      <button type="submit">Supprimer</button>
+    </form>
+  </body>
+</html>

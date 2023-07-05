@@ -32,7 +32,7 @@ Par soucis de simplicité, nous n'allons pas faire de POO. Nous allons juste cr�
 
 ### Le modèle
 
-Nous allons créer un fichier `models/article.js` qui contient le modèle `Article`. Ce modèle contient une liste d'articles de blog.
+Nous allons créer un fichier `models/articleModel.js` qui contient le modèle `Article`. Ce modèle contient une liste d'articles de blog.
 
 ```js
 const articles = [
@@ -151,14 +151,14 @@ const {
   createArticle,
   deleteArticleById,
   updateArticleById,
-} = require("../models/article");
+} = require("../models/articleModel");
 
 const getArticle = (request, response) => {
   try {
     const id = parseInt(request.params.id);
     const article = getArticleById(id);
     if (article) {
-      response.render("article", { article });
+      response.render("article/oneArticle", { article });
     } else {
       response.status(404).send("Article not found");
     }
@@ -170,21 +170,21 @@ const getArticle = (request, response) => {
 const getArticles = (request, response) => {
   try {
     const articles = getAllArticles();
-    response.render("index", { articles });
+    response.render("article/index", { articles });
   } catch (err) {
     response.status(500).send("Internal server error");
   }
 };
 
 const createArticleForm = (request, response) => {
-  response.render("/articles/new");
+  response.render("/article/new");
 };
 
 const createArticleAction = async (request, response) => {
   try {
     const { title, content } = request.body;
     const article = await createArticle({ title, content });
-    response.redirect(`/articles/${article.id}`);
+    response.redirect(`/article/${article.id}`);
   } catch (err) {
     response.status(500).send("Internal server error");
   }
@@ -194,7 +194,7 @@ const deleteArticle = (request, response) => {
   try {
     const id = parseInt(request.params.id);
     deleteArticleById(id);
-    response.redirect("/articles");
+    response.redirect("/article");
   } catch (err) {
     response.status(500).send("Internal server error");
   }
@@ -205,7 +205,7 @@ const updateArticleForm = (request, response) => {
     const id = parseInt(request.params.id);
     const article = getArticleById(id);
     if (article) {
-      response.render("/articles/update", { article });
+      response.render("/article/update", { article });
     } else {
       response.status(404).send("Article not found");
     }
@@ -238,7 +238,7 @@ module.exports = {
 
 ### Les routes
 
-Nous allons créer un fichier `routes/article.js` qui contient les routes pour les articles de blog.
+Nous allons créer un fichier `routers/articleRouter.js` qui contient les routes pour les articles de blog.
 
 ```js
 const express = require("express");
@@ -279,7 +279,7 @@ Nous allons créer un fichier `app.js` qui contient le point d'entrée de notre 
 ```js
 const express = require("express");
 
-const articleRouter = require("./routes/article");
+const articleRouter = require("./routers/articleRouter");
 
 const app = express();
 
@@ -296,7 +296,7 @@ app.listen(3000, () => {
 
 ### Les vues
 
-Nous allons créer un fichier `views/index.ejs` qui contient la vue pour la liste des articles de blog.
+Nous allons créer un fichier `views/article/index.ejs` qui contient la vue pour la liste des articles de blog.
 
 ```html
 <!DOCTYPE html>
@@ -310,16 +310,16 @@ Nous allons créer un fichier `views/index.ejs` qui contient la vue pour la list
     <ul>
       <% articles.forEach((article) => { %>
       <li>
-        <a href="/articles/<%= article.id %>"><%= article.title %></a>
+        <a href="/article/<%= article.id %>"><%= article.title %></a>
       </li>
       <% }) %>
     </ul>
-    <a href="/articles/new">Créer un nouvel article</a>
+    <a href="/article/new">Créer un nouvel article</a>
   </body>
 </html>
 ```
 
-Nous allons créer un fichier `views/article.ejs` qui contient la vue pour un article de blog.
+Nous allons créer un fichier `views/article/oneArticle.ejs` qui contient la vue pour un article de blog.
 
 ```html
 <!DOCTYPE html>
@@ -331,15 +331,15 @@ Nous allons créer un fichier `views/article.ejs` qui contient la vue pour un ar
   <body>
     <h1><%= article.title %></h1>
     <p><%= article.content %></p>
-    <a href="/articles/<%= article.id %>/update">Modifier</a>
-    <form action="/articles/<%= article.id %>/delete" method="post">
+    <a href="/article/<%= article.id %>/update">Modifier</a>
+    <form action="/article/<%= article.id %>/delete" method="post">
       <button type="submit">Supprimer</button>
     </form>
   </body>
 </html>
 ```
 
-Nous allons créer un fichier `views/articles/new.ejs` qui contient la vue pour créer un article de blog.
+Nous allons créer un fichier `views/article/new.ejs` qui contient la vue pour créer un article de blog.
 
 ```html
 <!DOCTYPE html>
@@ -350,7 +350,7 @@ Nous allons créer un fichier `views/articles/new.ejs` qui contient la vue pour 
   </head>
   <body>
     <h1>Créer un nouvel article</h1>
-    <form action="/articles" method="post">
+    <form action="/article" method="post">
       <div>
         <label for="title">Titre</label>
         <input type="text" id="title" name="title" />
@@ -365,7 +365,7 @@ Nous allons créer un fichier `views/articles/new.ejs` qui contient la vue pour 
 </html>
 ```
 
-Nous allons créer un fichier `views/articles/update.ejs` qui contient la vue pour modifier un article de blog.
+Nous allons créer un fichier `views/article/update.ejs` qui contient la vue pour modifier un article de blog.
 
 ```html
 <!DOCTYPE html>
@@ -376,7 +376,7 @@ Nous allons créer un fichier `views/articles/update.ejs` qui contient la vue po
   </head>
   <body>
     <h1>Modifier l'article <%= article.title %></h1>
-    <form action="/articles/<%= article.id %>/update" method="post">
+    <form action="/article/<%= article.id %>/update" method="post">
       <div>
         <label for="title">Titre</label>
         <input
@@ -404,15 +404,16 @@ Nous allons créer un fichier `views/articles/update.ejs` qui contient la vue po
 ├── controllers
 │   └── articleController.js
 ├── models
-│   └── article.js
+│   └── articleModel.js
 ├── package-lock.json
 ├── package.json
-├── routes
-│   └── article.js
+├── routers
+│   └── articleRouter.js
 └── views
-    ├── article.ejs
-    ├── articles
-    │   ├── new.ejs
-    │   └── update.ejs
-    └── index.ejs
+    └── article
+        ├── index.ejs
+        ├── new.ejs
+        ├── oneArticle.ejs
+        └── update.ejs
+
 ```
