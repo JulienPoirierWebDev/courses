@@ -1,0 +1,10 @@
+body,
+html {
+  background-color: black;
+  min-height: 100vh;
+}
+#root {
+  background-color: black;
+  color: aliceblue;
+  min-height: calc(100% - 100px);
+}
