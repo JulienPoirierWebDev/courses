@@ -476,3 +476,17 @@ const FlexboxContainerColumn = () => {
   </RoundBorder>
 </FlexboxContainerColumn>
 ```
+
+Ce que nous avons appris avec cet exercice :
+
+- Créer des composants simples
+- Créer des composants complexes en utilisant des composants simples
+- Créer des composants utilitaires
+- Créer des layouts en utilisant des composants utilitaires
+- Créer des variations de composants pour alleger le code
+
+Ce qui pourrait encore être amélioré :
+
+- L'organisation du dossier `components` pourrait être améliorée : on pourrait créer un dossier `components/layout` pour y mettre les composants utilitaires et un dossier `components/article` pour y mettre les composants `Article`, `Title` et `Image`.
+- Le composant `FlexboxContainer` pourrait être amélioré en utilisant `tailwindcss` pour définir les classes CSS utilitaires.
+- Les différents composants pourraient être associés dans des composants plus complexes pour créer des layouts plus complexes.
