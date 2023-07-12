@@ -123,7 +123,7 @@ const reducer = (state, action) => {
     case "EMPTY_WALLET":
       return 0;
     default:
-      return state;
+      throw Error("Unknown action.");
   }
 };
 
@@ -164,7 +164,7 @@ const reducer = (state, action) => {
     case "EMPTY_WALLET":
       return { amount: 0 };
     default:
-      return state;
+      throw Error("Unknown action.");
   }
 };
 
@@ -209,7 +209,7 @@ const reducer = (state, action) => {
     case EMPTY_WALLET:
       return { amount: 0 };
     default:
-      return state;
+      throw Error("Unknown action.");
   }
 };
 
@@ -617,7 +617,7 @@ Dans le composant Element, on a accès au contexte. On peut le modifier avec l'i
 
 Toutefois, ici, on ne peut pas modifier le contexte dans le composant Element. Pour cela, il faudrait passer dans le contexte une fonction pour modifier le contexte.
 
-```
+```js
 const MyContext = React.createContext();
 
 const MyProvider = ({ children }) => {
@@ -642,8 +642,7 @@ const MyProvider = ({ children }) => {
 
 Et pour acceder a la fonction, on peut utiliser le hook useContext :
 
-```
-
+```js
 const Element = () => {
   const { value, setValue } = useContext(MyContext);
   console.log("context", value);
@@ -655,7 +654,6 @@ const Element = () => {
         value={value}
         onChange={(event) => {
           setValue(event.target.value);
-          console.log(event.target.value);
         }}
       />
     </>
@@ -664,3 +662,44 @@ const Element = () => {
 ```
 
 Avec cette manière de faire, on peut passer de nombreux états dans le contexte et les modifier dans les composants enfants.
+
+Nous verrons plus tard des exemples plus concrets d'utilisation du contexte.
+
+### useRef
+
+Le hook useRef permet de créer une référence un élément qui ne doit pas générer de render lorque l'on modifie la référence et qui est maintenu en mémoire lors d'un re-render (comme les states).
+
+Dans les faits, on l'utilise souvent pour faire référence a un élément du DOM et ainsi pouvoir le manipuler.
+
+```js
+const MyComponent = () => {
+  const ref = useRef(null);
+  return (
+    <div>
+      <input type="text" ref={ref} />
+      <button onClick={() => ref.current.focus()}>Focus</button>
+    </div>
+  );
+};
+```
+
+Le hook useRef est très utile lorsque l'on travaille avec un canvas. En effet, on peut utiliser le hook useRef pour faire référence au canvas et ainsi pouvoir le manipuler.
+
+```js
+const MyComponent = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.fillStyle = "red";
+    context.fillRect(0, 0, 100, 100);
+  }, []);
+
+  return <canvas ref={canvasRef} width="100" height="100" />;
+};
+```
+
+### useMemo
+
+### useCallback
