@@ -144,3 +144,193 @@ Une arborescence de fichier a été créée.
 - Il manque un dossier `components` pour stocker nos composants. Nous allons le créer.
 
 Une fois ce nettoyage effectué, nous pouvons commencer a créer notre application.
+
+## Composition de composants
+
+Une fois que nous avons nos composants simples, nous pouvons les combiner pour créer des composants plus complexes.
+
+C'est ce que l'on appelle la composition de composants. Il y a différentes manières de combiner des composants. Nous allons commencer par des exemples simples.
+
+### Une liste.
+
+Imaginons que nous souhaitions afficher une liste de tâches. Nous allons avoir besoin d'un composant `Task` qui affiche une tâche, et d'un composant `TaskList` qui affiche une liste de tâches.
+
+```jsx
+const Task = ({ text }) => {
+  return <li>{text}</li>;
+};
+
+const TaskList = () => {
+  return (
+    <ul>
+      <Task text="Faire les courses" />
+      <Task text="Faire le ménage" />
+      <Task text="Faire du sport" />
+    </ul>
+  );
+};
+```
+
+Nous pouvons ensuite utiliser le composant `TaskList` dans notre composant `App`.
+
+```jsx
+const App = () => {
+  return (
+    <div>
+      <TaskList />
+    </div>
+  );
+};
+```
+
+Pour gérer les données, nous allons utiliser un tableau de tâches.
+
+```jsx
+const tasks = [
+  { id: 1, text: "Faire les courses" },
+  { id: 2, text: "Faire le ménage" },
+  { id: 3, text: "Faire du sport" },
+];
+
+const Task = ({ text }) => {
+  return <li>{text}</li>;
+};
+
+const TaskList = () => {
+  return (
+    <ul>
+      {tasks.map((task) => (
+        <Task key={task.id} text={task.text} />
+      ))}
+    </ul>
+  );
+};
+
+const App = () => {
+  return (
+    <div>
+      <TaskList />
+    </div>
+  );
+};
+```
+
+Nous avons utilisé la méthode `map` pour parcourir le tableau de tâches et créer un composant `Task` pour chaque tâche.
+
+> Nous aurions aussi pu passer le tableau de tâches en tant que prop du composant `TaskList` et le parcourir dans le composant `TaskList`. Permettant ainsi de réutiliser le composant `TaskList` avec d'autres tableaux de tâches.
+
+### Des variations de composants
+
+Nous pouvons aussi créer des composants qui ont des variations. Par exemple, un composant `Button` qui peut être de différentes couleurs.
+
+```jsx
+const Button = ({ text, color }) => {
+  return <button style={{ backgroundColor: color }}>{text}</button>;
+};
+```
+
+Nous pouvons ensuite utiliser ce composant de la manière suivante :
+
+```jsx
+const App = () => {
+  return (
+    <div>
+      <Button text="Valider" color="green" />
+      <Button text="Annuler" color="red" />
+    </div>
+  );
+};
+```
+
+Si nous voulons que notre bouton `Valider` soit utilisé plus souvent, nous pouvons créer un composant `ButtonValidate` qui utilise le composant `Button`.
+
+```jsx
+const ButtonValidate = () => {
+  return <Button text="Valider" color="green" />;
+};
+
+const App = () => {
+  return (
+    <div>
+      <ButtonValidate />
+      <Button text="Annuler" color="red" />
+    </div>
+  );
+};
+```
+
+En faisant ainsi, vous pouvez créer des composants qui sont des variations d'autres composants. Cela permet de réduire le nombre de composants a créer et a maintenir.
+
+> Si vous devez changer la couleur du bouton `Valider`, vous n'avez qu'a le faire dans le composant de variation `ButtonValidate` et non pas dans tous les composants qui utilisent le bouton `Valider`.
+
+### Les layouts
+
+Nous pouvons aussi créer des composants de mise en page. Leur contenu n'est pas défini, il est passé en tant qu'enfant. Ces composants servent surtout a structurer la page et a appliquer du style CSS a des endroits précis.
+
+#### Un composant `Flexbox`
+
+Nous allons créer un composant `Flexbox` qui va nous permettre d'afficher des éléments en `flexbox`.
+
+```jsx
+const Flexbox = ({ children }) => {
+  return <div className="flexbox">{children}</div>;
+};
+```
+
+Nous pouvons ensuite utiliser ce composant de la manière suivante :
+
+```jsx
+const App = () => {
+  return (
+    <div>
+      <Flexbox>
+        <Button text="Valider" color="green" />
+        <Button text="Annuler" color="red" />
+      </Flexbox>
+    </div>
+  );
+};
+```
+
+On peut rendre le composant `Flexbox` plus flexible en lui ajoutant des props pour définir la direction et l'alignement des éléments.
+
+```jsx
+const Flexbox = ({ children, direction, align }) => {
+  return (
+    <div
+      className="flexbox"
+      style={{ flexDirection: direction, alignItems: align }}
+    >
+      {children}
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <div>
+      <Flexbox direction="row" align="center">
+        <Button text="Valider" color="green" />
+        <Button text="Annuler" color="red" />
+      </Flexbox>
+    </div>
+  );
+};
+```
+
+On voir ici que les props peuvent être de n'importe quel type, pas seulement des chaînes de caractères. Ici, nous avons utilisé des chaînes de caractères pour la direction et l'alignement, mais nous aurions pu utiliser des nombres pour définir la taille des éléments, ou des booléens pour définir si les éléments doivent être centrés ou non.
+
+Comment faire pour que l'on ne puisse pas mettre n'importe quoi comme valeur pour la direction et l'alignement ? Nous pouvons utiliser les `propTypes`.
+
+```jsx
+Flexbox.propTypes = {
+  direction: PropTypes.oneOf(["row", "column"]),
+  align: PropTypes.oneOf(["center", "flex-start", "flex-end"]),
+};
+```
+
+Si nous passons une valeur qui n'est pas dans la liste, nous aurons une erreur dans la console.
+
+> Quand vous utiliserez TypeScript, vous n'aurez plus besoin de `propTypes` car TypeScript vérifiera le type des props.
+
+> C'est d'ailleur ce que recommande ReactJS, utiliser TypeScript plutôt que `propTypes` : https://react.dev/reference/react/Component#static-proptypes
