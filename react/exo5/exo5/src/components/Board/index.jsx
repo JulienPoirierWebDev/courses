@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TaskColumn from "../TaskColumn";
 import styles from "./Board.module.css";
+import useDragAndDrop from "../../hooks/useDragAndDrop";
 
 const Board = () => {
   const [tasks, setTasks] = useState([]);
@@ -54,34 +55,7 @@ const Board = () => {
     }
   }, []);
 
-  const onDragStart = (event, id) => {
-    event.dataTransfer.setData("id", id);
-
-    console.log(event.dataTransfer.getData("id"));
-  };
-
-  const onDragOver = (event) => {
-    event.preventDefault();
-  };
-
-  const onDrop = (event, groupId) => {
-    console.log("Task drag over");
-
-    console.log(event.dataTransfer.getData("id"));
-    const id = event.dataTransfer.getData("id");
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === Number(id)) {
-        console.log("task updated");
-        task.groupId = groupId;
-      }
-
-      return task;
-    });
-
-    console.log(updatedTasks);
-
-    setTasks(updatedTasks);
-  };
+  const { onDragStart, onDragOver, onDrop } = useDragAndDrop(tasks, setTasks);
 
   return (
     <div className={styles.board}>
