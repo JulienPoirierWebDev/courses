@@ -89,20 +89,12 @@ console.log(a); // SyntaxError: Identifier 'a' has already been declared
 
 Le problème de `var` c'est qu'il n'a pas de portée au niveau du bloc, ce qui signifie que si on déclare une variable avec `var` dans une boucle, une condition ou une fonction, cette variable sera accessible en dehors de la boucle ou de la condition.
 
-```js
-function direBonjour() {
-  var salutation = "Bonjour, comment ça va?"; // Ici, tu crées une variable 'salutation' dans une fonction.
-  console.log(salutation); // Même à l'intérieur de la fonction, tu peux vérifier ce qu'il y a dans 'salutation'. Il affichera "Bonjour, comment ça va?".
-}
-
-direBonjour(); // Tu appelles la fonction, et elle affiche "Bonjour, comment ça va?".
-console.log(salutation); // Mais même à l'extérieur de la fonction, tu peux toujours accéder à 'salutation'. C'est la "portée globale" de `var`.
-```
-
-Le mot-clé `var` a une portée globale, c'est à dire que même s'il est déclarer dans un `bloc` (une fonction, une boucle, une condition), il sera accessible en dehors de ce bloc.
+Le mot-clé `var` a une portée globale (ou une portée de fonction si déclarée dans une fonction), c'est à dire que même s'il est déclarer dans un `bloc` (une boucle, une condition), il sera accessible en dehors de ce bloc (globalement, ou dans la fonction).
 Cela veut aussi dire que l'affectation mémoire de la variable sera conservée en dehors du bloc.
 
 > La notion de `bloc` : un bloc est une portion de code délimitée par des accolades `{}`. Par exemple, une fonction, une boucle ou une condition sont des blocs.
+
+> la notion de `fonction` : les fonctions ont une portée de fonction, c'est à dire que les variables déclarées dans une fonction ne seront pas accessibles en dehors de la fonction. C'est un `bloc` particulier.
 
 Le problème de la protée globale est que si l'on utilise le même nom de variable dans un autre bloc, on va écraser la variable précédente, même si elle était déclarer dans un bloc d'un niveau supérieur.
 
@@ -111,21 +103,35 @@ var a = 1;
 
 if (true) {
   var a = 2;
+  var b = "B";
+  let c = "C";
   console.log(a); // 2
 }
 
 console.log(a); // 2
-```
+console.log(b); // "B"
+console.log(c); // Error
 
-```js
-let a = 1;
+function test() {
+  var a = 3;
 
-if (true) {
-  let a = 2;
-  console.log(a); // 2
+  if (true) {
+    var a = 4;
+
+    var b = "B";
+
+    let c = "C";
+  }
+  console.log(a); // 4
+
+  console.log(b); // "B"
+
+  console.log(c); // "Error"
 }
 
-console.log(a); // 1
+test();
+
+console.log(a); // 2
 ```
 
 ### Pourquoi utiliser const par défaut ?
