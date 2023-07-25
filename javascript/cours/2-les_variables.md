@@ -182,9 +182,10 @@ L'initialisation, c'est le fait de donner une valeur initiale à la variable.
 
 L'affectation, c'est le fait de modifier la valeur d'une variable.
 
-Une expression, c'est une combinaison de valeurs, de variables et d'opérateurs qui produit une autre valeur.
+Une expression peut être vue comme une unité de code valide qui est résolue en une valeur. Il existe deux types d'expressions, celles qui ont des effets de bord (par exemple l'affectation d'une valeur) et celles qui sont purement évaluées.
 
-To-do : statement
+Un statement est une série d'instruction pour réaliser une action dans le programme (dans une boucle if, dans une fonction, etc.)
+
 
 ```js
 let a = 1; // déclaration et initialisation
