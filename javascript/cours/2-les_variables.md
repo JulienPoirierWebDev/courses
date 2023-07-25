@@ -216,6 +216,7 @@ Les cas d'utilisation des types primitifs :
 - null : pour représenter une valeur nulle.
 - undefined : pour représenter une valeur non définie.
 - symbol : pour représenter des identifiants uniques.
+- bigint : pour représenter les nombres
 
 Le symbol est un type de données introduit avec ES6. Il permet de créer des identifiants uniques, qui ne peuvent pas être écrasés par d'autres identifiants.
 
@@ -234,6 +235,7 @@ let estMajeur = true;
 let nom = null;
 let nom2;
 let id = Symbol("id");
+let max = 9007199254740991n;
 
 console.log(typeof prenom); // "string"
 console.log(typeof age); // "number"
@@ -241,9 +243,10 @@ console.log(typeof estMajeur); // "boolean"
 console.log(typeof nom); // "object"
 console.log(typeof nom2); // "undefined"
 console.log(typeof id); // "symbol"
+console.log(typeof max); // "bigint"
 ```
 
-- Les types complexes : object, array, function.
+- Les types complexes : object et function.
 
 On parle de type complexes car ils sont composés de plusieurs valeurs, qui peuvent être de n'importe quel type.
 
@@ -273,7 +276,7 @@ let etudiant = {
 etudiant.sayMyName(); // Affiche "John" dans une boîte de dialogue.
 ```
 
-Le type `array` est un type de données qui permet de représenter des tableaux. Un tableau est un ensemble de valeurs, qui peuvent être de n'importe quel type.
+Un `array` est un type de données, dérivé du type `object`, qui permet de représenter des tableaux. Un tableau est un ensemble de valeurs, qui peuvent être de n'importe quel type.
 
 On parle aussi de tableau car on peut accéder aux valeurs d'un tableau en utilisant un index, qui est un nombre entier qui représente la position de la valeur dans le tableau.
 
@@ -305,7 +308,7 @@ console.log(typeof additionner); // "function"
 
 Les variables étudiantes et fruits sont toutes les deux des objets, mais elles ne se ressemblent pas. L'objet étudiant est un objet littéral, tandis que l'objet fruits est un tableau. Les tableaux sont des objets particuliers, qui ont des propriétés et des méthodes spécifiques.
 
-Tous les types de données en JavaScript sont des objets, sauf les types primitifs (string, number, boolean, null, undefined, symbol) et les fonctions, qui sont a part.
+Tous les types de données en JavaScript sont des objets, sauf les types primitifs (string, number, boolean, null, undefined, symbol, bigInt) et les fonctions, qui sont a part.
 
 ## Opérations de base sur les variables.
 
