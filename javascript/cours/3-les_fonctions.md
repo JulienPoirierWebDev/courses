@@ -332,7 +332,7 @@ Il y a beaucoup de fonctions natives en JavaScript.
 
 - La fonction `parseInt` permet de convertir une chaîne de caractères en nombre entier.
 - La fonction `parseFloat` permet de convertir une chaîne de caractères en nombre décimal.
-- La fonction `isNaN` permet de vérifier si une valeur est un nombre ou non.
+- La fonction `isNaN` permet de vérifier si une valeur est "Not a Number".
 
 Ensuite, il y a ce qu'on appelle les objets natifs. Ce sont des objets qui sont disponibles directement en JavaScript. Ces objets ont des méthodes (qui sont des fonctions) qui permettent de faire des choses.
 
