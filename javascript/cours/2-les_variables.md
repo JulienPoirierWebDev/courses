@@ -184,6 +184,8 @@ L'affectation, c'est le fait de modifier la valeur d'une variable.
 
 Une expression, c'est une combinaison de valeurs, de variables et d'opérateurs qui produit une autre valeur.
 
+To-do : statement
+
 ```js
 let a = 1; // déclaration et initialisation
 a = 2; // affectation
