@@ -211,7 +211,7 @@ La boucle `for...of` permet de parcourir un tableau ou une chaîne de caractère
 ```js
 let arr = [0, 1, 2];
 
-for (element of arr) {
+for (const element of arr) {
   console.log(element);
 }
 ```
