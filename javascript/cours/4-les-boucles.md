@@ -110,7 +110,7 @@ Dans certains cas, on peut utiliser la structure `switch` à la place de la stru
 Par contre, la structure `switch` ne permet pas de vérifier des conditions multiples.
 
 ```js
-let fruit = parseInt(prompt("Quel fruit aime tu ?"));
+let fruit = prompt("Quel fruit aime tu ?");
 
 if (fruit === "orange") {
   console.log("orange");
@@ -211,7 +211,7 @@ La boucle `for...of` permet de parcourir un tableau ou une chaîne de caractère
 ```js
 let arr = [0, 1, 2];
 
-for (element of arr) {
+for (const element of arr) {
   console.log(element);
 }
 ```

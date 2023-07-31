@@ -12,7 +12,7 @@ Et en plus, c'est très facile à faire et très concrêt !
 
 - JavaScript peut être utilisé pour détecter ces événements et exécuter du code en réponse à ces actions.
 
-  8.2 Ajout d'un gestionnaire d'événements
+### Ajout d'un gestionnaire d'événements
 
 - Syntaxe pour ajouter un gestionnaire d'événements à un élément HTML :
 
@@ -26,7 +26,7 @@ Et en plus, c'est très facile à faire et très concrêt !
 <button onclick="alert('Bouton cliqué !')">Cliquez ici</button>
 ```
 
-9.3 Utilisation de la méthode `addEventListener`
+### Utilisation de la méthode `addEventListener`
 
 - Syntaxe pour ajouter un gestionnaire d'événements à un élément en utilisant `addEventListener` :
 
@@ -46,7 +46,7 @@ element.addEventListener("evenement", nomDeLaFonction);
 </script>
 ```
 
-9.4 Exemple pratique
+### Exemple pratique
 
 - Créer un programme qui change la couleur du texte d'un paragraphe lorsqu'on clique sur un bouton :
 - Ajouter un input type texte et un bouton submit : lorsque le bouton est appuyé, un paragraphe est créer avec comme texte celui de l'input.
