@@ -54,6 +54,7 @@ form.addEventListener("submit", function (event) {
   name = formData.get("name");
   email = formData.get("email");
   message = formData.get("message");
+  formeData.set();
 
   console.log(name, message, email);
 });
