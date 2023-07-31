@@ -105,6 +105,7 @@ if (true) {
   var a = 2;
   var b = "B";
   let c = "C";
+  var globalElement = "global";
   console.log(a); // 2
 }
 
@@ -132,6 +133,9 @@ function test() {
 test();
 
 console.log(a); // 2
+
+console.log(window.c); // "Error"
+console.log(window.globalElement); // "global"
 ```
 
 ### Pourquoi utiliser const par défaut ?

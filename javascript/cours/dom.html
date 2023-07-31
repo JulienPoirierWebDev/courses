@@ -4,116 +4,116 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <script>
+      const body = document.body;
 
-  <script>
-    const body = document.body;
+      const bodyStyle = "margin: 0;";
+      body.setAttribute("style", bodyStyle);
 
-    const bodyStyle = "margin: 0;";
-    body.setAttribute("style", bodyStyle);
+      const header = document.createElement("header");
 
-    const header = document.createElement("header");
+      const menu = document.createElement("nav");
+      const a1 = document.createElement("a");
+      a1.textContent = "Accueil";
+      a1.href = "#";
+      const a2 = document.createElement("a");
+      a2.textContent = "Contact";
+      a2.href = "#";
+      const a3 = document.createElement("a");
+      a3.textContent = "A propos";
+      a3.href = "#";
 
-    const menu = document.createElement("nav");
-    const a1 = document.createElement("a");
-    a1.textContent = "Accueil";
-    a1.href = "#";
-    const a2 = document.createElement("a");
-    a2.textContent = "Contact";
-    a2.href = "#";
-    const a3 = document.createElement("a");
-    a3.textContent = "A propos";
-    a3.href = "#";
+      const anchorStyle = "color: #fff; text-decoration: none;";
+      a1.setAttribute("style", anchorStyle);
+      a2.setAttribute("style", anchorStyle);
+      a3.setAttribute("style", anchorStyle);
 
-    const anchorStyle = "color: #fff; text-decoration: none;";
-    a1.setAttribute("style", anchorStyle);
-    a2.setAttribute("style", anchorStyle);
-    a3.setAttribute("style", anchorStyle);
+      menu.appendChild(a1);
+      menu.appendChild(a2);
+      menu.appendChild(a3);
+      const menuStyle = "display: flex; justify-content: space-around;";
+      menu.setAttribute("style", menuStyle);
 
-    menu.appendChild(a1);
-    menu.appendChild(a2);
-    menu.appendChild(a3);
-    const menuStyle = "display: flex; justify-content: space-around;";
-    menu.setAttribute("style", menuStyle);
+      header.appendChild(menu);
+      const headerStyle = "background-color: #333; color: #fff; padding: 1rem;";
+      header.setAttribute("style", headerStyle);
 
-    header.appendChild(menu);
-    const headerStyle = "background-color: #333; color: #fff; padding: 1rem;";
-    header.setAttribute("style", headerStyle);
+      const main = document.createElement("main");
 
-    const main = document.createElement("main");
+      const h1 = document.createElement("h1");
+      h1.textContent = "Je suis un développeur web";
 
-    const h1 = document.createElement("h1");
-    h1.textContent = "Je suis un développeur web";
+      const h1Style = "color: #333; text-align: center;";
+      h1.setAttribute("style", h1Style);
 
-    const h1Style = "color: #333; text-align: center;";
-    h1.setAttribute("style", h1Style);
+      const p = document.createElement("p");
+      p.textContent =
+        "Je suis un développeur web qui aime le JavaScript et tout ce site est fait en JavaScript";
 
-    const p = document.createElement("p");
-    p.textContent =
-      "Je suis un développeur web qui aime le JavaScript et tout ce site est fait en JavaScript";
+      const pStyle = "color: #333; text-align: center;";
+      p.setAttribute("style", pStyle);
+      const a = document.createElement("a");
+      a.textContent = "Lien vers mon github";
+      a.href = "https://github.com/JulienPoirierWebDev";
 
-    const pStyle = "color: #333; text-align: center;";
-    p.setAttribute("style", pStyle);
-    const a = document.createElement("a");
-    a.textContent = "Lien vers mon github";
-    a.href = "https://github.com/JulienPoirierWebDev";
+      const aStyle = "color: #333";
+      a.setAttribute("style", aStyle);
 
-    const aStyle = "color: #333";
-    a.setAttribute("style", aStyle);
+      const skills = document.createElement("h2");
+      skills.textContent = "Mes compétences";
+      const skillsStyle = "color: #633; text-align: center;";
+      skills.setAttribute("style", skillsStyle);
 
-    const skills = document.createElement("h2");
-    skills.textContent = "Mes compétences";
-    const skillsStyle = "color: #633; text-align: center;";
-    skills.setAttribute("style", skillsStyle);
+      const list = document.createElement("ul");
+      const li1 = document.createElement("li");
+      li1.textContent = "HTML";
+      const li2 = document.createElement("li");
+      li2.textContent = "CSS";
+      const li3 = document.createElement("li");
+      li3.textContent = "JavaScript";
 
-    const list = document.createElement("ul");
-    const li1 = document.createElement("li");
-    li1.textContent = "HTML";
-    const li2 = document.createElement("li");
-    li2.textContent = "CSS";
-    const li3 = document.createElement("li");
-    li3.textContent = "JavaScript";
+      const listStyle =
+        "background-color: #630; color: #fff; padding-left: 5rem; padding-top: 1rem; padding-bottom: 1rem;";
+      list.setAttribute("style", listStyle);
 
-    const listStyle =
-      "background-color: #630; color: #fff; padding-left: 5rem; padding-top: 1rem; padding-bottom: 1rem;";
-    list.setAttribute("style", listStyle);
+      list.appendChild(li1);
+      list.appendChild(li2);
+      list.appendChild(li3);
 
-    list.appendChild(li1);
-    list.appendChild(li2);
-    list.appendChild(li3);
+      main.appendChild(h1);
+      main.appendChild(p);
+      main.appendChild(a);
+      main.appendChild(skills);
 
-    main.appendChild(h1);
-    main.appendChild(p);
-    main.appendChild(a);
-    main.appendChild(skills);
+      main.appendChild(list);
 
-    main.appendChild(list);
+      const mainStyle = "background-color: #eee; padding: 1rem;";
+      main.setAttribute("style", mainStyle);
 
-    const mainStyle = "background-color: #eee; padding: 1rem;";
-    main.setAttribute("style", mainStyle);
+      const footer = document.createElement("footer");
 
-    const footer = document.createElement("footer");
+      const liens_externes = document.createElement("ul");
+      const ext1 = document.createElement("li");
+      ext1.textContent = "Linkedin";
+      const ext2 = document.createElement("li");
+      ext2.textContent = "Github";
+      const ext3 = document.createElement("li");
+      ext3.textContent = "Twitter";
 
-    const liens_externes = document.createElement("ul");
-    const ext1 = document.createElement("li");
-    ext1.textContent = "Linkedin";
-    const ext2 = document.createElement("li");
-    ext2.textContent = "Github";
-    const ext3 = document.createElement("li");
-    ext3.textContent = "Twitter";
+      liens_externes.appendChild(ext1);
+      liens_externes.appendChild(ext2);
+      liens_externes.appendChild(ext3);
 
-    liens_externes.appendChild(ext1);
-    liens_externes.appendChild(ext2);
-    liens_externes.appendChild(ext3);
+      footer.appendChild(liens_externes);
 
-    footer.appendChild(liens_externes);
+      const p2 = document.createElement("p");
+      p2.textContent = "Tous droits réservés";
 
-    const p2 = document.createElement("p");
-    p2.textContent = "Tous droits réservés";
-
-    const footerStyle = document.createElement("style");
-    footerStyle.textContent = `
+      const footerStyle = document.createElement("style");
+      footerStyle.textContent = `
       footer {
         background-color: #333;
         color: #fff;
@@ -128,11 +128,12 @@
         padding: 0;
       }
     `;
-    footer.appendChild(p2);
-    footer.appendChild(footerStyle);
+      footer.appendChild(p2);
+      footer.appendChild(footerStyle);
 
-    body.appendChild(header);
-    body.appendChild(main);
-    body.appendChild(footer);
-  </script>
+      body.appendChild(header);
+      body.appendChild(main);
+      body.appendChild(footer);
+    </script>
+  </body>
 </html>

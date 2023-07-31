@@ -11,7 +11,7 @@ Tips: Vous pouvez fixer le nombre a trouver pour tester votre code. Seulement lo
 */
 
 window.onload = function () {
-  guessNumberV2();
+  guessNumberV2(1, 100);
 };
 
 function guessNumber() {

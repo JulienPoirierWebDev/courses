@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change la couleur d'un paragraphe</title>
+  </head>
+  <body>
+    <p class="lorem">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint ipsum autem
+      fugit quo doloribus et minima incidunt, architecto doloremque mollitia
+      similique assumenda iusto, consectetur quasi accusamus nemo explicabo
+      temporibus officia.
+    </p>
+    <button class="loremButton">Changer la couleur !</button>
+
+    <hr />
+
+    <input type="color" name="color" id="color" />
+
+    <hr />
+
+    <form id="formParagraph" action="">
+      <input type="text" name="newParagraph" id="newParagraph" />
+      <input class="newParagraphButton" type="submit" />
+    </form>
+
+    <div class="target"></div>
+    <script>
+      const paragraph = document.querySelector(".lorem");
+      const button = document.querySelector(".loremButton");
+
+      button.addEventListener("click", () => {
+        paragraph.style.color = "red";
+      });
+
+      const inputColor = document.querySelector("#color");
+
+      inputColor.addEventListener("change", (event) => {
+        paragraph.style.color = event.target.value;
+      });
+
+      const form = document.querySelector("#formParagraph");
+
+      const targetDiv = document.querySelector(".target");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        const paragraph = formData.get("newParagraph");
+
+        const p = document.createElement("p");
+        p.textContent = paragraph;
+
+        targetDiv.appendChild(p);
+
+        form.reset();
+      });
+    </script>
+  </body>
+</html>

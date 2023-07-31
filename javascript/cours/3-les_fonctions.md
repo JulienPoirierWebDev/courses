@@ -230,6 +230,8 @@ afficherArguments("Bonjour", "à", "tous"); // Affiche ['Bonjour', 'à', 'tous']
 C'est plus lisible que d'utiliser l'objet `arguments` et c'est plus simple à utiliser que de récupérer les arguments un par un.
 Au moins, on sait que tous les arguments sont stockés dans un tableau et que leur nombre peut varier.
 
+[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters](Lire la doc sur le rest parameter)
+
 ### Les fonctions anonymes
 
 Une fonction anonyme est une fonction qui n'a pas de nom. C'est-à-dire qu'elle n'est pas déclarée avec un nom.
