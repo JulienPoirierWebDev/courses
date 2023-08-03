@@ -691,9 +691,9 @@ const commentRouter = require("./commentRouter");
 
 const app = express();
 
-app.use(articleRouter);
-app.use(userRouter);
-app.use(commentRouter);
+app.use("/article", articleRouter);
+app.use("/user", userRouter);
+app.use("/comment", commentRouter);
 
 app.listen(3000, () => {
   console.log("Server started");
