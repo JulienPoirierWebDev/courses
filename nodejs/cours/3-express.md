@@ -685,6 +685,9 @@ On peut ensuite importer le router dans `app.js` :
 const express = require("express");
 
 const articlesRouter = require("./articlesRouter");
+const userRouter = require("./userRouter");
+const commentRouter = require("./commentRouter");
+
 
 const app = express();
 
