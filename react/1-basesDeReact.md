@@ -4,7 +4,7 @@
 
 React est une librairie !
 
-En mai 2011, Jordan Walke, un ingénieur logiciel chez Facebook, a créé une première version de React. Il l'a créé pour résoudre un problème de performance sur le site Facebook. En effet, le site était devenu très lent à cause de la complexité de l'interface. C'est pourquoi, il a créé React, une librairie JavaScript qui permet de créer des interfaces utilisateurs complexes et dynamiques. (L'objectif était de remplacer blitz.js, un framework JavaScript qui était utilisé par Facebook à l'époque.)
+En mai 2011, Jordan Walke, un ingénieur logiciel chez Facebook, a créé une première version de React. Il l'a créé pour résoudre un problème de performance sur le site Facebook. En effet, le site était devenu très lent à cause de la complexité de l'interface. C'est pourquoi, il a créé React, une librairie JavaScript qui permet de créer des interfaces utilisateurs complexes et dynamiques. (L'objectif était de remplacer bolt.js, un framework JavaScript qui était utilisé par Facebook à l'époque.)
 
 Ce qui change :
 
