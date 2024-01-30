@@ -1,0 +1,11 @@
+:root {
+  --color1: #808080;
+  --color2: #add8e6;
+  --color-text: black;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

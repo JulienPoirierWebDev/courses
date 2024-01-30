@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mainInfos {
+  display: flex;
+  gap: 20px;
+}
+
+.company {
+  color: hsl(180, 29%, 50%);
+  font-weight: bolder;
+}
+
+.otherInfos {
+  display: flex;
+  gap: 20px;
+}
+
+.companyInfos {
+  display: flex;
+  align-items: center;
+}
+
+.newOrFeatured {
+  display: flex;
+  gap: 10px;
+}
+
+.new {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  background-color: hsl(180, 29%, 50%);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.featured {
+  font-size: 12px;
+
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+}

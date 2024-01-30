@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  background-color: white;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 30px;
+  border-radius: 5px;
+  padding: 20px 30px;
+  box-shadow: 10px 10px 20px hsl(180, 29%, 50%);
+}
+
+.featured {
+  position: relative;
+  z-index: 99;
+  border-radius: 0 5px 5px 0;
+}
+
+.featured::before {
+  content: "";
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: -2px;
+  right: 99.8%;
+  position: absolute;
+  background-color: hsl(180, 29%, 50%);
+  border-radius: 10px 0 0 10px;
+}
+
+.mainInfos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

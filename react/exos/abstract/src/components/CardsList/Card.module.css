@@ -1,0 +1,40 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 400px;
+  margin: 70px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.content {
+  font-size: 1.8rem;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.link::after {
+  content: "->";
+  margin-left: 10px;
+}
+
+.special {
+  background-color: red;
+}
