@@ -232,6 +232,7 @@ const state = {
       userId: 1,
     }
   ]
+}
 ```
 
 On peut voir que le state est un objet qui contient un `userId`, un tableau de `tasks` et un tableau de `appointments`.
