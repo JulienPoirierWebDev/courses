@@ -1,0 +1,14 @@
+.test * {
+  animation: test 0.2s;
+  transition: all;
+}
+
+@keyframes test {
+  from {
+    border: 2px solid red;
+  }
+
+  to {
+    border: none;
+  }
+}

@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color3);
+  color: var(--color4);
+  padding-block: 20px;
+  padding-inline: 75px;
+}
+
+.container {
+  display: flex;
+  gap: 1rem;
+}

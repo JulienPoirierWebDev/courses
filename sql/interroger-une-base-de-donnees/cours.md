@@ -16,7 +16,7 @@ Dans tous les cas, je vous conseiller d'aller sur le site sql.sh qui est une min
 
 Une base de données est un système organisé de stockage d'informations qui permet d'effectuer des opérations pour créer, modifier, récupérer et supprimer des données. 
 
-Les bases de données relationnelles, comme SQL, sont basées sur le modèle relationnel, qui organise les données en tables composées de lignes et de colonnes. Chaque table représente une entité (par exemple, un client ou un produit) et chaque ligne représente un enregistrement (une instance de cette entité).
+Les bases de données relationnelles organisent les données en tables composées de lignes et de colonnes. Chaque table représente une entité (par exemple, un client ou un produit) et chaque ligne représente un enregistrement (une instance de cette entité).
 
 Les termes qui reviennent souvent : 
 
@@ -26,7 +26,7 @@ Les termes qui reviennent souvent :
 
 - Schéma de base de données : Un schéma de base de données définit la structure logique d'une base de données. Il spécifie les tables, les colonnes, les contraintes, les relations et les autres objets de la base de données. Le schéma de base de données décrit la manière dont les données sont organisées et les règles qui s'appliquent à ces données.
 
-- Modèle de base de données : Un modèle de base de données est une représentation conceptuelle de la structure d'une base de données. Les modèles de base de données couramment utilisés sont le modèle relationnel, le modèle hiérarchique, le modèle en réseau et le modèle orienté objet. Le modèle relationnel est le plus répandu et utilise des tables, des clés primaires et des relations pour organiser les données.
+- Modèle (logique ou conceptuel) de base de données : Un modèle de base de données est une représentation de la structure d'une base de données. Les modèles de base de données couramment utilisés sont le modèle relationnel, le modèle hiérarchique, le modèle en réseau et le modèle orienté objet. Le modèle relationnel est le plus répandu et utilise des tables, des clés primaires et des relations pour organiser les données.
 
 - Requête SQL : Une requête SQL est une instruction utilisée pour interroger une base de données et récupérer des données spécifiques. Les requêtes SQL peuvent être simples, comme une sélection de toutes les lignes d'une table, ou complexes, impliquant des opérations de jointure, des conditions et des agrégations.
 
@@ -50,11 +50,11 @@ MySQL est l'un des SGBD les plus populaires au monde. Il est utilisé par de nom
 
 ### 3.3 Qu'est-ce que phpMyAdmin ?
 
-phpMyAdmin est un outil de gestion de bases de données MySQL basé sur le web. Il permet d'effectuer des opérations telles que la création, la modification, la suppression et la récupération de données à partir de bases de données MySQL.
+phpMyAdmin est une application web basée sur PHP qui sert d'interface graphique pour la gestion de bases de données MySQL. Il permet d'effectuer diverses opérations telles que la création, la modification, la suppression, et la récupération de données dans des bases de données MySQL. 
 
-PHPMyAdmin n'est pas un système de gestion de base de données (SGBD) à proprement parler. PHPMyAdmin est une application web basée sur PHP qui fournit une interface conviviale pour gérer et administrer des bases de données MySQL. Il agit en tant qu'outil de gestion pour interagir avec un SGBD spécifique, qui est MySQL dans ce cas.
+Bien que phpMyAdmin facilite la gestion de ces bases, il n'est pas en lui-même un Système de Gestion de Base de Données (SGBD). Au lieu de cela, il interagit avec MySQL, qui est le SGBD responsable du stockage et de la gestion des données. 
 
-MySQL est le SGBD réel qui gère et stocke les données dans une base de données relationnelle. PHPMyAdmin facilite l'interaction avec MySQL en fournissant une interface visuelle pour effectuer des opérations courantes telles que la création de tables, l'exécution de requêtes SQL, l'importation et l'exportation de données, la gestion des utilisateurs et des privilèges, etc.
+L'interface utilisateur de phpMyAdmin rend ces interactions plus accessibles via des fonctions visuelles comme la manipulation de tables, l'exécution de requêtes SQL, et la gestion des utilisateurs et des privilèges.
 
 ## Chapitre 4 : Installation de MySQL et d'un outil de gestion
 
@@ -426,14 +426,50 @@ RIGHT JOIN commandes ON clients.id = commandes.client_id;
 
 ### 1.4 CROSS JOIN
 
-Le CROSS JOIN renvoie les enregistrements lorsqu'il y a une correspondance dans l'une des tables. Les résultats de la table de gauche ou de droite sont NULL s'il n'y a pas de correspondance.
+Un `CROSS JOIN` est un type de jointure SQL qui produit le produit cartésien de deux tables. Cela signifie que chaque ligne de la première table est combinée avec chaque ligne de la seconde table, résultant en un tableau où le nombre de lignes est égal au produit du nombre de lignes des deux tables jointes.
+
+En d'autres termes, si la première table contient `n` lignes et la deuxième table `m` lignes, le résultat du `CROSS JOIN` contiendra `n x m` lignes. Un `CROSS JOIN` ne nécessite aucune condition de jointure spécifiée (`ON`), car chaque combinaison possible de lignes entre les deux tables est automatiquement incluse dans le résultat.
+
+Voici un exemple simple pour illustrer un `CROSS JOIN` :
+
+Supposons que nous ayons deux petites tables :
+
+Table A:
+
+| `id | nom  |
+| --- | ---- |
+| 1   | Anne |
+| 2   | Bob` |
+
+Table B:
+
+| `id | couleur |
+| --- | ------- |
+| 1   | Rouge   |
+| 2   | Bleu`   |
+
+La requête SQL utilisant un `CROSS JOIN` entre ces deux tables serait :
 
 ```sql
--- Récupérer toutes les commandes et tous les clients, avec leurs correspondances éventuelles
-SELECT clients.nom, clients.prenom, commandes.date
-FROM clients
-CROSS JOIN commandes ON clients.id = commandes.client_id;
+SELECT A.nom, B.couleur
+FROM TableA A
+CROSS JOIN TableB B;
 ```
+
+Le résultat serait :
+
+diffCopy code
+
+| `nom | couleur |
+| ---- | ------- |
+| Anne | Rouge   |
+| Anne | Bleu    |
+| Bob  | Rouge   |
+| Bob  | Bleu`   |
+
+Comme on peut le voir, chaque nom est associé à chaque couleur, formant toutes les combinaisons possibles.
+
+
 
 ## Chapitre 2 : Sous-requêtes
 

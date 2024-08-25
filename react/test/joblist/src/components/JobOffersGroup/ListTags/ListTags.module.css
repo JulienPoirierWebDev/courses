@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  gap: 10px;
+}
+
+.list li {
+  list-style: none;
+  background-color: hsl(180, 52%, 96%);
+  color: hsl(180, 29%, 50%);
+  padding: 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}

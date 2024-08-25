@@ -1,0 +1,21 @@
+.item {
+  list-style: none;
+
+  margin-inline: 20px;
+
+  margin-block: 40px;
+
+  padding: 10px;
+
+  border-radius: 20px;
+}
+
+.header {
+  background-color: var(--color1);
+  color: var(--color-text);
+}
+
+.footer {
+  background-color: var(--color2);
+  color: var(--color-text);
+}

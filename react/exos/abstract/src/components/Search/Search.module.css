@@ -1,0 +1,24 @@
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 400px;
+  background-color: var(--color2);
+  gap: 30px;
+}
+
+.searchContainer h1 {
+  font-size: 5rem;
+}
+
+.searchContainer input {
+  width: 700px;
+  height: 60px;
+  border: 1px solid var(--color3);
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 40px;
+  font-size: 1.5rem;
+}

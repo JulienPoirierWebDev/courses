@@ -1,0 +1,8 @@
+.arrow {
+  transition: 0.5s;
+  font-weight: bolder;
+}
+
+.arrow:hover {
+  font-size: 1.5rem;
+}
