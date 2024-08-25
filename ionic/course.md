@@ -1,7 +1,7 @@
 # Installer Ionic CLI
 
 ```bash
-npm install -g @ionic/cli native-run cordova-res
+npm install -g @ionic/cli 
 ```
 
 Cela va installer l'outil en ligne de commande Ionic de manière globale (sur toute la machine)
