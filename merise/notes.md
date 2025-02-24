@@ -310,3 +310,83 @@ Par exemple, une entité-type "Employé" peut être liée a elle-même par une r
 -   Toute les propriétés d'une entité-type doivent être des dépendances fonctionnelles de la clé primaire de l'entité-type.
 -   Le nom d'une propriété ne doit apparaitre qu'ne seule fois dans le modèle conceptuel des données. Par exemple, si on a un attribut "Nom" dans l'entité-type "Client", on ne doit pas avoir un attribut "Nom" dans l'entité-type "Article" mais "Désignation" ou "Nom2" par exemple.
 -   Les propriétés qui résultent d'un calcul ne doivent pas apparaitre dans le modèle conceptuel des données. Par exemple, si on a un attribut "Prix" dans l'entité-type "Article" et un attribut "Total" dans l'entité-type "Commande", on ne doit pas avoir un attribut "Total" dans l'entité-type "Article" car il peut être calculé a partir du prix et de la quantité.
+
+# Le Modèle Logique des Données
+
+Le Modèle Logique des Données (MLD) est la suite du Modèle Conceptuel des Données (MCD).
+
+Il permet de définir l'impact des cardinalités sur les tables de la base de données : est-ce qu'il y a de nouvelles entités-types ? Comment on utilise les clés étrangères ?
+
+L'idée est de faire disparaitre les relations-types pour les remplacer par des entités-types.
+
+## Les entités-types
+
+Chaque entité-type du MCD devient une table dans le MLD.
+
+Chaque attribut de l'entité-type devient un champ dans la table.
+
+L'identifiant de l'entité-type devient la clé primaire de la table.
+
+## Les relations-types
+
+Une relation-type avec des cardinalités 1,n ou 0,n des deux cotés devient une table.
+
+La clé primaire de cette table est composée des clés primaires des deux entités-types liées.
+
+Les attributs de la relation-type deviennent des champs de la table.
+
+Une relation-type avec des cardinalités 1,1 ou 0,1 d'un coté et 0,n ou 1,n de l'autre coté devient un champ dans la table de l'entité-type qui a la cardinalité 1,1 ou 0,1. On peut dire que la clé de la table avec la cardinalité x,n se fait absorber par la table avec la cardinalité 1,1 ou 0,1.
+
+## Les règles a retenir :
+
+-   Chaque entité-type du MCD devient une table dans le MLD.
+-   Chaque attribut de l'entité-type devient un champ dans la table.
+-   L'identifiant de l'entité-type devient la clé primaire de la table.
+-   Une relation-type avec des cardinalités 1,n ou 0,n des deux cotés devient une table.
+-   La clé primaire de cette table est composée des clés primaires des deux entités-types liées.
+-   Les attributs de la relation-type deviennent des champs de la table.
+-   Une relation-type avec des cardinalités 1,1 ou 0,1 d'un coté et 0,n ou 1,n de l'autre coté devient un champ dans la table de l'entité-type qui a la cardinalité 1,1 ou 0,1.
+
+# Le Modèle Physique des Données
+
+Le Modèle Physique des Données (MPD) est la suite du Modèle Logique des Données (MLD).
+
+Il s'agit de passer en format texte les tables du MLD pour les transformer en tables de base de données. Il n'y a pas encore de choix de SGBD, on reste dans le schéma logique.
+
+## Les tables
+
+Chaque table du MLD devient une table de la base de données.
+
+On reprend le nom de la table, les champs et les clés primaires.
+
+On souligne la clé primaire. Ici, elle sera en gras.
+
+Exemple :
+
+Client(**idClient**, nom, prenom, adresse)
+
+## Les clés étrangères
+
+Les clés étrangères permettent de lier les tables entre elles.
+
+On les note avec un # devant le nom du champ.
+
+Exemple :
+
+Client( **NumClient**, Nom, Prénom, Adresse)
+Commande( _NumCommande_, DateCommande, #NumClient)
+
+## Les règles a retenir :
+
+-   Chaque table du MLD devient une table de la base de données.
+-   On reprend le nom de la table, les champs et les clés primaires.
+-   Les clés étrangères permettent de lier les tables entre elles.
+-   On les note avec un # devant le nom du champ.
+
+# Looping
+
+Le logiciel Looping est un logiciel de modélisation de base de données.
+
+Il permet, a partir du MCD, de générer le MLD et le MPD, notamment sous forme de script SQL (pour MySQL, PostgreSQL, etc.).
+
+C'est très pratique pour gagner du temps et pour éviter les erreurs de saisie
