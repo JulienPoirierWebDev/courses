@@ -1,7 +1,3 @@
-Voici une **fiche claire et synthétique pour les opérations CRUD avec MongoDB**, parfaite pour un public Bac+3. Elle inclut la syntaxe de base, des exemples concrets, et peut être directement utilisée en cours ou en TP. 👇
-
----
-
 ## 🧾 Fiche pratique : Opérations CRUD dans MongoDB
 
 > 📚 **CRUD** = Create, Read, Update, Delete  
