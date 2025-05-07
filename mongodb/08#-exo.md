@@ -1,6 +1,4 @@
-Parfait, voici la **Partie 8 du TP MongoDB — Requêtes avancées avec agrégation**, pour introduire doucement les pipelines MongoDB tout en restant pratique et pédagogique.
 
----
 
 # 🧠 TP MongoDB — Partie 8 : Requêtes avancées avec agrégation
 
