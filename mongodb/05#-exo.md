@@ -20,11 +20,11 @@ Toutes les requêtes doivent être effectuées **dans mongosh** avec l’utilisa
 
 ---
 
-## 1. 🔍 Rechercher les livres lus par un utilisateur
+## 1. 🔍 Rechercher les utilisateurs qui ont "1984" dans leurs livres.
 
 > Objectif : accéder à un sous-tableau (embedded array) dans `users`
 
-**Consigne :** Affiche uniquement les livres (`books`) d’un utilisateur donné (`email`) où `isRead` est `true`.
+**Consigne :** Affiche uniquement les livres (`books`) d’un utilisateur donné (`email`) où l'un des livres est 1984.
 
 💡 _Astuce :_ il faudra cibler les sous-documents du tableau `books`.
 
