@@ -174,6 +174,7 @@ Toutes les opérations doivent être réalisées **dans mongosh** avec l’utili
 -   `$pull` supprime d’un tableau les éléments correspondants à un filtre
 -   `$set` modifie une valeur
 -   `books.$` fait référence au **premier élément du tableau** qui correspond au filtre
+-   ``books.$[]` fait référence a l'ensemble des élements, sous forme d'itérateur. 
 
 ---
 
