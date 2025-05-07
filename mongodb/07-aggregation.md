@@ -1,6 +1,3 @@
-Parfait ! Voici un **chapitre clair et progressif** sur **l’agrégation dans MongoDB**, adapté à ton public Bac+3, avec une pédagogie orientée sur la **métaphore du pipeline**, des **étapes** successives, et des **exemples pratiques**.
-
----
 
 # 🧪 Chapitre : L'agrégation dans MongoDB
 
@@ -170,11 +167,3 @@ db.utilisateurs.aggregate([
 * 🔍 Utiliser `$project` pour éviter de traîner des champs inutiles
 * 📊 `$group` est puissant mais à utiliser sur des collections raisonnables
 * 👁️ Visualiser les étapes avec MongoDB Compass (mode *Aggregation Pipeline*)
-
----
-
-Souhaites-tu que je t’ajoute ensuite :
-
-* 💡 une **fiche d’exercices progressifs** ?
-* 📁 un **jeu de données + 3 cas métiers à résoudre avec des pipelines** ?
-* 👨‍🏫 un **TP projeté pour guidage pas à pas en classe** ?
