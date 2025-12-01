@@ -22,7 +22,6 @@ Exemple :
   {
     "id": 1,
     "titre": "Quiz Histoire",
-    "points": 5
   }
 ]
 ```
