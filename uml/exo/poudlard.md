@@ -1,0 +1,9 @@
+## 🧙‍♂️ Gestion des Sorts et des Potions à Poudlard
+
+"En tant que responsable de la logistique des cours de Poudlard, j'ai besoin d'un système pour suivre l'enseignement et les ressources. C'est le chaos entre les ingrédients manquants et le suivi des réussites et échecs des élèves.
+
+Premièrement, on doit cataloguer toutes les **Potions** et tous les **Sorts** enseignés. Pour chaque Potion, il faut noter son nom (ex: Polynectar), son niveau de **Difficulté** (Débutant, Avancé, S.A.R.F.), la **Liste des Ingrédients** nécessaires (avec les quantités exactes) et le **Temps de Préparation** estimé. Pour chaque Sort, on enregistre la formule (le mot), le mouvement de baguette associé, et la Difficulté.
+
+Ensuite, la gestion des **Ingrédients** est cruciale. Chaque ingrédient (bave de crapaud, plumes de phénix, etc.) doit être enregistré avec sa **Rareté** (Commun à Légendaire), sa **Quantité en Stock** dans les réserves de Poudlard, et le Fournisseur magique. Quand un professeur prend des ingrédients pour une classe, le stock doit diminuer. Si un stock tombe en dessous d'un certain seuil, il faut générer une **alerte de réapprovisionnement**.
+
+Le plus important, c'est le suivi des **Étudiants**. Pour chaque élève, je dois suivre son progression. Quand un élève tente de préparer une Potion ou de lancer un Sort en classe, le professeur enregistre le résultat : **Réussi**, **Échec Mineur** (Potions instables, Sorts ratés), ou **Échec Majeur** (explosions, conséquences imprévues). Ce résultat doit être lié à l'élève, à la Potion/Sort et à la date. C'est essentiel pour déterminer, à la fin de l'année, qui a réussi ses examens de S.A.R.F. ou B.U.S.E. Je dois pouvoir imprimer un rapport pour un professeur donné, listant tous ses élèves et leurs taux de réussite par Sort et Potion."

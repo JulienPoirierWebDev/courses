@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+' Définition des acteurs
+actor Client as C
+actor Administrateur as A
+
+' Définition du système
+rectangle "Système de Vente" {
+  (Passer une Commande) as UC1
+  (Gérer le Stock) as UC2
+}
+
+' Associations
+C --> UC1
+A --> UC2
+@enduml

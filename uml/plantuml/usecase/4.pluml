@@ -1,0 +1,21 @@
+@startuml
+' Pour une meilleure lisibilité (Acteur à gauche, Système à droite)
+left to right direction
+
+' Déclaration de l'Acteur à l'extérieur
+actor Client as C
+
+' Déclaration de la Fenêtre du Système
+rectangle "Système de Paiement en Ligne" {
+  (Payer une commande) as Pay
+  (Vérifier l'Authentification) as Auth
+  (Saisir Carte Cadeau) as Gift
+}
+
+' Relations entre l'Acteur et les UC (traversant la frontière)
+C --> Pay
+
+' Relations internes (inclusion/extension)
+Pay .left.> Auth : <<include>>
+Gift .down.> Pay : <<extend>>
+@enduml

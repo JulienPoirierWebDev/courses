@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+actor Client
+
+' Cas de base
+(Payer une commande) as Pay
+
+' Inclusion : un Cas obligatoire (pour la réutilisation)
+(Vérifier l'Authentification) as Auth
+Pay .left.> Auth : <<include>>
+
+' Extension : un cas conditionnel
+(Saisir Carte Cadeau) as Gift
+Gift .down.> Pay : <<extend>>
+
+Client --> Pay
+
+@enduml

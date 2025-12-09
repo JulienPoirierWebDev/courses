@@ -1,0 +1,27 @@
+@startuml
+title **Tutoriel UML – Diagramme de cas d'utilisation**
+caption _Introduction à la syntaxe PlantUML_
+
+
+actor Visiteur
+actor Membre
+rectangle "Site Web" {
+  (Créer un compte)
+  (Se connecter)
+  (Consulter le contenu)
+  (Poster un message)
+  (Se déconnecter)
+}
+
+Visiteur --> (Créer un compte)
+Visiteur --> (Consulter le contenu)
+
+Membre --> (Se connecter)
+Membre --> (Poster un message)
+Membre --> (Se déconnecter)
+
+(Se connecter) <.. (Créer un compte) : <<extend>>
+(Consulter le contenu) ..> (Se connecter) : <<include>>
+
+
+@enduml

@@ -1,0 +1,11 @@
+## 🐐 Scénario : Gestion d'une Micro-Ferme Pédagogique
+
+"Notre ferme, 'La Basse-Cour Savante', propose deux types d'activités principales : la visite simple de la ferme et des ateliers éducatifs spécifiques. Nous avons un besoin urgent d'un outil pour gérer ces deux volets.
+
+Concernant les **ateliers éducatifs**, nous en proposons plusieurs types, comme 'Découverte des Abeilles', 'Soins aux Chevaux' ou 'Semer et Récolter'. Chaque atelier est programmé à une date et heure précises, a un thème bien défini, et surtout, nous avons une **capacité maximale** de participants (souvent 15 enfants, par exemple). Les inscriptions se font généralement par des **écoles** ou par des **familles individuelles**. L'école nous contacte et nous donne le nombre d'élèves. Nous enregistrons la réservation, le nom du contact de l'école, et le nombre de participants. Les familles, elles, s'inscrivent souvent pour un nombre plus réduit (1 à 4 personnes). Je dois pouvoir consulter le planning et voir rapidement combien de places il reste pour un atelier donné. Je dois aussi pouvoir marquer une réservation comme 'Payée' après réception du règlement.
+
+Pour les **visites simples**, nous ne prenons pas de réservation à l'avance, mais j'ai besoin d'enregistrer le nombre de visiteurs par jour (adultes et enfants) pour des questions de statistiques et de recettes.
+
+Ensuite, il y a la gestion de nos 'ressources' principales : les **animaux**. Chaque animal a une fiche. Sur cette fiche, je dois enregistrer son nom (ex: 'Barnabé' la chèvre), son espèce, sa date de naissance, et le plus critique, son **historique de soins**. Cela inclut les dates de vaccination, les traitements reçus, et le nom du vétérinaire qui est intervenu. Quand le vétérinaire vient, je dois pouvoir rapidement ajouter une nouvelle entrée dans l'historique de soins de l'animal concerné. J'aimerais également avoir un système d'alerte me disant, par exemple, 'Barnabé a besoin d'un rappel de vaccin dans 30 jours'.
+
+Enfin, en tant que gérant, je dois pouvoir sortir un **bilan mensuel** : le total des revenus générés par les ateliers et le total des visites simples, séparément. Avoir une vue d'ensemble de l'état de santé de tous mes animaux serait aussi très utile. C'est tout pour l'instant !"

@@ -1,0 +1,60 @@
+@startuml
+title **Diagramme de séquence – Connexion avec barres d'activation**
+
+actor Utilisateur
+participant "PageLogin" as Page
+participant "AuthController" as Ctrl
+participant "AuthService" as Service
+participant "UserRepository" as Repo
+database "DB" as DB
+
+Utilisateur -> Page : entrerIdentifiants(id, mdp)
+
+Page -> Ctrl : submitForm(id, mdp)
+activate Ctrl
+
+Ctrl -> Service : verifierIdentifiants(id, mdp)
+activate Service
+
+Service -> Repo : trouverUtilisateur(id)
+activate Repo
+
+Repo -> DB : SELECT user
+activate DB
+DB --> Repo : données utilisateur
+deactivate DB
+
+deactivate Repo
+
+alt utilisateur inconnu
+    Repo --> Service : null
+    Service --> Ctrl : false
+    deactivate Service
+
+    Ctrl --> Page : afficherErreur("Utilisateur inconnu")
+    deactivate Ctrl
+
+else utilisateur connu
+    Repo --> Service : utilisateur
+
+    Service -> Service : comparerMotDePasse()
+    activate Service #LightGreen
+    deactivate Service
+
+    alt mot de passe incorrect
+        Service --> Ctrl : false
+        deactivate Service
+
+        Ctrl --> Page : afficherErreur("Mot de passe incorrect")
+        deactivate Ctrl
+
+    else OK
+        Service --> Ctrl : true
+        deactivate Service
+
+        Ctrl --> Page : redirigerVersAccueil()
+        deactivate Ctrl
+    end
+end
+
+@enduml

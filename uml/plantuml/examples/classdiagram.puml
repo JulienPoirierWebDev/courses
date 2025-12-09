@@ -1,0 +1,55 @@
+@startuml
+title **Exemple UML – Diagramme de classes : Gestion d'un Forum**
+
+' ============================
+'        DÉCLARATION DES CLASSES
+' ============================
+
+class Utilisateur {
+  -id : int
+  -nom : String
+  -email : String
+  +seConnecter() : boolean
+  +seDeconnecter()
+}
+
+class Membre {
+  -dateInscription : Date
+  +posterMessage(message : Message)
+}
+
+class Admin {
+  +bannirUtilisateur(u : Utilisateur)
+}
+
+class Message {
+  -id : int
+  -contenu : String
+  #dateCreation : Date
+  +editer(contenu : String)
+}
+
+class Sujet {
+  -id : int
+  -titre : String
+  +ajouterMessage(m : Message)
+}
+
+' ============================
+'        RELATIONS
+' ============================
+
+' Héritage
+Membre --|> Utilisateur
+Admin --|> Utilisateur
+
+' Association simple
+Membre "1" --> "*" Message : poste >
+
+' Composition : un Sujet contient des Messages
+Sujet "1" *-- "*" Message
+
+' Agrégation : un Membre peut suivre plusieurs Sujets
+Membre "1" o-- "*" Sujet : suit >
+
+@enduml

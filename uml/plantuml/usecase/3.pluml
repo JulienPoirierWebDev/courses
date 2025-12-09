@@ -1,0 +1,15 @@
+@startuml
+actor Utilisateur
+(Réserver un Vol) as Resa
+(Gérer les Options) as Options
+
+note right of Resa
+  Flot Nominal :
+  1. Choix du vol
+  2. Paiement
+end note
+
+Options .up.> Resa : <<extend>> \n(Si l'utilisateur a un compte Premium)
+
+Utilisateur --> Resa
+@enduml
