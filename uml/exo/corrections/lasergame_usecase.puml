@@ -1,0 +1,61 @@
+@startuml
+left to right direction
+
+actor Gérant as G
+
+rectangle "LaserGame" {
+    (Réserver une session) as US1
+    (Encaisser un accompte) as US2
+    (Encaisser la totalité) as US3
+    (Donner une facture / reçu) as US4
+    (Afficher les créneaux disponibles) as US5
+    (Ajouter une réservation) as US6
+    (Modifier une réservation) as US7
+    (Annuler une reservation) as US8
+
+    (Associer réservation avec équipement) as US9
+    (Signaler un dysfonctionnement de l'équipement) as US10
+    (Envoyer en réparation un équipement) as US11
+    (Afficher l'équipement disponible) as US12
+
+    (Afficher Rapport : session par jour) as US13
+    (Afficher total encaissement sur période) as US14 
+
+    (Vérifier l'état de l'équipement) as US15
+}
+
+G -->US1
+G -->US3
+G -->US4
+G -->US5
+G -->US6
+G -->US7
+G -->US8
+G -->US9
+G -->US10
+G -->US11
+G -->US12
+G -->US13
+G -->US14
+
+US1 ..> US2 : <<extend>>
+US2 <.. US4 : <<include>>
+US3 <.. US4 : <<include>>
+
+' Quand on prend / modifie une réservation, on vérifie forcement les créneaux dispo
+US1 <.. US5 : <<include>>
+US7 <.. US5 : <<include>>
+US9 <.. US12 : <<include>>
+US9 <.. US15 : <<include>>
+US15 ..> US10 : <<extend>>
+
+
+
+
+
+
+
+
+
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+
+class Utilisateur {
+
+}
+
+class Gerant {
+
+}
+
+class Gérant {
+}
+
+class Client {}
+
+class Joueur {}
+
+class Equipe {}
+
+class Paiement {}
+
+class Equipement {}
+
+Facture
+
+Reçu
+
+Dysfonctionnement
+
+Rapport
+
+@enduml

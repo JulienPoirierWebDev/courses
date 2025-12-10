@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+
+
+actor Visiteur
+actor Abonné
+actor Bibliothécaire as B
+
+rectangle "Système d'emprunt biblio" {
+    (S'inscrire) as US1
+    (Renouveller l'adhésion) as US2
+    (Verifier l'abonnement) as US3
+    (Emprunter des livres) as US4
+    (Ramener le livre) as US5
+    (Enregistrer le retour) as US6
+    (Reserver un livre) as US7
+    (Récupérer une réservation) as US8
+    (Rechercher dans le catalogue) as US9
+    (Générer tous les utilisateurs avec retard) as US10
+}
+
+US4 <.left. US3 : <<include>>
+
+US4 ..> US7 : <<extend>>
+Visiteur --> US1
+Abonné --> US2
+Abonné --> US3
+Abonné --> US4
+Abonné --> US5
+Abonné --> US7
+Abonné --> US8
+B --> US6
+B --> US9
+B --> US10
+
+Visiteur <|-- Abonné
+
+@enduml
