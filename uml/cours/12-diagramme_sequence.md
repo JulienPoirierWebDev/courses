@@ -1,39 +1,100 @@
-diagramme de sequence
+# 📉 Les Diagrammes d'Interaction : Séquence et Collaboration
 
-montre les interactions d'un point de vue temporel
+Les Diagrammes d'Interaction décrivent le **comportement dynamique** du système en se concentrant sur l'échange de messages entre les objets. Ils sont essentiels pour modéliser le *comment* des scénarios complexes.
 
-permet de décrire des scenarios complexes avec peu d'objet. Ils ne rendent pas compte du contexte interne des objets (plutôt voir le diagramme de collaboration)
+-----
 
-Les interactions : les objets communiquent en envoyant des messages. Les objets sont placé horizontalement en haut et ont une ligne de vie. 
-Une interaction, c'est un comportement dynamique entre les objets : l'envoi d'un message, donc l'éxécution d'une méthode de l'objet qui recoit le message par l'objet qui l'envoi (le receveur se fait "exécuter")
+## 1\. ⏱️ Diagramme de Séquence (Sequence Diagram)
 
-Les activations et la durée de vie : 
+Le Diagramme de Séquence montre les interactions d'un **point de vue temporel**. Le temps s'écoule verticalement de haut en bas.
 
-le diagramme de sequence montre les activations des objets et combien de temps il reste actif. 
+### Rôle et Contexte
 
-les types de message (donne des exemples en plantUML): 
+  * **Rôle :** Décrire des **scénarios complexes** avec peu d'objets, en insistant sur l'ordre chronologique des événements.
+  * **Limitation :** Il ne rend **pas compte du contexte interne et spatial** des objets (pour cela, on utilise le Diagramme de Collaboration).
 
-flot de controle a plat : asynchrone, symbolisé par une fleche simple
+### Les Fondamentaux
 
-appel de procédure ou flot de controle emboité : la séquence emboité doit se terminer pour que la séquence englobante reprenne le contrôle. Symbole : des flèches a l'extrémité triangulaire. 
+  * **Objets :** Placé **horizontalement en haut** du diagramme. Ils sont notés de manière soulignée (ex. : `:Ascenseur`).
+  * **Ligne de Vie (Lifeline) :** Trait vertical pointillé sous chaque objet, symbolisant la durée de son existence dans le scénario.
+  * **Interaction :** Un **comportement dynamique** où un objet envoie un **message** (appel de méthode) à un autre objet, forçant le receveur à s'exécuter.
 
-le retour explicite de procédure : fleche de retour en point tillé, normalement implicite et done non noté, car s'exécute a la fin de l'activation de l'objet. On peut y associer un retour de paramètre. 
+### Activations et Durée de Vie
 
-exercice : faire le diagramme de sequence d'un ascenseur. 
+Le Diagramme de Séquence montre les **activations** des objets, qui représentent la période pendant laquelle l'objet est actif et exécute une méthode.
 
+  * **Notation :** Un **rectangle fin et vertical** est dessiné sur la ligne de vie de l'objet receveur pour indiquer le début et la fin de son activation.
 
+### Types de Message (PlantUML)
 
----- 
+| Type de Message | Sémantique | Notation UML | Exemple PlantUML |
+| :--- | :--- | :--- | :--- |
+| **Asynchrone** (Flot de Contrôle Plat) | L'expéditeur n'est **pas bloqué** et continue son exécution. | Flèche simple (demi-tête). | `Client -> Serveur : notification()` |
+| **Synchrone** (Flot de Contrôle Emboîté) | La séquence emboîtée doit se terminer (réponse reçue) pour que la séquence englobante reprenne le contrôle. | Flèche à **extrémité pleine et triangulaire**. | `Expéditeur -> Receveur : traitement()` |
+| **Retour de Procédure** | Réponse explicite du destinataire. Normalement **implicite** (à la fin de l'activation), mais peut être notée pour un retour de paramètre. | Flèche de retour **en pointillés**. | `Receveur --> Expéditeur : résultat` |
 
-diagramme de collaboration
+-----
 
-présente les rôles joués par les objets dans un contexte. interaction par envoi de message
+### Exercice : Diagramme de Séquence d'un Ascenseur
 
-on insiste ici sur la représentation spatiale des objets. 
-La description du comportement se fait par la description de la structure et des formes de communication. 
+**Scénario :** Un utilisateur appelle l'ascenseur, l'ascenseur se déplace, puis ouvre ses portes.
 
-donc diagramme de collaboration : réalisation d'une opération (méthode) ou d'un classificateur (use case, classe) dans un contexte donné. 
+```plantuml
+@startuml
+actor Utilisateur
+participant BoutonAppel as B
+participant Controleur as C
+participant Moteur as M
+participant Porte as P
 
-deux types de descriptions : 
-1- description générale au niveau spécification : le role des classificateurs et le role des associations. Une interaction : une sequence de messages partiellement ordonnées échangés entre les rôles des classificateurs. 
-2- description spécifique au niveau instance : une instance particulière d'interaction avec les objets et les liens qui se conforment a ce qui est décrit au niveau spécification + les stimulus (instances des messages) échangés entre ces objets. 
+Utilisateur -> B : appuyer(niveau)
+activate B
+B -> C : appel(niveau)
+deactivate B
+
+activate C
+C -> M : démarrer(direction)
+activate M
+M --> C : positionAtteinte()
+deactivate M
+
+C -> P : ouvrir()
+activate P
+P --> C : portesOuvertes()
+deactivate P
+C --> Utilisateur : arrivé()
+deactivate C
+@enduml
+```
+
+-----
+
+## 2\. 🗺️ Diagramme de Collaboration (Collaboration Diagram / Communication Diagram)
+
+Le Diagramme de Collaboration (anciennement Diagramme de Communication) met l'accent sur la **représentation spatiale** des objets et leurs relations.
+
+### Rôle et Structure
+
+  * **Rôle :** Montrer les **rôles joués** par les objets dans un contexte donné. Il insiste sur la **structure** et les formes de communication.
+  * **Finalité :** Réaliser une **opération (méthode)** ou un **classificateur (cas d'utilisation, classe)** dans un contexte donné.
+
+### Comportement et Description
+
+La description du comportement dans un Diagramme de Collaboration se fait par l'ajout de **numéros de séquence** sur les messages.
+
+  * **Notation :** Objets (rectangles soulignés) et Liens (lignes simples) sont affichés. Les messages sont numérotés dans l'ordre chronologique sur les liens.
+
+### Types de Description
+
+Le Diagramme de Collaboration permet deux niveaux de description :
+
+1.  **Description Générale (Spécification) :**
+
+      * Décrit le **rôle des classificateurs** et le **rôle des associations**.
+      * Une interaction est vue comme une **séquence de messages partiellement ordonnés** échangés entre les rôles des classificateurs.
+
+2.  **Description Spécifique (Instance) :**
+
+      * Décrit une **instance particulière d'interaction**.
+      * Montre les **objets** et les **liens** qui se conforment à la spécification.
+      * Ajoute les **stimulus** (instances des messages, numérotés) échangés entre ces objets.

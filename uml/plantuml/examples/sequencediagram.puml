@@ -8,15 +8,15 @@ participant "AuthService" as Service
 participant "UserRepository" as Repo
 database "DB" as DB
 
-Utilisateur -> Page : entrerIdentifiants(id, mdp)
+Utilisateur -> Page : entrerIdentifiants(email, mdp)
 
-Page -> Ctrl : submitForm(id, mdp)
+Page -> Ctrl : submitForm(email, mdp)
 activate Ctrl
 
-Ctrl -> Service : verifierIdentifiants(id, mdp)
+Ctrl -> Service : verifierIdentifiants(email, mdp)
 activate Service
 
-Service -> Repo : trouverUtilisateur(id)
+Service -> Repo : trouverUtilisateur(email)
 activate Repo
 
 Repo -> DB : SELECT user

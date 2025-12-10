@@ -1,0 +1,112 @@
+@startuml
+
+' Configuration du style
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Black
+}
+
+' --- Énumérations ---
+enum StatutAbonnement {
+    ACTIF
+    SUSPENDU
+    RESILIE
+}
+enum StatutBox {
+    A_PREPARER
+    EXPEDIEE
+}
+enum StatutSelection {
+    BROUILLON
+    VALIDEE
+}
+
+' --- Classes ---
+
+class Client {
+    - id : int
+    - nom : String
+    + sAbonner()
+}
+
+class Questionnaire {
+    - gouts : List
+    + maj()
+}
+
+class Abonnement {
+    - id : int
+    - dateFin : Date
+    + genererSelection()
+}
+
+class Formule {
+    - id : int
+    - prix : float
+}
+
+class Selection {
+    - id : int
+    - dateCreation : Date
+    - statut : StatutSelection
+    + valider()
+}
+
+class Box {
+    - numeroSuivi : String
+    - statut : StatutBox
+    + expedier()
+}
+
+class Livre {
+    - isbn : String
+    - titre : String
+}
+
+class Libraire {
+    - id : int
+    + validerSelection()
+}
+
+class ServiceLogistique {
+    + traiterBox()
+}
+
+' --- Relations Corrigées ---
+
+' 1. QUI CONNAIT L'ID DE QUI ?
+
+' Le Client connait son Questionnaire
+' (Table Client a questionnaire_id OU Questionnaire a client_id avec contrainte unique)
+Client "1" --> "1" Questionnaire : possède >
+
+' Le Questionnaire connait les livres lus (Table de jointure ou liste d'IDs)
+Questionnaire "1" --> "*" Livre : exclure (déjà lu) >
+
+' Le Client ne connait pas forcément l'ID abonnement directement s'il en a plusieurs,
+' C'est souvent l'Abonnement qui pointe vers le Client (client_id dans Abonnement)
+Abonnement "*" --> "1" Client : appartient à >
+
+' L'Abonnement connait la Formule (formule_id dans Abonnement)
+Abonnement "*" --> "1" Formule : utilise >
+
+' --- VOS MODIFICATIONS ---
+
+' Relation simple : L'abonnement est lié à des sélections (historique)
+' La sélection doit savoir à quel abonnement elle appartient (abonnement_id dans Selection)
+Abonnement "1" <-- "*" Selection : est générée pour <
+
+' Composition : La Box est le contenant, la Sélection le contenu.
+' Une Box est composée d'une Sélection. 
+Box "1" *-- "1" Selection : encapsule >
+
+' La Sélection pointe vers les Livres (livre_id_1, livre_id_2 dans Selection)
+Selection "*" --> "2" Livre : cible >
+
+' --- Acteurs ---
+Libraire ..> Selection : valide
+ServiceLogistique ..> Box : expédie
+
+@enduml

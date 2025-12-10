@@ -1,0 +1,38 @@
+@startuml
+title **Suspendre l'abonnement (méthode de Client: suspendreAbonnement())**
+
+participant "Bob :Client" as C
+participant ":Abonnement" as A
+database "BDD" as DB
+
+'date de suspension a ajouter
+
+activate C
+C -> A : suspendre()
+
+activate A
+
+
+alt abonnement déja suspendu
+
+A -> A : getStatus : "suspendu"
+
+A --> C : erreur : abonnementDéjaSuspendu
+
+else abonnement encore valide
+
+A -> A : getStatus : "en cours"
+
+A -> DB : mise a jour DB
+
+DB --> A : OK
+
+A --> C : OK
+
+deactivate A
+
+deactivate C
+
+end
+
+@enduml
