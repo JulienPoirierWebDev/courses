@@ -1,0 +1,90 @@
+@startuml
+title **Preparation de la box**
+
+actor "Utilisateur" as U
+participant "UI" as UI
+participant ":BoxController" as B
+participant ":Box" as Box
+participant ":Selection" as S
+participant ":Livre" as L
+participant ":Erreur" as E
+database "BDD" 
+
+U -> UI : cliquer sur le bouton "preparer la box"
+activate UI
+UI -> B : preparerLaBox()
+activate B
+
+B -> Box : ajouterLaSelectionALaBox()
+activate Box
+
+Box -> Box : preparer()
+
+Box -> S : verifierSelectionComplete()
+activate S
+
+alt si return true
+
+S --> Box : true / false
+
+Box -> S : recupérerLivres()
+
+loop deux fois
+S -> L : récupérUnLivre()
+activate L
+
+L -> BDD : SELECT ...
+activate BDD
+
+BDD --> L : data
+
+deactivate BDD
+
+
+L --> S : livre[]
+deactivate L
+
+end
+
+S --> Box
+
+Box -> S : récupérerCommentaireLibraire()
+
+S -> BDD : SELECT ...
+activate BDD
+
+BDD --> S : data
+deactivate BDD
+
+S --> Box : 
+
+else si return false
+S --> Box : erreur
+deactivate S
+
+Box -> E : créerUneErreur()
+activate E
+
+E --> BDD : insert ...
+activate BDD
+BDD --> E : OK 
+deactivate BDD
+E --> Box
+
+deactivate E
+
+end
+
+Box --> B : OK tout va bien :)
+deactivate Box
+
+B --> UI : afficher que tout est OK
+deactivate B
+
+UI-> U : renvoi de l'HTML
+
+deactivate UI
+
+
+
+@enduml

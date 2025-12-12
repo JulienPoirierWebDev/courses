@@ -13,100 +13,150 @@ enum StatutAbonnement {
     ACTIF
     SUSPENDU
     RESILIE
+    TERMINE
 }
-enum StatutBox {
-    A_PREPARER
-    EXPEDIEE
-}
+
 enum StatutSelection {
     BROUILLON
     VALIDEE
 }
 
-' --- Classes ---
+enum StatutBox {
+    A_PREPARER
+    EXPEDIEE
+    LIVREE
+}
+
+enum FormatLivre {
+    POCHE
+    GRAND_FORMAT
+}
+
+enum GenreLitteraire {
+    FANTASY
+    POLAR
+    HISTOIRE
+    ROMANCE
+    SF
+}
+
+' --- Classes Métier ---
 
 class Client {
     - id : int
     - nom : String
-    + sAbonner()
+    - prenom : String
+    - email : String
+    - adresseFacturation : String
+    - adresseLivraison : String
+    + sAbonner(formule : Formule)
+    + demanderSuspension()
+    + changerAdresse()
 }
 
 class Questionnaire {
-    - gouts : List
-    + maj()
+    - genresAimes : List<GenreLitteraire>
+    - genresDetestes : List<GenreLitteraire>
+    - formatPrefere : FormatLivre
+    + mettreAJour()
 }
 
 class Abonnement {
     - id : int
+    - dateDebut : Date
     - dateFin : Date
+    - statut : StatutAbonnement
+    - renouvellementAuto : boolean
+    + suspendre(duree : int)
+    + resilier()
     + genererSelection()
 }
 
 class Formule {
     - id : int
-    - prix : float
+    - nom : String
+    - dureeMois : int
+    - prixMensuel : float
+}
+
+class Libraire {
+    - id : int
+    - nom : String
+    - specialite : GenreLitteraire
+    + consulterProfil(client : Client)
+    + validerSelection(sel : Selection)
 }
 
 class Selection {
     - id : int
     - dateCreation : Date
     - statut : StatutSelection
-    + valider()
+    - commentaireLibraire : String
+    + ajouterLivre(livre : Livre)
+    + validerChoix()
+    + verifierSelectionComplete()
+    + verifierCommentaireLibraire()
+    + ajoutCommentaireLibraire()
+    + récupérerLivres()
+}
+
+class ServiceLogistique {
+    + recupererListeExpedition()
+    + traiterBox(box : Box)
 }
 
 class Box {
+    - id : int
     - numeroSuivi : String
+    - dateExpedition : Date
     - statut : StatutBox
     + expedier()
+    + preparer()
+    + notifierClient()
+    + ajouterLaSelectionALaBox()
 }
 
 class Livre {
     - isbn : String
     - titre : String
+    - auteur : String
+    - genre : GenreLitteraire
+    - quantiteStock : int
+    + verifierStock()
+    + decrementerStock()
 }
 
-class Libraire {
-    - id : int
-    + validerSelection()
-}
+' --- Relations et Gestion des IDs ---
 
-class ServiceLogistique {
-    + traiterBox()
-}
-
-' --- Relations Corrigées ---
-
-' 1. QUI CONNAIT L'ID DE QUI ?
-
-' Le Client connait son Questionnaire
-' (Table Client a questionnaire_id OU Questionnaire a client_id avec contrainte unique)
+' 1. CLIENT & PROFIL
+' Le Client pointe vers son questionnaire (client a questionnaire_id)
 Client "1" --> "1" Questionnaire : possède >
 
-' Le Questionnaire connait les livres lus (Table de jointure ou liste d'IDs)
-Questionnaire "1" --> "*" Livre : exclure (déjà lu) >
+' Le Questionnaire pointe vers les livres DEJA LUS (Table jointure questionnaire_livre_lu)
+Questionnaire "1" --> "*" Livre : a déjà lu (exclure) >
 
-' Le Client ne connait pas forcément l'ID abonnement directement s'il en a plusieurs,
-' C'est souvent l'Abonnement qui pointe vers le Client (client_id dans Abonnement)
+' 2. ABONNEMENT
+' L'Abonnement pointe vers le Client (abonnement a client_id)
 Abonnement "*" --> "1" Client : appartient à >
 
-' L'Abonnement connait la Formule (formule_id dans Abonnement)
+' L'Abonnement pointe vers la Formule (abonnement a formule_id)
 Abonnement "*" --> "1" Formule : utilise >
 
-' --- VOS MODIFICATIONS ---
-
-' Relation simple : L'abonnement est lié à des sélections (historique)
-' La sélection doit savoir à quel abonnement elle appartient (abonnement_id dans Selection)
+' 3. FLUX SELECTION / BOX
+' La Sélection pointe vers l'Abonnement (selection a abonnement_id)
+' (Pour retrouver le client et l'adresse via l'abonnement)
 Abonnement "1" <-- "*" Selection : est générée pour <
 
-' Composition : La Box est le contenant, la Sélection le contenu.
-' Une Box est composée d'une Sélection. 
+' La Box COMPREND la Sélection (Composition forte)
+' (La Box a selection_id, ou partage le même ID car 1-1)
 Box "1" *-- "1" Selection : encapsule >
 
-' La Sélection pointe vers les Livres (livre_id_1, livre_id_2 dans Selection)
-Selection "*" --> "2" Livre : cible >
+' La Sélection pointe vers les 2 Livres choisis (selection a livre_id_1, livre_id_2)
+Selection "*" --> "2" Livre : contient >
 
-' --- Acteurs ---
-Libraire ..> Selection : valide
-ServiceLogistique ..> Box : expédie
+' 4. ACTEURS
+Libraire ..> Selection : valide >
+ServiceLogistique ..> Box : traite >
+Libraire -- "*" Client : suit >
 
 @enduml
