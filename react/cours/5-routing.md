@@ -15,7 +15,7 @@ Pour cela, nous allons utiliser une librairie externe à ReactJS, qui s'appelle 
 Pour installer cette librairie, nous allons utiliser `npm`:
 
 ```bash
-npm install react-router-dom
+npm install react-router
 ```
 
 ## Utilisation
