@@ -1,0 +1,91 @@
+
+
+Ce cours repose sur un accompagnement a l'installation des logiciels et a un échange ouvert sur plusieurs pratiques dans le développement. 
+
+Voici le support écrit : 
+ 
+
+Les IDE
+
+    Un environnement de développement est différent d'un éditeur de code. Il possède des fonctionnalités avancées pour aider l'utilisateur dans son travail. La suite Jetbrains possède ainsi plusieurs IDE spécialisés dans des langages différents. Nous utiliserons VS Code : c'est un IDE léger, il nécessite l'installation d'extensions pour étendre ses fonctionnalités. Voici quelques extensions essentielles :
+
+        Live Server : pour lancer un serveur local et voir vos modifications en temps réel dans le navigateur.
+
+        Prettier : pour formater automatiquement le code selon des règles de style définies.
+
+        ESLint : pour analyser et corriger les erreurs de syntaxe et de style dans le code JavaScript.
+
+        Auto Rename Tag : pour automatiquement renommer les balises HTML lors de l'édition.
+
+        Bracket Pair Colorizer : pour colorier les paires de parenthèses, crochets et accolades afin de mieux visualiser les structures de code imbriquées.
+
+        Import Cost : pour afficher le poids des fichiers importés dans le code JavaScript afin d'optimiser les performances.
+
+    À chaque langage, il faudra explorer et installer des extensions spécifiques pour améliorer l’expérience de développement. Au besoin, vous pouvez créer des profils utilisateurs dans VS Code pour organiser vos extensions par projet, comme HTML/CSS/JS, PHP, Python, etc
+
+     
+    Les serveurs locaux : XAMPP, MAMP, LAMP, WAMP
+
+    Ces serveurs locaux sont des ensembles de logiciels qui permettent de simuler un environnement de serveur sur votre ordinateur pour tester des projets web. Ils regroupent des logiciels comme PHP, MySQL (avec phpMyAdmin) et Apache (serveur web). Chacun est dédié à un système d'exploitation, sauf XAMPP qui est multiplateforme (Windows, macOS, Linux).
+    Utilisation d'Apache
+
+    Apache est un serveur HTTP qui permet d’héberger des sites web localement. Pour l’utiliser avec un serveur local comme XAMPP :
+
+        Lancez XAMPP et démarrez le module Apache.
+
+        Placez vos fichiers de projet dans le dossier htdocs de XAMPP (généralement situé dans le répertoire d'installation de XAMPP).
+
+        Accédez à votre projet via http://localhost/nom_du_projet dans votre navigateur. Vous pouvez configurer des Virtual Hosts pour gérer plusieurs projets plus facilement ou personnaliser la configuration d'Apache pour vos besoins.
+    Autres outils
+    WinZip ou 7-Zip
+
+    WinZip et 7-Zip sont des utilitaires de compression de fichiers. WinZip est payant alors que 7-Zip est gratuit et open-source. Ils permettent de compresser des fichiers pour économiser de l'espace de stockage ou faciliter leur envoi. 7-Zip est particulièrement utile car il supporte de nombreux formats comme .zip, .rar, et .7z tout en offrant des taux de compression plus élevés.
+    Outil FTP comme Filezilla
+
+    FileZilla est un client FTP (File Transfer Protocol) open-source qui permet de transférer des fichiers entre votre machine locale et un serveur distant. Il est utilisé pour déployer des projets web en téléchargeant les fichiers sur le serveur où le site sera hébergé. FileZilla prend en charge FTP, SFTP (FTP sécurisé), et FTPS (FTP sécurisé par TLS).
+
+     
+    Bien organiser ses dossiers
+
+    Il est important de bien organiser vos dossiers de travail pour éviter les erreurs et faciliter la gestion de vos projets. Voici un exemple d'organisation :
+    dev/    projet1/    projet2/ notes/    projet1_notes.md    projet2_notes.md cas_pratiques/ : exercices et cas pratiques divers
+
+    Idéalement, isolez chaque projet dans un sous-dossier dédié, et prévoyez un dossier pour vos notes personnelles ainsi qu'un autre pour les cas pratiques. Cela permet aussi de mieux gérer vos projets sous Git en évitant les conflits entre fichiers.
+    La sécurité en ligne
+    L'hygiène du dev
+
+    Il est crucial de respecter les recommandations de la CNIL (Commission Nationale de l'Informatique et des Libertés), notamment en ce qui concerne la gestion des données personnelles. Cela inclut :
+
+        L'anonymisation des données : utiliser des données fictives pendant le développement pour protéger la vie privée des utilisateurs.
+
+        La protection contre les attaques : mettre en place des mesures de sécurité pour éviter le piratage de votre site (par exemple, protéger contre les attaques par injection SQL).
+
+        Le respect du RGPD : s'assurer que les sites web collectant des données respectent la réglementation européenne sur la protection des données.
+
+    Il est également recommandé de maintenir vos environnements de développement à jour, de faire régulièrement des sauvegardes, et d'utiliser des gestionnaires de mots de passe pour vos comptes professionnels.
+
+    Se prémunir des attaques Pour garantir la sécurité de vos projets web, il est essentiel d'anticiper et de protéger votre application contre diverses menaces. Voici quelques bonnes pratiques pour se prémunir des attaques courantes :
+
+        Le phishing et les spams
+
+    Phishing : Ces attaques visent à tromper les utilisateurs pour qu'ils divulguent des informations sensibles (mots de passe, données bancaires) en se faisant passer pour des entités légitimes. Il est important d'éduquer les utilisateurs à reconnaître les emails suspects et de toujours valider l'authenticité des sites web avant de fournir des informations personnelles. Spams : Mettre en place des filtres anti-spam efficaces, tels que des CAPTCHA, pour limiter les soumissions automatisées sur vos formulaires de contact ou d'inscription. 
+
+        L'architecture Bulletproof (au minimum)
+
+    Adopter une architecture robuste et sécurisée dès la conception de votre application permet de réduire les points de vulnérabilité. Cela inclut : La mise en place de pare-feu et d'IPS/IDS (systèmes de prévention/détection d'intrusions). La gestion des droits d'accès pour limiter les privilèges des utilisateurs et des applications. Le chiffrement des données en transit (HTTPS) et au repos.
+
+    [18:51]
+
+        Sécuriser WordPress
+
+    Si vous travaillez sur des projets WordPress, plusieurs mesures de sécurité sont essentielles : Changer le préfixe des tables de la base de données : Par défaut, WordPress utilise le préfixe wp_ pour toutes les tables de la base. Le modifier réduit les chances de réussite des attaques automatisées ciblant les bases de données WordPress. Modifier l'URL de connexion : Par défaut, l'URL de connexion de WordPress est connue (/wp-login.php). En la changeant via un plugin ou des configurations spécifiques, vous réduisez les risques d'attaques par force brute sur la page de connexion. Installer des plugins de sécurité : Utiliser des plugins comme Wordfence ou Sucuri pour surveiller et sécuriser le site. 
+
+        Sécurité dans les développements spécifiques
+
+    Prévenir les failles XSS (Cross-Site Scripting) : Validez et échappez toujours les données fournies par l’utilisateur avant de les afficher dans vos pages pour éviter qu’un attaquant n’injecte des scripts malveillants. Sécuriser contre les injections SQL : Utilisez des requêtes préparées (Prepared Statements) pour éviter les attaques d'injection SQL qui visent à manipuler vos bases de données via des entrées utilisateurs malveillantes. 
+
+        Protection des mots de passe et données sensibles
+
+    Utilisation de fichiers .env : Les mots de passe et autres informations sensibles (comme les clés API) doivent être stockés dans un fichier .env en dehors du répertoire accessible au public (root web). Ce fichier doit être exclu des dépôts Git via un fichier .gitignore. Hasher les mots de passe : Toujours hasher les mots de passe avec des algorithmes sécurisés (comme bcrypt, argon2) avant de les stocker dans la base de données, pour protéger les données des utilisateurs même en cas de fuite. En suivant ces recommandations, vous renforcez la sécurité de vos projets web contre les attaques les plus courantes et créez une base solide pour le développement sécurisé.
+
+

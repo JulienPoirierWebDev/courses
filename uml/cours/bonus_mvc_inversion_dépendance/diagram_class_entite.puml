@@ -1,0 +1,28 @@
+@startuml
+class Utilisateur {
+  - id : String
+  - nom : String
+  + envoyerMessage(groupe : Groupe, contenu : String)
+  + rejoindreGroupe(groupe : Groupe)
+}
+
+class Groupe {
+  - id : String
+  - nom : String
+  - membres : List<Utilisateur>
+  + ajouterMembre(utilisateur : Utilisateur)
+  + getMessages() : List<Message>
+}
+
+class Message {
+  - id : String
+  - contenu : String
+  - timestamp : Date
+  - auteur : Utilisateur
+  + getAuteur() : Utilisateur
+}
+
+Utilisateur "1..*" -- "1..*" Groupe : membreDans
+Utilisateur "1" --> "0..*" Message : estAuteurDe
+Groupe "1" -- "0..*" Message : contient
+@enduml

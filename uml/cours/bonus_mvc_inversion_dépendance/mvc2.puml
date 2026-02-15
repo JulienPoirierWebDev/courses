@@ -1,0 +1,57 @@
+@startuml
+title ✅ SOLUTION DIP (Inversion de Dépendance)
+
+' Positionnement des classes pour l'harmonie visuelle
+' Couche Présentation
+class ControleurMessagerie
+class VueMessagerie
+
+' Couche Métier (Modèle)
+class MessageService {
+  - repository : MessageRepository // Dépendance à l'INTERFACE (DIP)
+  + envoyer(contenu, auteur, groupe)
+}
+interface MessageRepository {
+  + sauvegarder(message)
+}
+class Message
+class Groupe
+
+' Couche Persistance
+class MySQLRepository {
+  + sauvegarder(message)
+}
+
+' ------------------ NOTES et PLACEMENT ------------------
+' Placement pour harmonie avec Diagramme 1
+MessageRepository -[hidden]-> MySQLRepository
+VueMessagerie -[hidden]up-> MySQLRepository
+ControleurMessagerie -[hidden]left-> VueMessagerie
+
+' Notes
+note left of ControleurMessagerie: MVC: Contrôleur
+note right of VueMessagerie: MVC: Vue
+note left of MessageService: MVC: Modèle (Logique Métier)
+note right of MessageRepository: L'Abstraction (Contrat DIP)
+note right of MySQLRepository: Le Détail Concret (Module Bas Niveau)
+note right of Message: MVC: Modèle (Entité)
+note right of Groupe: MVC: Modèle (Entité)
+
+
+' ------------------ RELATIONS ------------------
+
+' 1. Flux MVC (Controller -> Model/Service)
+ControleurMessagerie --> MessageService : utilise
+ControleurMessagerie --> VueMessagerie : utilise
+
+' 2. Flux interne au Modèle
+MessageService --> Message
+MessageService --> Groupe
+
+' 3. La Solution DIP (Inversion de Dépendance)
+' Le Service dépend de l'Interface (Abstraction)
+MessageService .up.> MessageRepository 
+
+' Le Détail implémente l'Interface (Détail dépend de l'Abstraction)
+MySQLRepository .up.|> MessageRepository : Implémente (Réalise)
+@enduml

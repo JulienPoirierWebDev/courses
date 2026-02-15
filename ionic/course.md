@@ -5,7 +5,7 @@ npm install -g @ionic/cli
 ```
 
 Cela va installer l'outil en ligne de commande Ionic de manière globale (sur toute la machine)
-
+i
 ## Avant toute chose, c'est quoi Ionic ?
 
 C'est un ToolKit UI pour créer des applications web et mobile avec une seule codebase.
@@ -171,37 +171,37 @@ Bonus si le temps le permet :
 ## Ionic et React
 
 - Rappel des bases de React :
-  - Les composants
-  - Le styling
-  - Les props
-  - Les states
-  - Les hooks
+  - Les composants         X
+  - Le styling          
+  - Les props              X
+  - Les states             X
+  - Les hooks              X
   - Les contextes
-  - Les custom hooks
+  - Les custom hooks       X
   - UseMemo et UseCallback
 
 ## Installer Ionic CLI
 
-- Installer Ionic CLI
-- Créer une application avec Ionic CLI
-- Lancer l'application sur un device virtuel
-- Lancer l'application sur un device réel
+- Installer Ionic CLI                           X
+- Créer une application avec Ionic CLI          X
+- Lancer l'application sur un device virtuel    X
+- Lancer l'application sur un device réel       X
 
 ## Les bases d'Ionic
 
 - Les composants ION :
 
-  - Les boutons
-  - Les listes
-  - Les cards
-  - Les formulaires
+  - Les boutons                                 X
+  - Les listes                                  
+  - Les cards                                   X
+  - Les formulaires                             X
   - Etc.
 
-- Le routing
+- Le routing                                    X
 
 ## Les bases de Capacitor
 
 - Les plugins Capacitor :
-  - Utilisation des plugins : cookies, haptics, etc.
-  - Intégration avec React.
-  - Build de l'application avec Capacitor
+  - Utilisation des plugins : cookies, haptics, etc.      X
+  - Intégration avec React.                               X
+  - Build de l'application avec Capacitor                 X

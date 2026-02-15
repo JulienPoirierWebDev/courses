@@ -1,0 +1,48 @@
+@startuml
+title ⛔ VIOLATION DU DIP (Dépendance Statique)
+
+' Positionnement des classes pour l'harmonie visuelle
+' Couche Présentation
+class ControleurMessagerie 
+class VueMessagerie 
+
+' Couche Métier (Modèle)
+class MessageService {
+  - repository : BaseDeDonneesMySQL  // <--- VIOLATION DU DIP !
+  + envoyer(contenu, auteur, groupe)
+}
+class Message 
+class Groupe 
+
+' Couche Persistance
+class BaseDeDonneesMySQL {
+  + sauvegarder(message)
+}
+
+' ------------------ NOTES et PLACEMENT ------------------
+' Placement pour harmonie avec Diagramme 2
+MessageRepository -[hidden]-> BaseDeDonneesMySQL 
+hide MessageRepository 
+
+' Décalage pour aligner le flow
+VueMessagerie -[hidden]up-> BaseDeDonneesMySQL
+ControleurMessagerie -[hidden]left-> VueMessagerie
+
+' Notes
+note left of ControleurMessagerie: MVC: Contrôleur
+note right of VueMessagerie: MVC: Vue
+note left of MessageService: MVC: Modèle (Logique Métier)
+note bottom of MessageService #orange: Dépendance STATIQUE et RIGIDE.
+note right of BaseDeDonneesMySQL: Le Détail Concret (Module Bas Niveau)
+note right of Message: MVC: Modèle (Entité)
+note right of Groupe: MVC: Modèle (Entité)
+
+' ------------------ RELATIONS ------------------
+ControleurMessagerie --> MessageService : utilise
+ControleurMessagerie --> VueMessagerie : utilise
+MessageService --> Message
+MessageService --> Groupe
+
+' LE PROBLÈME : Dépendance Forte et Statique
+MessageService --> BaseDeDonneesMySQL : Dépendance Concrète
+@enduml
