@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messagerie Vulnérable</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Messagerie (démo vulnérable)</h1>
+
+    <section id="auth-section">
+      <h2>Connexion</h2>
+      <form id="login-form">
+        <input type="text" id="username" placeholder="username" required>
+        <input type="password" id="password" placeholder="password" required>
+        <button type="submit">Se connecter</button>
+      </form>
+      <p class="hint">Comptes de démo: admin/admin123, alice/alice123, bob/bob123</p>
+    </section>
+
+    <section id="app-section" class="hidden">
+      <div class="top-bar">
+        <p id="me"></p>
+        <button id="logout-btn">Déconnexion</button>
+      </div>
+
+      <div class="controls">
+        <label for="receiver">Conversation avec:</label>
+        <select id="receiver"></select>
+      </div>
+
+      <div id="messages" class="messages"></div>
+
+      <form id="message-form" class="message-form">
+        <input type="text" id="message-content" placeholder="Votre message..." required>
+        <button type="submit">Envoyer</button>
+      </form>
+
+      <form id="edit-form" class="message-form">
+        <input type="number" id="edit-id" placeholder="ID message à modifier" required>
+        <input type="text" id="edit-content" placeholder="Nouveau contenu" required>
+        <button type="submit">Modifier</button>
+      </form>
+
+      <form id="delete-form" class="message-form">
+        <input type="number" id="delete-id" placeholder="ID message à supprimer" required>
+        <button type="submit">Supprimer</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -17,6 +17,17 @@ La question devient : *jusqu’où peut-elle aller ?*
 
 ---
 
+## Ce que vous saurez faire à la fin de ce bloc
+
+À la fin de ce bloc, vous devrez être capable de :
+
+* proposer des mesures techniques cohérentes avec un risque priorisé,
+* appliquer le moindre privilège à plusieurs couches (UI, API, BDD),
+* distinguer authentification et autorisation,
+* justifier les contrôles côté serveur et pas seulement côté interface.
+
+---
+
 ## Authentification et gestion des mots de passe
 
 L’authentification est **le premier point d’entrée** de la majorité des attaques.
@@ -25,6 +36,20 @@ Elle protège directement :
 * la **Confidentialité** (qui accède aux données),
 * l’**Intégrité** (qui peut les modifier),
 * la **Traçabilité** (qui a fait quoi).
+
+---
+
+### À ne pas confondre : authentification vs autorisation
+
+* **Authentification** : vérifier *qui* agit
+* **Autorisation** : vérifier *ce qu'il a le droit de faire*
+
+Exemple SLAM :
+
+* utilisateur authentifié (`JWT valide`)
+* mais non autorisé à supprimer un compte → `403 Forbidden`
+
+📌 Un token valide ne remplace jamais un contrôle d'autorisation.
 
 ---
 
@@ -46,6 +71,12 @@ Une bonne politique est :
 * diversité de caractères,
 * refus des mots de passe trop faibles,
 * interdiction de réutilisation.
+
+Nuance utile (pratiques modernes) :
+
+* privilégier une longueur suffisante,
+* vérifier contre des mots de passe compromis,
+* éviter des règles trop rigides qui poussent à des mots de passe prévisibles.
 
 📌 Erreur classique :
 
@@ -75,6 +106,12 @@ Un mot de passe :
 * **ne doit jamais être chiffré de façon réversible**.
 
 Il doit être **haché**, avec un **sel**, via une fonction adaptée.
+
+Exemples de fonctions adaptées (selon la stack) :
+
+* **Argon2id**
+* **bcrypt**
+* **scrypt**
 
 #### Raisonnement attendu
 
@@ -118,6 +155,15 @@ Limiter les attaques de type :
 * temporisation progressive,
 * blocage temporaire,
 * journalisation des échecs.
+
+Exemple logique (pseudo-code) :
+
+```text
+si > 5 échecs en 10 minutes :
+  temporiser / bloquer temporairement
+  journaliser
+  alerter si le volume augmente
+```
 
 📌 Logique importante :
 
@@ -280,6 +326,11 @@ Elle doit donc être **autonome en sécurité**.
 📌 HTTPS n’est pas une option,
 c’est le **socle minimum**.
 
+Complément utile :
+
+* en présence d'un reverse proxy, il faut garder une configuration cohérente,
+* **HSTS** renforce la protection contre certains retours involontaires en HTTP.
+
 ---
 
 ### Authentification par jeton (JWT)
@@ -310,6 +361,14 @@ Chaque route doit vérifier :
 ⚠️ Erreur classique :
 
 > « le token est valide donc l’accès est autorisé » ❌
+
+Exemple (Express, conceptuel) :
+
+```js
+app.delete("/api/users/:id", requireAuth, requireRole("ADMIN"), deleteUserController);
+```
+
+📌 Le contrôle doit être fait côté serveur, même si le bouton est masqué dans l'interface.
 
 ---
 
@@ -348,6 +407,11 @@ Protection :
 > Le CSRF concerne les applications Web avec session,
 > pas les API REST stateless.
 
+Nuance utile :
+
+* le point clé est surtout le **mode d'authentification**,
+* si l'API utilise des **cookies** envoyés automatiquement par le navigateur, la protection CSRF redevient pertinente.
+
 ---
 
 ## Transition vers le bloc suivant
@@ -372,3 +436,38 @@ Il reste une question essentielle :
 * Les rôles protègent plus que les interfaces
 * La base de données est la dernière barrière
 * Une API ne fait confiance à personne
+
+---
+
+## Références externes (bonnes pratiques techniques)
+
+* OWASP Authentication Cheat Sheet : <https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html>
+* OWASP Password Storage Cheat Sheet : <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>
+* OWASP Session Management Cheat Sheet : <https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>
+* Express – Security Best Practices : <https://expressjs.com/en/advanced/best-practice-security.html>
+
+---
+
+## Cas réels / rapports (2 encarts rapides)
+
+### Encadré 1 — Okta : accès non autorisé au système de support (root cause)
+
+**Source** : Okta Security, *Unauthorized Access to Okta's Support Case Management System: Root Cause and Remediation* (**3 novembre 2023**)  
+<https://sec.okta.com/articles/2023/11/unauthorized-access-oktas-support-case-management-system-root-cause/>
+
+Intérêt pédagogique :
+
+* montre qu'un système de support peut devenir un **point d'entrée** critique,
+* illustre la nécessité de contrôles techniques + hygiène opérationnelle,
+* très utile pour parler de **défense en profondeur** et gestion des sessions.
+
+### Encadré 2 — ICO : amende LastPass UK (2025)
+
+**Source** : ICO, *Password manager provider fined £1.2m by ICO for data breach* (**11 décembre 2025**)  
+<https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2025/12/password-manager-provider-fined/>
+
+Intérêt pédagogique :
+
+* montre qu'un acteur "sécurité" peut lui aussi être sanctionné pour des mesures insuffisantes,
+* permet de discuter des mesures techniques et organisationnelles attendues,
+* intéressant pour nuancer : certaines données sont restées protégées grâce au modèle de chiffrement.

@@ -8,6 +8,17 @@ L'épreuve correspondante est un exament de 4 heures reposant sur l'analyse d'un
 
 ---
 
+## Ce que vous saurez faire à la fin de cette introduction
+
+À la fin de ce bloc 0, vous devrez être capable de :
+
+* expliquer pourquoi la cybersécurité est évaluée en SLAM (et pas seulement en réseau),
+* utiliser la grille **DIC(T)** pour analyser une fonctionnalité,
+* structurer une réponse d'examen en 4 étapes (actif → risque → impact → mesure),
+* distinguer une réponse "catalogue" d'une réponse argumentée.
+
+---
+
 ## 0.1 Pourquoi la cybersécurité est évaluée en SLAM
 
 En BTS SIO SLAM, la cybersécurité **n’est pas un domaine annexe** ni une spécialité réseau.
@@ -61,6 +72,26 @@ Pour raisonner correctement en cybersécurité, on utilise une **grille de lectu
 Cette grille sert à **analyser et prioriser les risques** liés à une activité, une fonctionnalité ou une user story.
 
 L’objectif n’est pas de tout sécuriser au même niveau, mais de **comprendre ce qui est critique, ce qui l’est moins, et pourquoi**.
+
+---
+
+### À ne pas confondre (vocabulaire de base)
+
+Avant de continuer, voici 4 mots souvent mélangés :
+
+* **Menace** : ce qui peut nuire (attaquant, erreur, panne, abus)
+* **Vulnérabilité** : faiblesse exploitable (bug, mauvais réglage, absence de contrôle)
+* **Attaque** : exploitation concrète d'une vulnérabilité
+* **Risque** : probabilité + impact d'un événement défavorable
+
+Exemple SLAM :
+
+* menace : attaquant externe
+* vulnérabilité : formulaire sans protection
+* attaque : injection SQL
+* risque : fuite de données clients
+
+📌 Cette distinction vous aide à répondre plus précisément au jury.
 
 ---
 
@@ -215,6 +246,26 @@ Face à une situation donnée, la démarche attendue est toujours la même :
 📌 Une réponse courte mais structurée vaut **mieux** qu’une réponse longue et floue. Donc utiliser clairement cette grille dans vos réponses peut être judicieux : mieux vaut être un peu mécanique dans son approche, cela montre aussi une méthode et un professionnalisme. 
 ---
 
+### Exemple de réponse d'examen : insuffisante vs attendue
+
+**Réponse insuffisante (trop vague)**
+
+> "Il faut sécuriser l'application avec du HTTPS, des logs et des mots de passe forts."
+
+Pourquoi c'est faible :
+
+* ne dit pas **quel actif** est protégé,
+* ne dit pas **quel risque** est prioritaire,
+* empile des solutions sans justification.
+
+**Réponse attendue (courte mais structurée)**
+
+> "L'actif principal est l'accès administrateur (Confidentialité / Intégrité). Le risque prioritaire est l'usurpation de compte. L'impact est une modification frauduleuse des tarifs. Je priorise donc MFA + limitation de tentatives + journalisation des actions sensibles afin de réduire la compromission et de conserver une preuve."
+
+📌 Le jury attend surtout le **raisonnement**, pas une liste de buzzwords.
+
+---
+
 ## 0.6 Ce que nous ferons dans la suite du cours
 
 * Le **bloc 1** expliquera *pourquoi* ces protections sont nécessaires (RGPD).
@@ -230,9 +281,47 @@ Face à une situation donnée, la démarche attendue est toujours la même :
   * les rôles,
   * les logs et les preuves.
 
+Transition :
+
+> Nous avons maintenant la méthode de raisonnement (**DIC(T)**). Le bloc suivant apporte le cadre juridique (RGPD) qui explique pourquoi certaines protections et certaines preuves ne sont pas seulement "utiles", mais nécessaires.
+
 ---
 
 ### 🧠 À retenir dès maintenant
 
 > **La cybersécurité n’est pas une liste de techniques.**
 > C’est une manière structurée de réfléchir aux risques, aux données et aux responsabilités.
+
+---
+
+## Références externes (pour aller plus loin)
+
+* CNIL – Guide RGPD du développeur : <https://www.cnil.fr/fr/guide-rgpd-du-developpeur>
+* OWASP Cheat Sheet Series (vue d'ensemble) : <https://cheatsheetseries.owasp.org/>
+* ANSSI – Hygiène informatique (bonnes pratiques générales) : <https://cyber.gouv.fr/publications/guide-dhygiene-informatique>
+
+---
+
+## Cas réels / rapports (2 encarts rapides)
+
+### Encadré 1 — ENISA Threat Landscape 2025 (rapport UE)
+
+**Source** : ENISA, *ENISA Threat Landscape 2025* (publication du **1 octobre 2025**, révision **9 janvier 2026**)  
+<https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025>
+
+Ce que cela apporte en cours :
+
+* une vue d'ensemble des menaces en Europe (ransomware, DDoS, etc.),
+* un support pour montrer que les priorités changent selon les secteurs,
+* un bon point d'appui pour justifier la logique **DIC(T)**.
+
+### Encadré 2 — Verizon DBIR 2025 (rapport d'incidents réels)
+
+**Source** : Verizon, *2025 Data Breach Investigations Report (DBIR)* (édition 2025)  
+<https://www.verizon.com/business/resources/reports/dbir/>
+
+Ce que cela apporte en cours :
+
+* des statistiques issues d'incidents réels,
+* des vecteurs d'attaque initiaux utiles pour prioriser,
+* un support concret pour montrer qu'une réponse sécurité doit être **contextualisée**.

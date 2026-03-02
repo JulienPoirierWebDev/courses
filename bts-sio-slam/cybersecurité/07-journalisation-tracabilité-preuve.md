@@ -16,6 +16,17 @@ Un système réellement sécurisé doit permettre de :
 
 ---
 
+## Ce que vous saurez faire à la fin de ce bloc
+
+À la fin de ce bloc, vous devrez être capable de :
+
+* définir ce qu'un log exploitable doit contenir,
+* distinguer journalisation utile et sur-collecte risquée,
+* interpréter des signaux d'attaque à partir des logs,
+* expliquer ce qui rend une preuve numérique contestable ou défendable.
+
+---
+
 ## Pourquoi la journalisation est centrale en cybersécurité SLAM
 
 La journalisation est un **outil transversal**, à la fois technique, métier et juridique.
@@ -58,9 +69,34 @@ Un log exploitable doit permettre de répondre à cinq questions fondamentales :
 * **Résultat**
   succès, échec, refus, erreur
 
+Complément très utile en pratique :
+
+* **Identifiant de corrélation** (`request_id`, `trace_id`)
+  pour relier plusieurs logs d'une même requête / action
+
 📌 Formule à retenir telle quelle :
 
 > *Un log doit permettre de reconstituer un événement sans ambiguïté.*
+
+---
+
+### Exemple de log structuré (JSON)
+
+```json
+{
+  "event_time": "2026-02-26T10:14:22Z",
+  "request_id": "req_9f31",
+  "actor_id": 42,
+  "role": "ADMIN",
+  "action": "UPDATE_PRICE",
+  "resource": "tarif:12",
+  "endpoint": "PUT /api/tarifs/12",
+  "result": "SUCCESS",
+  "ip": "203.0.113.8"
+}
+```
+
+📌 Le format exact importe moins que la capacité à **reconstituer l'action**.
 
 ---
 
@@ -144,6 +180,28 @@ Compétences attendues :
 
 ---
 
+### Mini cas d'analyse (à verbaliser)
+
+Cas 1 :
+
+* `1` échec de connexion sur un compte, puis succès quelques secondes plus tard
+
+Conclusion probable :
+
+* erreur utilisateur (mot de passe mal saisi), pas forcément une attaque
+
+Cas 2 :
+
+* `300` échecs en `2` minutes sur `50` comptes depuis une même IP
+
+Conclusion probable :
+
+* attaque automatisée (force brute / spraying / stuffing selon le motif)
+
+📌 L'attendu n'est pas de "deviner", mais **d'argumenter avec les traces**.
+
+---
+
 ## Différencier une erreur utilisateur d’une attaque
 
 Cette distinction est **essentielle à l’examen**.
@@ -181,6 +239,11 @@ Une preuve numérique exploitable doit être :
 
 Sans ces éléments, la preuve peut être **contestée**.
 
+Compléments importants :
+
+* horodatage en **UTC** (plus simple à corréler),
+* synchronisation d'horloge (NTP) pour éviter des traces incohérentes.
+
 ---
 
 ### Garantir l’intégrité des preuves
@@ -195,6 +258,13 @@ Bonnes pratiques attendues :
 📌 Objectif central :
 
 > empêcher toute remise en cause ultérieure des faits.
+
+Exemples de mesures techniques (niveau cours) :
+
+* accès restreint en lecture aux personnes habilitées,
+* séparation entre production des logs et consultation,
+* stockage append-only / export régulier,
+* empreinte (hash) périodique des journaux sensibles.
 
 ---
 
@@ -257,3 +327,36 @@ Exemples cohérents :
 * Trop de logs = risque RGPD
 * Pas assez de logs = absence de preuve
 
+---
+
+## Références externes (logs / preuve / bonnes pratiques)
+
+* OWASP Logging Cheat Sheet : <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
+* CNIL – Guide RGPD du développeur : <https://www.cnil.fr/fr/guide-rgpd-du-developpeur>
+* ANSSI – Guide d'hygiène informatique : <https://cyber.gouv.fr/publications/guide-dhygiene-informatique>
+
+---
+
+## Cas réels / rapports (2 encarts rapides)
+
+### Encadré 1 — Cloudflare : postmortem d'une panne majeure (2025)
+
+**Source** : Cloudflare, *Cloudflare outage on November 18, 2025* (**18 novembre 2025**)  
+<https://blog.cloudflare.com/18-november-2025-outage/>
+
+Intérêt pédagogique :
+
+* excellent exemple de **postmortem** détaillé (chronologie, hypothèses initiales, cause racine, remédiations),
+* permet de travailler la distinction incident / attaque,
+* très utile pour parler de **traçabilité**, **horodatage**, **preuve technique** et **disponibilité**.
+
+### Encadré 2 — CISA et partenaires : bonnes pratiques de logging (2024)
+
+**Source** : CISA, *Best Practices for Event Logging and Threat Detection* (**21 août 2024**)  
+<https://www.cisa.gov/resources-tools/resources/best-practices-event-logging-and-threat-detection>
+
+Intérêt pédagogique :
+
+* guide concret pour construire une journalisation exploitable,
+* permet d'illustrer le compromis entre **visibilité** et **contraintes de ressources**,
+* très bon complément aux exigences "preuve + détection".

@@ -13,6 +13,28 @@ Un **jeton** est une information temporaire utilisée pour :
 
 ---
 
+## Ce que vous saurez faire à la fin de ce bloc
+
+À la fin de ce bloc, vous devrez être capable de :
+
+* expliquer la différence entre JWT et token CSRF,
+* choisir un stockage de jeton cohérent (cookie vs JS),
+* justifier la présence (ou non) d'une protection CSRF selon l'architecture,
+* expliquer pourquoi un JWT valide ne suffit pas pour autoriser une action.
+
+---
+
+## À ne pas confondre : session, cookie, JWT, CSRF
+
+* **Session** : état conservé côté serveur
+* **Cookie** : mécanisme de transport / stockage côté navigateur
+* **JWT** : format de jeton signé (claims)
+* **Token CSRF** : preuve d'intention pour une requête sensible
+
+📌 Un JWT peut être transporté dans un cookie, sans devenir une protection CSRF.
+
+---
+
 ## 🪪 JWT – JSON Web Token
 
 ### À quoi sert un JWT ?
@@ -48,6 +70,13 @@ HEADER.PAYLOAD.SIGNATURE
 * informations applicatives
 
 📌 Le payload est **lisible**, pas chiffré.
+
+Claims fréquents à connaître :
+
+* `iss` : émetteur
+* `aud` : audience
+* `nbf` : pas valide avant
+* `jti` : identifiant du token
 
 #### Signature
 
@@ -103,6 +132,13 @@ HEADER.PAYLOAD.SIGNATURE
 * stockage sécurisé (éviter `localStorage`),
 * vérification systématique des rôles côté serveur.
 
+Pièges fréquents :
+
+* access token trop long,
+* absence de vérification de `exp` / `aud`,
+* refresh token mal protégé,
+* confusion entre "JWT valide" et "action autorisée".
+
 ---
 
 ## 🔁 Access token vs Refresh token
@@ -118,6 +154,11 @@ HEADER.PAYLOAD.SIGNATURE
 * sert à obtenir un nouveau access token,
 * durée plus longue,
 * doit être fortement protégé.
+
+Bonne pratique avancée (utile à citer) :
+
+* rotation du refresh token,
+* détection de réutilisation anormale (signe possible de compromission).
 
 📌 Logique sécurité :
 
@@ -182,6 +223,18 @@ Requête sans ce token → refusée.
 
 ---
 
+### Mini tableau décisionnel (quand parler de CSRF ?)
+
+| Contexte | CSRF ? | Pourquoi |
+| --- | --- | --- |
+| Session en cookie | Oui | Cookies envoyés automatiquement |
+| JWT en cookie HttpOnly | Oui (souvent) | Le navigateur envoie aussi le cookie |
+| Bearer token en header `Authorization` (hors cookie) | Pas de CSRF classique | Le navigateur ne l'envoie pas automatiquement |
+
+📌 Sans CSRF ne veut pas dire "sans risque" : le **XSS** reste critique si le token est géré en JS.
+
+---
+
 ## 🔒 Où stocker les jetons ?
 
 ### JWT
@@ -193,7 +246,58 @@ Requête sans ce token → refusée.
 
 * généré côté serveur,
 * stocké en session,
-* transmis au client dans le formulaire.
+* transmis au client pour être renvoyé dans la requête sensible.
+
+Concrètement côté client, le token CSRF est généralement :
+* dans un champ caché du formulaire (`<input type="hidden">`),
+* ou dans une variable JS (récupérée via un endpoint `/csrf-token`) puis envoyé dans un header (ex: `X-CSRF-Token`).
+
+Il n'est pas "secret" comme un mot de passe : il sert de preuve d'intention liée à la session courante.
+
+Exemple (token récupéré en JS puis ajouté au formulaire) :
+
+```js
+// Frontend
+async function initCsrf() {
+  const res = await fetch('/csrf-token', { credentials: 'include' });
+  const data = await res.json(); // { csrfToken: "..." }
+
+  // 1) Option formulaire classique : injecter un champ caché
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = '_csrf';
+  input.value = data.csrfToken;
+  document.querySelector('#profile-form').appendChild(input);
+
+  // 2) Option AJAX : garder le token en mémoire JS
+  window.csrfToken = data.csrfToken;
+}
+
+document.querySelector('#profile-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  await fetch('/profile', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': window.csrfToken
+    },
+    body: JSON.stringify({ email: 'alice@example.com' })
+  });
+});
+```
+
+```js
+// Backend Express (exemple)
+app.get('/csrf-token', (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
+app.post('/profile', (req, res) => {
+  // Si token absent/invalide, le middleware CSRF renvoie 403
+  res.json({ ok: true });
+});
+```
 
 ---
 
@@ -290,7 +394,7 @@ Voici un **schéma visuel** (texte) + des **préconisations React (Vite/React)**
 
 ---
 
-# Préconisations React (pratiques et “jury-proof”)
+# Préconisations React (pratiques et adaptées à l'examen)
 
 ## 1) Stockage des tokens
 
@@ -306,7 +410,7 @@ Voici un **schéma visuel** (texte) + des **préconisations React (Vite/React)**
 
 ## 2) Requêtes fetch/axios : inclure les cookies
 
-Si ton API est sur un domaine différent, ou même par rigueur :
+Si votre API est sur un domaine différent, ou par précaution :
 
 ### `fetch`
 
@@ -324,9 +428,9 @@ axios.defaults.withCredentials = true;
 
 ## 3) CSRF : comment l’intégrer en React
 
-### Quand tu en as besoin
+### Quand la protection est nécessaire
 
-* Dès que tu utilises des **cookies** pour l’auth (session ou JWT en cookie) **ET** que tu acceptes des requêtes cross-site possibles.
+* Dès que vous utilisez des **cookies** pour l’authentification (session ou JWT en cookie) **et** que des requêtes cross-site sont possibles.
 
 ### Pattern simple (très utilisé)
 
@@ -372,7 +476,7 @@ export async function postJson(url, body) {
 
 ## 4) Intercepteur “refresh automatique” (UX propre)
 
-Le point important : **si 401**, tu tentes `/auth/refresh`, puis tu rejoues la requête.
+Point important : en cas de **401**, l'application tente `/auth/refresh`, puis rejoue la requête.
 
 Pseudo-stratégie :
 
@@ -381,7 +485,7 @@ Pseudo-stratégie :
 
 ---
 
-## 5) React et XSS : ce que tu peux dire sans te planter
+## 5) React et XSS : formulation fiable
 
 * React échappe par défaut le texte injecté dans le DOM (bien).
 * Le danger principal : `dangerouslySetInnerHTML`.
@@ -389,7 +493,7 @@ Pseudo-stratégie :
 ### Règle simple à enseigner
 
 * **Jamais** de `dangerouslySetInnerHTML` avec du contenu non maîtrisé.
-* Si tu dois afficher du HTML (éditeur WYSIWYG, etc.) :
+* S'il faut afficher du HTML (éditeur WYSIWYG, etc.) :
 
   * sanitization côté serveur **et** côté client (ex : DOMPurify).
 
@@ -413,7 +517,16 @@ Pseudo-stratégie :
 
   * il faut CORS + `credentials: true` côté API,
   * et un `SameSite` compatible.
-* En prod, idéalement : **même domaine** (ou sous-domaines maîtrisés) pour réduire les emmerdes.
+* En production, idéalement : **même domaine** (ou sous-domaines maîtrisés) pour réduire la complexité opérationnelle.
+
+Exemple côté API (Express, conceptuel) :
+
+```js
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
+```
 
 ---
 
@@ -427,7 +540,7 @@ Pseudo-stratégie :
 # Bonus 2 
 
 Un token CSRF, c’est **pas un “token utilisateur”** et **ça ne se gère pas comme un JWT**.
-Le but est simple : le serveur doit pouvoir vérifier que la requête vient bien de **ton site** et qu’elle est liée à **une session/identité** en cours.
+Le but est simple : le serveur doit pouvoir vérifier que la requête vient bien du **site légitime** et qu’elle est liée à **une session/identité** en cours.
 
 ---
 
@@ -439,7 +552,7 @@ Le but est simple : le serveur doit pouvoir vérifier que la requête vient bien
 2. Il l’associe à l’utilisateur **ou à sa session**
 3. Il la renvoie au client (React)
 4. Le client la renvoie dans un header (ex: `X-CSRF-Token`) sur les requêtes sensibles
-5. Le serveur compare → si ça match, il accepte
+5. Le serveur compare → si le jeton correspond, il accepte
 
 ### Génération (concept)
 
@@ -480,7 +593,7 @@ La plupart des frameworks font un de ces 3 modèles :
 * le serveur vérifie que cookie == header
 
 ✅ Pas besoin de session serveur dédiée au CSRF
-⚠️ dépend de cookies, et tu dois cadrer XSS (sinon on peut voler le token)
+⚠️ dépend des cookies, et la protection XSS doit être rigoureuse (sinon le token peut être volé)
 
 #### Modèle C — Token signé (stateless)
 
@@ -505,7 +618,7 @@ La plupart des frameworks font un de ces 3 modèles :
   * ou à intervalle régulier,
   * ou après login.
 
-Dans les frameworks, tu as souvent :
+Dans les frameworks, on retrouve souvent :
 
 * TTL de session (ex : 30 min d’inactivité, ou 2h, etc.)
 * et rotation possible du token CSRF
@@ -523,14 +636,14 @@ Dans les frameworks, tu as souvent :
 
 ## Pourquoi on ne veut pas un TTL très long ?
 
-Parce que si le token est compromis (ex : XSS, poste partagé, capture), tu veux limiter :
+Si le token est compromis (ex : XSS, poste partagé, capture), il faut limiter :
 
 * **la fenêtre d’exploitation**
 * **le risque de rejeu**
 
 ---
 
-## Réponse directe à tes questions
+## Réponses directes aux questions
 
 ✅ **Comment on le génère ?**
 Avec un générateur aléatoire cryptographique côté serveur, puis on l’associe à la session (ou on le signe).
@@ -546,4 +659,40 @@ Oui : soit celle de la session, soit un TTL explicite + rotation.
 ## Point important à dire aux élèves (et au jury)
 
 > Le token CSRF n’est pas là pour “cacher un secret”, mais pour prouver l’origine et l’intention.
-> Si tu as du XSS, le CSRF ne te sauvera pas : l’attaquant peut agir depuis ton site.
+> En cas de XSS, le CSRF ne suffit pas : l’attaquant peut agir depuis le site légitime.
+
+---
+
+## Références externes (JWT / cookies / CSRF)
+
+* RFC 7519 (JWT) : <https://www.rfc-editor.org/rfc/rfc7519>
+* OWASP CSRF Prevention Cheat Sheet : <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
+* OWASP Session Management Cheat Sheet : <https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>
+* MDN – Set-Cookie : <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>
+* MDN – CORS : <https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS>
+
+---
+
+## Cas réels / rapports (2 encarts rapides)
+
+### Encadré 1 — Microsoft / Storm-0558 : falsification de tokens
+
+**Source** : Microsoft MSRC, *Microsoft mitigates China-based threat actor Storm-0558 targeting of customer email* (**11 juillet 2023**)  
+<https://msrc.microsoft.com/blog/2023/07/microsoft-mitigates-china-based-threat-actor-storm-0558-targeting-of-customer-email/>
+
+Intérêt pédagogique :
+
+* cas réel pour montrer qu'un problème de **tokens / validation / clés de signature** peut avoir un impact majeur,
+* utile pour rappeler qu'un jeton valide en apparence n'est pas suffisant sans architecture robuste,
+* très bon exemple pour parler d'**identité**, **autorisation** et **impact cloud**.
+
+### Encadré 2 — Okta : vol de tokens de session via fichiers de support (HAR)
+
+**Source** : Okta Security, *Tracking Unauthorized Access to Okta's Support System* (**20 octobre 2023**)  
+<https://sec.okta.com/articles/2023/10/tracking-unauthorized-access-oktas-support-system/>
+
+Intérêt pédagogique :
+
+* illustre un risque concret de **session hijacking** sans vol de mot de passe,
+* montre pourquoi les fichiers techniques (HAR) peuvent contenir des **cookies / tokens** sensibles,
+* très bon cas pour relier JWT/cookies/session à la traçabilité.

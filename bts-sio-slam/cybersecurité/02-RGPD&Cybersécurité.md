@@ -9,6 +9,17 @@ règlement général sur la protection des données
 
 ---
 
+## Ce que vous saurez faire à la fin de ce bloc
+
+À la fin de ce bloc, vous devrez être capable de :
+
+* distinguer donnée personnelle et donnée sensible,
+* relier un principe RGPD à une conséquence technique (code / BDD / logs),
+* expliquer ce qu'est une preuve de conformité exploitable,
+* justifier une mesure de cybersécurité par une finalité RGPD.
+
+---
+
 ## 1.1 Pourquoi le RGPD concerne directement les développeurs
 
 Le RGPD n’est pas un texte réservé aux juristes. D'ailleurs, sur le site de la CNIL, vous trouverez plusieurs documents que je vous conseille de lire plusieurs fois pour préparer l'examen. Ici, nous ferons une synthèse des élements centraux mais en tant que développeur, vous devez avoir une connaissance minimale, si ce n'est approfondie selon vos objectifs professionnels, des attentes en terme de RGPD. 
@@ -52,7 +63,7 @@ L'identification des personnes physiques peut être directe (: nom prénom) ou b
 📌 Erreur fréquente :
 penser qu’une donnée « technique » n’est pas personnelle → **faux**.
 
-Attention : le développeur doit savoir qu'il doit sauvegarder que le struct nécessaire, utile pour l'application et surtout pour l'utilisateur. Son email, OK. Son adresse : pourquoi, est-ce qu'on a des factures a remplir, des colis a envoyer ? Si c'est juste un "jeu en ligne", peut être que l'adresse n'est pas nécessaire. 
+Attention : le développeur doit savoir qu'il doit sauvegarder que le strict nécessaire, utile pour l'application et surtout pour l'utilisateur. Son email, OK. Son adresse : pourquoi, est-ce qu'on a des factures a remplir, des colis a envoyer ? Si c'est juste un "jeu en ligne", peut être que l'adresse n'est pas nécessaire. 
 
 Stocker le moins possible, c'est réduire la surface a proteger. 
 
@@ -78,6 +89,18 @@ Exemples attendus à l’examen :
 ## 1.3 Les principes RGPD appliqués au développement
 
 Le RGPD repose sur des principes **concrets**, qui doivent se traduire dans le code.
+
+### Tableau de lecture rapide : principe RGPD → conséquence technique
+
+| Principe RGPD | Conséquence côté développement |
+| --- | --- |
+| Minimisation | Collecter moins de champs, limiter les colonnes exposées |
+| Finalité | Documenter l'usage de la donnée, éviter les réutilisations non prévues |
+| Durée de conservation | Prévoir purge / anonymisation / archivage |
+| Accès restreint | Rôles, contrôles d'accès, moindre privilège |
+| Privacy by Design | Intégrer sécurité et traçabilité dès la conception |
+
+📌 Ce tableau est utile pour passer rapidement du **juridique** au **technique**.
 
 ### 1️⃣ Minimisation
 
@@ -125,6 +148,8 @@ Lien DIC(T) :
 * moins de données = moins de risques
 * meilleure conformité juridique
 
+[Ici, vous trouverez des recommandations de la CNIL](https://www.cnil.fr/fr/passer-laction/les-durees-de-conservation-des-donnees)
+
 ---
 
 ### 4️⃣ Accès restreint
@@ -166,6 +191,26 @@ On peut anonymiser (: impossible de refaire un lien avec une personne physique) 
 
 On pseudonymise en hashant des données personnelles et permettre tout de même l'exploitation des données (analyse par origine géographique, profil client, etc.). C'est fortement recommandé car cela réduit les risques pour les personnes et contribue a la mise en conformité du réglement. 
 
+⚠️ Nuance importante :
+
+* un **hash seul** ne suffit pas toujours à anonymiser (risque de ré-identification selon le contexte),
+* la **pseudonymisation** réduit le risque, mais la donnée reste souvent personnelle juridiquement.
+
+---
+
+## 1.3 bis Bases légales : ne pas tout ramener au consentement
+
+Le consentement est important, mais **ce n'est pas la seule base légale** prévue par le RGPD.
+
+Exemples de raisonnement utiles en SLAM :
+
+* **Consentement** : newsletter marketing
+* **Exécution d'un contrat** : livraison d'une commande
+* **Obligation légale** : conservation de certaines données comptables
+* **Intérêt légitime** (à justifier) : sécurité, détection d'abus, journalisation proportionnée
+
+📌 À l'examen, dire "on demande le consentement pour tout" peut être juridiquement faux.
+
 ## 1.4 Consentement : collecte licite des données
 
 ### Consentement valide = 4 conditions
@@ -205,6 +250,20 @@ Les personnes concernées disposent notamment de :
 * des contrôles d’identité
 * des logs de demande
 
+[On peut lire ici des infos supplémentaires sur le droit des personnes](https://www.cnil.fr/fr/passer-laction/les-droits-des-personnes-sur-leurs-donnees)
+
+### Exemple de workflow SLAM (droit d'accès / effacement)
+
+Exemple de chaîne technique attendue :
+
+1. réception de la demande (formulaire / support)
+2. vérification d'identité
+3. journalisation de la demande (date, type, statut)
+4. extraction / rectification / suppression selon le droit exercé
+5. journalisation du traitement et de la réponse
+
+📌 Cela relie directement **RGPD + sécurité + preuve**.
+
 ---
 
 ## 1.6 Preuve RGPD : pouvoir démontrer la conformité
@@ -220,6 +279,29 @@ Il faut pouvoir **le prouver**.
 * date et heure du consentement
 * version du texte accepté
 * **empreinte cryptographique (hash)** du consentement
+
+En gros, on met sous forme de string toutes les données relatives au consentement, on les hash et on sauvegarde le hash. Cela permet de prouver que l'on n'a pas modifié rétroactivement les données et que le consentement a bien été pris. 
+
+### Exemple "preuve suffisante" vs "preuve insuffisante"
+
+**Insuffisant**
+
+* "L'utilisateur a accepté" (sans date, sans version, sans trace)
+
+**Plus solide**
+
+* date/heure du consentement
+* identifiant de l'utilisateur
+* version du texte affiché
+* finalité concernée (ex: newsletter)
+* trace technique (hash / journal d'événement)
+
+Voir ce que la CNIL peut faire : 
+
+[Les contrôles de la CNIL](https://www.cnil.fr/fr/comprendre-le-rgpd/le-controle-de-la-cnil)
+[Les modalités d'un contrôle](https://www.cnil.fr/fr/comment-se-passe-un-controle-de-la-cnil)
+
+📌 Le jury valorise les réponses qui expliquent **comment** la preuve est conservée.
 
 Lien DIC(T) :
 
@@ -246,6 +328,8 @@ Mais :
 * on ne duplique pas les données métier
 * on respecte la minimisation
 
+[Plus d'infos ici](https://www.cnil.fr/fr/la-cnil-publie-une-recommandation-relative-aux-mesures-de-journalisation)
+
 📌 Cette logique sera approfondie au **bloc 4**.
 
 ---
@@ -263,6 +347,10 @@ Dans le **bloc 2**, on utilisera la grille **DIC(T)** pour :
 * comprendre les attaques,
 * prioriser les protections.
 
+Transition :
+
+> Le RGPD nous dit pourquoi protéger et pourquoi tracer. Le bloc suivant montre comment prioriser les menaces pour proposer des mesures pertinentes, au lieu d'empiler des solutions.
+
 ---
 
 ### 🧠 À retenir (examen)
@@ -276,3 +364,37 @@ Dans le **bloc 2**, on utilisera la grille **DIC(T)** pour :
   * risque
   * impact
   * mesure
+
+---
+
+## Références externes (officielles / utiles)
+
+* CNIL – Guide RGPD du développeur : <https://www.cnil.fr/fr/guide-rgpd-du-developpeur>
+* CNIL (GitHub) – Guide RGPD du développeur : <https://github.com/LINCnil/Guide-RGPD-du-developpeur>
+* EUR-Lex – RGPD (Règlement UE 2016/679) : <https://eur-lex.europa.eu/eli/reg/2016/679/oj>
+
+---
+
+## Cas réels / rapports (2 encarts rapides)
+
+### Encadré 1 — CNIL : sanction FREE / FREE MOBILE (2026)
+
+**Source** : CNIL, *Violation de données : sanction de 42 millions d'euros...* (**14 janvier 2026**)  
+<https://www.cnil.fr/fr/sanction-free-2026>
+
+Intérêt pédagogique :
+
+* illustre le lien direct entre **mesures de sécurité insuffisantes** et sanction RGPD,
+* permet de faire verbaliser **Article 32 (sécurité)** + notification des personnes + conservation,
+* montre qu'un défaut technique devient un sujet **juridique** et **preuve**.
+
+### Encadré 2 — CNIL : sanction FRANCE TRAVAIL (2026)
+
+**Source** : CNIL, *Data breach: FRANCE TRAVAIL fined €5 million* (**29 janvier 2026**)  
+<https://www.cnil.fr/en/data-breach-5million-fine-france-travail>
+
+Intérêt pédagogique :
+
+* met en évidence l'impact du **social engineering** sur la protection des données,
+* montre qu'identifier des mesures dans une analyse de risque ne suffit pas : il faut les **implémenter**,
+* relie RGPD, cybersécurité et responsabilité du responsable de traitement.
