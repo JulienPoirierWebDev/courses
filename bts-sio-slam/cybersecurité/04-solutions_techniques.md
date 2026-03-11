@@ -162,7 +162,12 @@ Exemple logique (pseudo-code) :
 si > 5 échecs en 10 minutes :
   temporiser / bloquer temporairement
   journaliser
-  alerter si le volume augmente
+  
+  si > 20 echecs en 10 minutes
+    bloquer le compte pour 24h
+  fin si
+
+fin si
 ```
 
 📌 Logique importante :

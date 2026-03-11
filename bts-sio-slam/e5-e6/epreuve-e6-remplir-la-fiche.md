@@ -2,403 +2,326 @@
 
 ## Remplir la fiche de réalisation professionnelle – Épreuve E6 (BTS SIO)
 
-## 1. Objectif de cette fiche
-
-La fiche E6 sert à présenter **une réalisation professionnelle précise** que vous avez effectuée :
-
-* en formation
-* en stage
-* dans un projet
-
-Elle permet au jury de comprendre :
-
-* le **contexte**
-* le **problème**
-* la **solution technique**
-* votre **travail personnel**
-
-Le jury s’appuie sur cette fiche pour :
-
-* poser des questions techniques
-* vérifier votre maîtrise
-* analyser votre démarche
-
-Chaque fiche correspond à **une réalisation professionnelle**. 
+Cette fiche doit rester alignée sur les **zones du document officiel**.
+L'objectif n'est pas d'ajouter des rubriques libres, mais d'expliquer **quoi écrire dans chaque zone**.
 
 ---
 
-# 2. Informations d’identification
+## Nom, prénom :
 
-Ces informations permettent d’identifier le candidat et la réalisation.
-
-
-### Nom / prénom
-
-Nom complet.
-
----
-
-### N° candidat
-
-Numéro fourni par votre centre d’examen.
-
----
-
-
-### Date
-
-Date de rédaction de la fiche.
+Indiquer votre identité complète.
 
 Exemple :
 
+```text
+Dupont Jean
 ```
+
+---
+
+## Épreuve ponctuelle
+## Contrôle en cours de formation
+
+Cocher ou compléter selon votre situation.
+
+Cette zone sert uniquement à identifier le cadre de l'évaluation.
+
+---
+
+## N° réalisation :
+
+Indiquer le numéro de la réalisation présentée.
+
+Comme l'épreuve E6 repose généralement sur **deux réalisations**, cette zone permet de distinguer clairement chaque fiche.
+
+Exemple :
+
+```text
+1
+```
+
+ou
+
+```text
+2
+```
+
+---
+
+## N° candidat :
+
+Reporter le numéro fourni par votre centre d'examen.
+
+---
+
+## Date : ...... / ...... / ............
+
+Indiquer la date de rédaction de la fiche.
+
+Exemple :
+
+```text
 12 / 03 / 2026
 ```
 
 ---
 
-# 3. Organisation support de la réalisation
+## Organisation support de la réalisation professionnelle
 
-Il faut indiquer **l’organisation dans laquelle la réalisation a été faite**.
+Indiquer l'organisation dans laquelle la réalisation a été menée.
 
 Cela peut être :
 
-* une entreprise
-* une association
-* un établissement
-* un projet pédagogique
+- une entreprise
+- une association
+- un service informatique
+- un projet réalisé dans le cadre de la formation
 
 Exemples :
 
+```text
+Entreprise X – service développement
+Association Y – service informatique
+Projet pédagogique BTS SIO – centre de formation
 ```
-Entreprise X – Service informatique
-Startup Y – équipe développement
-Projet pédagogique BTS SIO – IPSSI
-```
+
+L'idée est de situer le cadre professionnel ou pédagogique de la réalisation.
 
 ---
 
-# 4. Intitulé de la réalisation professionnelle
+## Intitulé de la réalisation professionnelle
 
-Le titre doit être **clair et technique**.
+Le titre doit être **précis**.
+Il doit désigner une réalisation identifiable, pas tout le projet.
+
+Il n'est pas obligatoire de présenter toute l'application.
+Vous pouvez présenter une fonctionnalité, un module, une évolution ou une partie technique bien délimitée.
 
 Éviter :
 
-❌ Projet informatique
-❌ Développement application
+- Projet web
+- Application métier
+- Développement application
 
 Préférer :
 
-✔ Développement d’une API REST de gestion de tournois
-✔ Mise en place d’un serveur Debian avec Docker
-✔ Développement d’une application React de gestion d’inscriptions
+- Développement d'une fonctionnalité de réservation de créneau
+- Conception et développement d'une API REST de gestion des utilisateurs
+- Maintenance corrective d'une application Symfony
+- Conception du schéma de base de données d'une application de réservation
 
 ---
 
-# 5. Période de réalisation
+## Période de réalisation : ........................................
+## Lieu : ...................................................................................
 
-Indiquer les dates.
+### Période de réalisation
 
-Exemple :
+Indiquer la période réelle de travail.
 
-```
-Janvier 2025 – Mars 2025
+Exemples :
+
+```text
+10/01/2026 au 28/02/2026
 ```
 
 ou
 
+```text
+Janvier 2026 à Mars 2026
 ```
-10/01/2025 au 28/02/2025
-```
 
----
+### Lieu
 
-# 6. Lieu
-
-Indiquer le lieu de réalisation.
+Indiquer où la réalisation a été menée.
 
 Exemples :
 
-```
+```text
 Entreprise X – Paris
-Centre de formation IPSSI
+Centre de formation
 Télétravail
 ```
 
 ---
 
-# 7. Modalité
+## Modalité :
+## Seul(e)
+## En équipe
 
-Indiquer :
+Préciser si la réalisation a été effectuée seul(e) ou en équipe.
 
-* Seul(e)
-* En équipe
-
-Si le projet est en équipe, préciser ensuite **votre rôle exact**.
-
-Exemple :
-
-```
-Projet réalisé en équipe de 3 développeurs
-Responsable du backend et de la base de données
-```
+Si le travail a été fait en équipe, il faut être capable d'expliquer clairement **votre rôle personnel** à l'oral.
+La fiche reste brève, mais le jury doit comprendre ce que vous avez réellement réalisé.
 
 ---
 
-# 8. Compétences travaillées
+## Compétences travaillées
 
-Les compétences doivent correspondre au référentiel BTS SIO.
+Il faut cocher uniquement les compétences réellement mobilisées dans la réalisation présentée.
 
-Pour l’option **SLAM** :
+### Concevoir et développer une solution applicative
 
-* Concevoir et développer une solution applicative
-* Assurer la maintenance corrective ou évolutive
-* Gérer les données 
+À cocher si vous avez participé à la conception ou au développement d'une solution :
 
-Il faut **cocher uniquement les compétences réellement utilisées**.
+- analyse du besoin
+- conception technique
+- développement d'une fonctionnalité
+- mise en place d'une interface ou d'une API
+
+### Assurer la maintenance corrective ou évolutive d’une solution applicative
+
+À cocher si vous avez :
+
+- corrigé un dysfonctionnement
+- fait évoluer une fonctionnalité existante
+- amélioré une solution déjà en place
+- repris un code existant pour le faire évoluer
+
+### Gérer les données
+
+À cocher si votre réalisation porte notamment sur :
+
+- la conception de la base de données
+- la modification du schéma relationnel
+- les requêtes SQL
+- les traitements liés aux données
+- les contrôles ou validations de données
 
 ---
 
-# 9. Conditions de réalisation
+## Conditions de réalisation5 (ressources fournies, résultats attendus)
 
-Cette section explique **le contexte du projet**.
+Cette zone doit décrire le cadre dans lequel vous avez travaillé.
 
-Elle doit répondre à :
+Il faut y faire apparaître :
 
-* quel problème ?
-* quels objectifs ?
-* quelles contraintes ?
+- les ressources fournies au départ
+- le besoin exprimé
+- les contraintes éventuelles
+- les résultats attendus
 
-Structure conseillée :
-
-### Contexte
-
-Présentation de la situation.
-
-### Objectif
-
-Ce que la solution doit permettre.
-
-### Contraintes
+### Ressources fournies
 
 Exemples :
 
-* sécurité
-* délais
-* technologie imposée
-* environnement technique
+- cahier des charges
+- documentation existante
+- base de données existante
+- maquette
+- dépôt Git existant
+- environnement de développement déjà préparé
 
----
+### Résultats attendus
 
-### Exemple SLAM
-
-```
-Contexte :
-Une association sportive souhaite gérer les inscriptions à ses tournois.
-
-Objectif :
-Développer une API REST permettant la gestion des clubs, des joueurs et des tournois.
-
-Contraintes :
-Utilisation de Symfony, Doctrine, MySQL, etc.
-```
-
----
-
-# 10. Ressources utilisées
-
-Il faut décrire les ressources utilisées :
-
-### Ressources matérielles
+Cette partie est importante.
+Elle correspond à ce qui devait fonctionner à partir des spécifications.
 
 Exemples :
 
-* PC de développement
-* VM
+- permettre la réservation d'un créneau
+- ajouter la gestion des utilisateurs
+- corriger un défaut bloquant
+- mettre à disposition une fonctionnalité accessible en ligne
+
+Il faut rester concret :
+le jury doit comprendre ce qui était demandé.
 
 ---
 
-### Ressources logicielles
+## Description des ressources documentaires, matérielles et logicielles utilisées6
 
-Exemples :
-
-* Node.js
-* Symfony
-* React
-* Docker
-* MySQL
-* Git
-
----
+Dans cette zone, il faut lister les ressources réellement utilisées.
 
 ### Ressources documentaires
 
 Exemples :
 
-* documentation officielle
-* tutoriels
-* documentation interne
-* RFC
-* StackOverflow
+- documentation officielle du framework
+- documentation SQL
+- documentation interne
+- spécifications du projet
 
----
-
-### Exemple
-
-```
-Logiciels :
-Symfony, Doctrine, MySQL
-
-Outils :
-Visual Studio Code, GitHub, Postman
-
-Documentation :
-Documentation Symfony et Postman
-```
-
----
-
-# 11. Modalités d’accès aux productions
-
-Le jury doit pouvoir **voir vos productions**.
+### Ressources matérielles
 
 Exemples :
 
-```
-Dépôt GitHub
-Documentation technique
-Captures d’écran
-Schémas UML
-```
+- poste de développement
+- machine virtuelle
+- serveur de test
+- hébergement mutualisé
 
-Exemple concret :
-
-```
-Code source disponible sur GitHub :
-github.com/jdupont/api-tournois
-
-Documentation technique disponible dans le portfolio.
-```
-
----
-
-# 12. Descriptif de la réalisation (verso)
-
-C’est **la partie la plus importante**.
-
-Elle doit expliquer :
-
-* votre démarche
-* la solution
-* les choix techniques
-
-Structure recommandée :
-
----
-
-## 1. Analyse du besoin
-
-Expliquer :
-
-* le problème
-* les besoins fonctionnels
-
----
-
-## 2. Conception de la solution
-
-Présenter :
-
-* architecture
-* schéma
-* base de données
-* API
-* infrastructure
-
----
-
-## 3. Réalisation
-
-Expliquer :
-
-* les étapes de développement
-* les outils utilisés
-* les difficultés rencontrées
-
----
-
-## 4. Tests et validation
-
-Présenter :
-
-* tests réalisés
-* corrections
-* résultats
-
----
-
-## 5. Résultat final
-
-Expliquer :
-
-* ce que la solution permet
-* les améliorations possibles
-
----
-
-# 13. Les schémas à ajouter
-
-Une fiche E6 est **beaucoup plus forte avec des schémas**.
+### Ressources logicielles
 
 Exemples :
 
-### Pour SLAM
+- Symfony
+- Laravel
+- React
+- Node.js
+- MySQL
+- PostgreSQL
+- Docker
+- Git
+- GitHub
+- GitLab
 
-* UML
-* MCD
-* architecture API
-* diagramme de séquence
-
----
-
-
-# 14. Les erreurs fréquentes
-
-### ❌ écrire trop peu
-
-Une fiche E6 doit faire **1 à 2 pages minimum**.
+L'objectif est de montrer avec quels moyens vous avez travaillé.
 
 ---
 
-### ❌ décrire uniquement le projet
+## Modalités d’accès aux productions7 et à leur documentation8
 
-Le jury veut savoir **ce que VOUS avez fait**.
+Cette zone doit permettre au jury d'accéder rapidement :
 
----
+- aux productions
+- à la documentation
+- éventuellement au code source
 
-### ❌ oublier les technologies
+Vous pouvez indiquer :
 
-Toujours préciser :
+- un lien vers l'application
+- un lien vers le dépôt Git
+- un lien vers la documentation technique
+- un lien vers la documentation utilisateur
+- un QR code
+- un lien court
 
-* langage
-* framework
-* base de données
+Exemples :
 
----
-
-### ❌ absence de preuves
-
-Toujours indiquer :
-
-* Git
-* documentation
-* captures
-
----
-
-# 15. Exemple de titre de réalisation (SLAM)
-
-```
-Développement d’une API REST de gestion de tournois sportifs avec Symfony
+```text
+Application : https://...
+Code source : https://...
+Documentation technique : https://...
 ```
 
+Points importants à respecter :
+
+- éviter de proposer un simple `localhost`
+- présenter un accès cohérent avec une logique serveur
+- si l'application est publiée, éviter une configuration approximative de type connexion root
+- si possible, montrer une mise à disposition crédible : serveur, environnement de test, déploiement via CI/CD, FTP ou outil du framework
+
+Le jury ne pourra pas forcément tester l'application.
+Il faut donc que l'accès proposé soit complété par des preuves utiles dans la documentation :
+
+- captures d'écran
+- visuel de l'interface homme-machine
+- schéma de la base de données
+- documentation technique
+- code source
+
+---
+
+## Ce qu'il faut retenir
+
+Pour cette fiche E6, il faut rester strictement dans les zones prévues et bien renseigner :
+
+- l'identification de la réalisation
+- le contexte de travail
+- les compétences mobilisées
+- les ressources fournies et utilisées
+- les résultats attendus
+- les modalités d'accès aux productions et à leur documentation
+
+Le plus important est d'être **précis, concret et vérifiable**.

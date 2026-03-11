@@ -260,7 +260,7 @@ Pourquoi c'est faible :
 
 **Réponse attendue (courte mais structurée)**
 
-> "L'actif principal est l'accès administrateur (Confidentialité / Intégrité). Le risque prioritaire est l'usurpation de compte. L'impact est une modification frauduleuse des tarifs. Je priorise donc MFA + limitation de tentatives + journalisation des actions sensibles afin de réduire la compromission et de conserver une preuve."
+> "L'actif principal est l'accès administrateur (Confidentialité / Intégrité). Le risque prioritaire est l'usurpation de compte. L'impact est une modification frauduleuse des tarifs. Je priorise double auth, limitation de tentatives + journalisation des actions sensibles afin de réduire la compromission et de conserver une preuve."
 
 📌 Le jury attend surtout le **raisonnement**, pas une liste de buzzwords.
 

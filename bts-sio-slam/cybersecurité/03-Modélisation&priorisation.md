@@ -265,7 +265,7 @@ Interception des échanges entre l’utilisateur et le service. Ce n'est pas une
 * modification des échanges.
 
 **Axe principal** : Confidentialité
-**Mesures clés** : HTTPS, HSTS, cookies sécurisés, MFA
+**Mesures clés** : HTTPS, header sécurisé, cookies sécurisés, MFA
 
 ---
 
@@ -768,19 +768,10 @@ Pont utile :
 **Source** : ANSSI, *Panorama de la cybermenace 2024* (publié le **1 mars 2025**)  
 <https://cyber.gouv.fr/nous-connaitre/publications/panoramas-de-la-cybermenace/panorama-de-la-cybermenace-2024/>
 
-Intérêt pédagogique :
 
-* excellent support pour identifier des **menaces** et des **actifs**,
-* permet de montrer la diversité des objectifs (extorsion, espionnage, déstabilisation),
-* aide à justifier la **priorisation** selon le contexte.
 
 ### Encadré 2 — CSRB / DHS : intrusion Microsoft Exchange Online (Storm-0558)
 
 **Source** : DHS / CSRB, annonce de publication du rapport sur l'incident Microsoft Exchange Online (**2 avril 2024**)  
 <https://www.dhs.gov/archive/news/2024/04/02/cyber-safety-review-board-releases-report-microsoft-online-exchange-incident-summer>
 
-Intérêt pédagogique :
-
-* cas très utile pour modéliser une attaque sur l'**identité** et les **tokens**,
-* montre l'importance de la **chaîne de défaillances** (technique + organisation),
-* bon exemple pour passer de "vulnérabilité" à "impact majeur".

@@ -391,7 +391,7 @@ Intérêt pédagogique :
 ### Encadré 2 — CNIL : sanction FRANCE TRAVAIL (2026)
 
 **Source** : CNIL, *Data breach: FRANCE TRAVAIL fined €5 million* (**29 janvier 2026**)  
-<https://www.cnil.fr/en/data-breach-5million-fine-france-travail>
+<https://www.cnil.fr/fr/violation-de-donnees-sanction-5millions-france-travail>
 
 Intérêt pédagogique :
 

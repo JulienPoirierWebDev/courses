@@ -1,7 +1,5 @@
 # Exo 1
 
-
-
 # 📚 Contexte
 
 Une startup lance **CinéPass+**, une plateforme de cinéma avec :
@@ -37,6 +35,20 @@ Pour chaque user story :
 
 > En tant qu’utilisateur, je peux me connecter avec mon email et mot de passe.
 > Les mots de passe sont stockés en base en texte brut pour faciliter le debug.
+
+Pour l'analyse DICT : 
+
+Disponibilité : faible
+Intégrité : élevé
+Confidentialité : élevé
+Preuve : moyen
+
+Dès lors que les mots de passe sont sauvegardé en clair, il est facile de faire un lien entre un utilisateur et un mot de passe. Il est nécessaire de hasher les MDP. 
+De plus, l'absence de double auth rend plus simple l'utilisation d'un mot de passe volé. 
+
+Stocker des preuves de connexion peut aussi permettre d'identifier plus facilement si la totalité de la BDD a été compromise. 
+
+L'impact d'une faille d'un vol d'une BDD avec les mots de passe en brut est l'image de marque de l'entreprise car tous les utilisateurs seront impactés et les mots de passe en clair seront visibles de tous. De plus, c'est un fort risque juridique vis a vis du RGPD car la BDD n'a pas été protégé dans les règles de l'art. 
 
 ---
 

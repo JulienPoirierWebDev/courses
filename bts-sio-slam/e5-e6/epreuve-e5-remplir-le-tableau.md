@@ -154,7 +154,7 @@ Documents associés :
 ### Exemple SLAM
 
 ```
-Développement d'une API REST pour la gestion de tournois
+Entreprise XX - Développement d'une API REST pour la gestion de tournois
 
 Création d'une API REST en Node.js avec Express et Sequelize
 permettant la gestion des clubs et tournois sportifs.
@@ -165,6 +165,18 @@ Documents associés :
 - schéma UML
 - captures Postman
 ```
+
+
+### Lien avec le portfolio
+Vous ne pouvez que cocher des cases sur le tableau de synthèse. Donc il faut impérativement que l'on retrouve ces projets sur votre portfolio. Je vous conseille de suivre la structure suivante : 
+
+Voici une structure type : 
+- Contexte d’entreprise et de la mission
+- Mini cahier des charges (définition des besoins) 
+- Développement de la solution
+- Listes des outils
+- Compétences développées. 
+
 
 ---
 
