@@ -1,11 +1,4 @@
-Pour beaucoup d’étudiants de **BTS SIO**, le vrai blocage n’est pas de remplir le tableau… c’est **de trouver leurs réalisations professionnelles**.
-Ils pensent souvent : *« Je n’ai rien fait d’intéressant »* alors qu’ils ont en réalité **10 à 20 réalisations exploitables**.
 
-La solution efficace consiste à utiliser une **stratégie d’auto-questionnement structurée**, proche d’une **rétrospective de projet**.
-
-Je te propose une méthode pédagogique que les étudiants peuvent suivre seuls.
-
----
 
 # Stratégie d’auto-questionnement
 
@@ -274,7 +267,7 @@ Exemple :
 
 C’est souvent **la base d’une réalisation E5**.
 
-
 # Bonus
 
 Surtout, n'hésitez pas a améliorer les TP fait en cours : souvent les formateurs vous donnent une base, que vous pouvez adapter ! 
+
